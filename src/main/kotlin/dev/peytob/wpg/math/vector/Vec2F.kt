@@ -1,6 +1,6 @@
 package dev.peytob.wpg.math.vector
 
-class Vec2F(
+class Vec2F internal constructor(
     override val x: Float,
     override val y: Float
 ) : Vec2<Float> {

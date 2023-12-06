@@ -2,7 +2,7 @@ package dev.peytob.wpg.math.vector
 
 import kotlin.math.roundToInt
 
-class Vec2I(
+class Vec2I internal constructor(
     override val x: Int,
     override val y: Int
 ) : Vec2<Int> {
