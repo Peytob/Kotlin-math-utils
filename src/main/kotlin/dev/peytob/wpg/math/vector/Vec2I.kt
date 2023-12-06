@@ -21,6 +21,10 @@ class Vec2I internal constructor(
         return Vec2I(floatX.roundToInt(), floatY.roundToInt())
     }
 
+    override fun times(vec2: Vec2<Int>): Vec2I = Vec2I(x * vec2.x, y * vec2.y)
+
+    override fun dot(vec2: Vec2<Int>): Int = x * vec2.x + y * vec2.y
+
     override fun isImmutable(): Boolean = true
 
     override fun toImmutable(): Vec2I = this

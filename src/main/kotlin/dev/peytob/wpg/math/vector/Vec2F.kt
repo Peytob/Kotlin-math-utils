@@ -15,6 +15,10 @@ class Vec2F internal constructor(
 
     fun times(scalar: Float): Vec2F = Vec2F(this.x * scalar, this.y * scalar)
 
+    override fun times(vec2: Vec2<Float>): Vec2F = Vec2F(this.x * vec2.x, this.y * vec2.y)
+
+    override fun dot(vec2: Vec2<Float>): Float = x * vec2.x + y * vec2.y
+
     override fun isImmutable(): Boolean = true
 
     override fun toImmutable(): Vec2F = this

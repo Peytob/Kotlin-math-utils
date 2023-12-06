@@ -30,6 +30,13 @@ interface Vec2<T : Number> {
 
     operator fun times(scalar: Number): Vec2<T>
 
+    /**
+     * Implements scalar (component-wise) vector multiplication.
+     */
+    operator fun times(vec2: Vec2<T>): Vec2<T>
+
+    fun dot(vec2: Vec2<T>): T
+
     fun isImmutable(): Boolean
 
     fun toImmutable(): Vec2<T>
