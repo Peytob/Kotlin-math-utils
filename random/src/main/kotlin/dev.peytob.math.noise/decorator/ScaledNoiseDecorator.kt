@@ -12,8 +12,8 @@ class ScaledNoiseDecorator(
 
     // Does not use override Vec2 operators to avoid creating too many new vector objects.
     override fun getPoint(vec2F: Vec2F): Float =
-        noise2D.getPoint(immutableVec2F((vec2F.x + offset.x) * scale, (vec2F.y + offset.y) * scale))
+        noise2D.getPoint(immutableVec2F(vec2F.x * scale + offset.x, vec2F.y * scale + offset.y))
 
     override fun getPoint(x: Float, y: Float): Float =
-        noise2D.getPoint((x + offset.x) * scale, (y + offset.y) * scale)
+        noise2D.getPoint(x * scale + offset.x, y * scale + offset.y)
 }

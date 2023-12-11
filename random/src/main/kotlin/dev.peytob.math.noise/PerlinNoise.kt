@@ -22,7 +22,7 @@ class PerlinNoise(
         fun generatePermutationTable(random: Random): List<Int> =
             (0 ..< CELL_LIMIT)
             .plus(0 ..< CELL_LIMIT)
-            .shuffled()
+            .shuffled(random)
             .toList()
     }
 
@@ -52,11 +52,14 @@ class PerlinNoise(
         val u = fade(fractionalX)
         val v = fade(fractionalY)
 
-        return interpolate(
+        // Result in range [-1, 1] and should be converted to [0, 1]
+        val result = interpolate(
             u,
             interpolate(v, dotBottomLeft, dotTopLeft),
             interpolate(v, dotBottomRight, dotTopRight)
         )
+
+        return (result + 1) / 2
     }
 
     private fun getGradientVector(x: Int, y: Int): Vec2F {
