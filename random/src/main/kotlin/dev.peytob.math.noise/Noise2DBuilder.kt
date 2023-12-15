@@ -12,7 +12,15 @@ class Noise2DBuilder(
         return this
     }
 
-    fun decorate(decoratorSupplier: (Noise2D) -> Noise2D) = decoratorSupplier(noise2D)
+    fun withOctaves(octaves: Int, lacunarity: Float = 2f, persistence: Float = 0.5f): Noise2DBuilder {
+        noise2D = FbmNoise2D(noise2D, octaves, lacunarity, persistence)
+        return this
+    }
+
+    fun decorate(decoratorSupplier: (Noise2D) -> Noise2D): Noise2DBuilder {
+        noise2D = decoratorSupplier(noise2D)
+        return this
+    }
 
     fun build(): Noise2D = noise2D
 }

@@ -5,6 +5,10 @@ import dev.peytob.math.vector.immutableVec2F
 import kotlin.math.floor
 import kotlin.random.Random
 
+/**
+ * Classic Perlin noise.
+ * Please note that at grid nodes (i.e. points with integer coordinates) the noise value is always 0.
+ */
 class PerlinNoise(
     random: Random = Random.Default
 ) : Noise2D {
@@ -28,7 +32,7 @@ class PerlinNoise(
 
     private val permutationTable = generatePermutationTable(random)
 
-    override fun getPoint(vec2F: Vec2F): Float = getPoint(vec2F.x, vec2F.y)
+    override fun getPoint(point: Vec2F): Float = getPoint(point.x, point.y)
 
     override fun getPoint(x: Float, y: Float): Float {
         val integerX = floor(x).toInt() and (CELL_LIMIT - 1)

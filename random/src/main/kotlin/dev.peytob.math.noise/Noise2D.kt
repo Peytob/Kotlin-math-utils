@@ -4,7 +4,7 @@ import dev.peytob.math.vector.Vec2F
 
 interface Noise2D {
 
-    fun getPoint(vec2F: Vec2F): Float
+    fun getPoint(point: Vec2F): Float
 
     /**
      * Returns noise value for given point. Value should be same for same points (x, y).

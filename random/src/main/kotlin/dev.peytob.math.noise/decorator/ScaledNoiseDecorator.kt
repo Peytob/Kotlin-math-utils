@@ -4,6 +4,9 @@ import dev.peytob.math.noise.Noise2D
 import dev.peytob.math.vector.Vec2F
 import dev.peytob.math.vector.immutableVec2F
 
+/**
+ * This decorator can scale and offset noise point.
+ */
 class ScaledNoiseDecorator(
     private val noise2D: Noise2D,
     private val scale: Float,
@@ -11,8 +14,8 @@ class ScaledNoiseDecorator(
 ) : Noise2D {
 
     // Does not use override Vec2 operators to avoid creating too many new vector objects.
-    override fun getPoint(vec2F: Vec2F): Float =
-        noise2D.getPoint(immutableVec2F(vec2F.x * scale + offset.x, vec2F.y * scale + offset.y))
+    override fun getPoint(point: Vec2F): Float =
+        noise2D.getPoint(immutableVec2F(point.x * scale + offset.x, point.y * scale + offset.y))
 
     override fun getPoint(x: Float, y: Float): Float =
         noise2D.getPoint(x * scale + offset.x, y * scale + offset.y)
