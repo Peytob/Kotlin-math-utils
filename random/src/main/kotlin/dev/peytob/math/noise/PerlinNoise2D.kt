@@ -1,16 +1,16 @@
 package dev.peytob.math.noise
 
+import dev.peytob.math.random.d1.Random1D
 import dev.peytob.math.vector.Vec2F
 import dev.peytob.math.vector.immutableVec2F
 import kotlin.math.floor
-import kotlin.random.Random
 
 /**
  * Classic Perlin noise.
  * Please note that at grid nodes (i.e. points with integer coordinates) the noise value is always 0.
  */
-class PerlinNoise(
-    random: Random = Random.Default
+class PerlinNoise2D(
+    random: Random1D
 ) : Noise2D {
 
     private companion object {
@@ -23,10 +23,10 @@ class PerlinNoise(
             immutableVec2F(1.0f, -1.0f)
         )
 
-        fun generatePermutationTable(random: Random): List<Int> =
+        fun generatePermutationTable(random: Random1D): List<Int> =
             (0 ..< CELL_LIMIT)
             .plus(0 ..< CELL_LIMIT)
-            .shuffled(random)
+            .shuffled(random.asKotlinRandom())
             .toList()
     }
 
