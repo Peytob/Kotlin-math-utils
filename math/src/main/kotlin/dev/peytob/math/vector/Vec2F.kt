@@ -38,4 +38,8 @@ class Vec2F internal constructor(
         result = 31 * result + y.hashCode()
         return result
     }
+
+    override fun toString(): String {
+        return "vec2f($x, $y)"
+    }
 }

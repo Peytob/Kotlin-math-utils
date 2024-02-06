@@ -44,4 +44,8 @@ class Vec2I internal constructor(
         result = 31 * result + y
         return result
     }
+
+    override fun toString(): String {
+        return "vec2i($x, $y)"
+    }
 }

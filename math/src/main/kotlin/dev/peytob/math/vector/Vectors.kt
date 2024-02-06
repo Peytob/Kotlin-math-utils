@@ -37,3 +37,7 @@ fun Vec2I.normalize(): Vec2I {
     val length = this.length()
     return immutableVec2I((x / length).toInt(), (y / length).toInt())
 }
+
+fun distance(p0: Vec2F, p1: Vec2F) = (p0 - p1).length()
+
+fun distance(p0: Vec2I, p1: Vec2I) = (p0 - p1).length()
