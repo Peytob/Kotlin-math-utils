@@ -1,10 +1,10 @@
 package dev.peytob.math.noise
 
-import dev.peytob.math.vector.Vec2F
+import dev.peytob.math.vector.Vec2f
 
 interface Noise2D {
 
-    fun getPoint(point: Vec2F): Float
+    fun getPoint(point: Vec2f): Float
 
     /**
      * Returns noise value for given point. Value should be same for same points (x, y).

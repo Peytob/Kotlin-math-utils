@@ -1,13 +1,13 @@
 package dev.peytob.math.noise
 
 import dev.peytob.math.noise.decorator.ScaledNoiseDecorator
-import dev.peytob.math.vector.Vec2F
+import dev.peytob.math.vector.Vec2f
 
 class Noise2DBuilder(
     private var noise2D: Noise2D
 ) {
 
-    fun withScale(scale: Float, offset: Vec2F): Noise2DBuilder {
+    fun withScale(scale: Float, offset: Vec2f): Noise2DBuilder {
         noise2D = ScaledNoiseDecorator(noise2D, scale, offset)
         return this
     }

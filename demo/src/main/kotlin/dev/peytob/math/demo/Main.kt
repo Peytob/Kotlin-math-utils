@@ -35,7 +35,7 @@ fun main() {
     )
 
     buildNoiseImage(
-        ScaledNoiseDecorator(WorleyNoise2D(random1), 1f / 128f, immutableVec2F()),
+        ScaledNoiseDecorator(WorleyNoise2D(random1), 1f / 128f, immutableVec2F(10f, 10f)),
         rectI(immutableVec2I(), defaultImageSize),
         "worley_noise"
     )

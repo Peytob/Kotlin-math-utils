@@ -1,7 +1,7 @@
 package dev.peytob.math.noise.decorator
 
 import dev.peytob.math.noise.Noise2D
-import dev.peytob.math.vector.Vec2F
+import dev.peytob.math.vector.Vec2f
 import dev.peytob.math.vector.immutableVec2F
 
 /**
@@ -10,11 +10,11 @@ import dev.peytob.math.vector.immutableVec2F
 class ScaledNoiseDecorator(
     private val noise2D: Noise2D,
     private val scale: Float,
-    private val offset: Vec2F
+    private val offset: Vec2f
 ) : Noise2D {
 
     // Does not use override Vec2 operators to avoid creating too many new vector objects.
-    override fun getPoint(point: Vec2F): Float =
+    override fun getPoint(point: Vec2f): Float =
         noise2D.getPoint(immutableVec2F(point.x * scale + offset.x, point.y * scale + offset.y))
 
     override fun getPoint(x: Float, y: Float): Float =

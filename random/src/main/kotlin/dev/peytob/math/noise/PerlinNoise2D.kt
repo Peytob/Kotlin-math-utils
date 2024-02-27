@@ -1,7 +1,7 @@
 package dev.peytob.math.noise
 
 import dev.peytob.math.random.d1.Random1D
-import dev.peytob.math.vector.Vec2F
+import dev.peytob.math.vector.Vec2f
 import dev.peytob.math.vector.immutableVec2F
 import kotlin.math.floor
 
@@ -32,7 +32,7 @@ class PerlinNoise2D(
 
     private val permutationTable = generatePermutationTable(random)
 
-    override fun getPoint(point: Vec2F): Float = getPoint(point.x, point.y)
+    override fun getPoint(point: Vec2f): Float = getPoint(point.x, point.y)
 
     override fun getPoint(x: Float, y: Float): Float {
         val integerX = floor(x).toInt() and (CELL_LIMIT - 1)
@@ -66,7 +66,7 @@ class PerlinNoise2D(
         return (result + 1) / 2
     }
 
-    private fun getGradientVector(x: Int, y: Int): Vec2F {
+    private fun getGradientVector(x: Int, y: Int): Vec2f {
         val h = permutationTable[permutationTable[x] + y] and 3
         return GRADIENT_VECTORS[h]
     }

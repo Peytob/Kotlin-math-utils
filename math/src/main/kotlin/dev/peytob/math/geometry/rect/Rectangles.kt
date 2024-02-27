@@ -2,7 +2,7 @@ package dev.peytob.math.geometry.rect
 
 import dev.peytob.math.vector.*
 
-fun rectI(topLeft: Vec2I, sizes: Vec2I): RectI =
+fun rectI(topLeft: Vec2i, sizes: Vec2i): RectI =
     RectI(
         topLeft,
         topLeft.plus(sizes.x, 0),
@@ -14,7 +14,7 @@ fun rectI(topLeft: Vec2I, sizes: Vec2I): RectI =
 fun rectI(topLeftX: Int, topLeftY: Int, width: Int, height: Int): RectI =
     rectI(immutableVec2I(topLeftX, topLeftY), immutableVec2I(width, height))
 
-fun rectF(topLeft: Vec2F, sizes: Vec2F): RectF =
+fun rectF(topLeft: Vec2f, sizes: Vec2f): RectF =
     RectF(
         topLeft,
         topLeft.plus(sizes.x, 0.0f),

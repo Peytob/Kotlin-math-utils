@@ -1,6 +1,6 @@
 package dev.peytob.math.noise
 
-import dev.peytob.math.vector.Vec2F
+import dev.peytob.math.vector.Vec2f
 
 /**
  * Fractal Brownian Motion.
@@ -14,7 +14,7 @@ class FbmNoise2D(
     private val persistence: Float = 0.5f
 ) : Noise2D {
 
-    override fun getPoint(point: Vec2F): Float = getPoint(point.x, point.y)
+    override fun getPoint(point: Vec2f): Float = getPoint(point.x, point.y)
 
     override fun getPoint(x: Float, y: Float): Float {
         var amplitude = 1f

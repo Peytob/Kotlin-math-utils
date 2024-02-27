@@ -16,7 +16,7 @@ class WorleyNoise2D(
 
     private val seed = random1D.nextFloat()
 
-    override fun getPoint(point: Vec2F): Float {
+    override fun getPoint(point: Vec2f): Float {
         val integerPoint = immutableVec2I(
             floor(point.x).toInt(),
             floor(point.y).toInt())
@@ -34,17 +34,17 @@ class WorleyNoise2D(
             }
         }
 
-        return minimalDistance
+        return min(minimalDistance, 1.0f)
     }
 
     override fun getPoint(x: Float, y: Float) = getPoint(immutableVec2F(x, y))
 
-    private fun getStaticRandomPoint(x: Float, y: Float): Vec2F {
+    private fun getStaticRandomPoint(x: Float, y: Float): Vec2f {
         val xy = immutableVec2F(x, y)
         return immutableVec2F(goldNoise(xy, 0.124f), goldNoise(xy, seed * 0.775f))
     }
 
-    private fun goldNoise(point: Vec2F, seed: Float): Float {
+    private fun goldNoise(point: Vec2f, seed: Float): Float {
         val dist = distance(point * PHI, point)
         val tan = tan(dist) * seed * point.x
         return tan - floor(tan)

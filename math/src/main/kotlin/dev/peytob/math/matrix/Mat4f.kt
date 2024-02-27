@@ -1,6 +1,6 @@
 package dev.peytob.math.matrix
 
-class Mat4F internal constructor(
+class Mat4f internal constructor(
     override val raw: FloatArray
 ) : Mat4 {
 
@@ -25,7 +25,7 @@ class Mat4F internal constructor(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Mat4F
+        other as Mat4f
 
         return raw.contentEquals(other.raw)
     }
