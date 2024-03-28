@@ -1,7 +1,6 @@
 package dev.peytob.math.noise.decorator
 
 import dev.peytob.math.noise.Noise2D
-import dev.peytob.math.vector.Vec2f
 import dev.peytob.math.vector.immutableVec2F
 
 /**

@@ -1,8 +1,6 @@
 package dev.peytob.math.random.d2
 
 import dev.peytob.math.random.d1.Random1D
-import dev.peytob.math.vector.Vec2f
-import dev.peytob.math.vector.Vec2i
 import dev.peytob.math.vector.immutableVec2F
 import dev.peytob.math.vector.immutableVec2I
 

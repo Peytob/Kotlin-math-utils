@@ -1,7 +1,6 @@
 package dev.peytob.math.noise
 
 import dev.peytob.math.random.d1.Random1D
-import dev.peytob.math.vector.Vec2f
 import dev.peytob.math.vector.immutableVec2F
 import kotlin.math.floor
 

@@ -1,6 +1,6 @@
 package dev.peytob.math.demo
 
-import dev.peytob.math.geometry.rect.RectI
+import dev.peytob.math.geometry.rect.RectIStruct
 import dev.peytob.math.geometry.rect.rectI
 import dev.peytob.math.noise.FbmNoise2D
 import dev.peytob.math.noise.Noise2D
@@ -41,7 +41,7 @@ fun main() {
     )
 }
 
-fun buildNoiseImage(noise2D: Noise2D, noiseRect: RectI, filename: String) {
+fun buildNoiseImage(noise2D: Noise2D, noiseRect: RectIStruct, filename: String) {
     val noiseImageBuilder = NoiseImageBuilder(noise2D)
     val buildImage = noiseImageBuilder.buildImage(noiseRect)
     buildImage.saveAsFile(filename, "png")
