@@ -14,4 +14,4 @@ internal data class RectIStruct(
 
     override val size: Vec2i
 
-): Rect<Int>
+): RectI

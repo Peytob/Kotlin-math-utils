@@ -2,6 +2,8 @@ package dev.peytob.math.vector
 
 import dev.peytob.math.vector.vec2.MutVec2
 import dev.peytob.math.vector.vec2.Vec2Accessor
+import dev.peytob.math.vector.vec2.Vec2f
+import dev.peytob.math.vector.vec2.Vec2i
 import kotlin.math.sqrt
 
 @JvmName("length2Double")
@@ -47,3 +49,9 @@ fun MutVec2<Long>.normalize(): MutVec2<Long> {
     y /= length
     return this
 }
+
+fun distance(p0: Vec2f, p1: Vec2f) = (p0 - p1).length()
+
+fun distance(p0: Vec2i, p1: Vec2i) = (p0 - p1).length()
+
+fun distance(p0: Vec2f, p1: Vec2i) = (p0 - p1).length()

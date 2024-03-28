@@ -47,6 +47,8 @@ internal class MutVec2fStruct(
         return this
     }
 
+    override fun dot(right: Vec2d): Float = (x * right.x + y * right.y).toFloat()
+
     override fun plus(rightX: Float, rightY: Float): MutVec2<Float> {
         x += rightX
         y += rightY
@@ -70,6 +72,8 @@ internal class MutVec2fStruct(
         y *= right.y
         return this
     }
+
+    override fun dot(right: Vec2f): Float = x * right.x + y * right.y
 
     override fun plus(rightX: Int, rightY: Int): MutVec2<Float> {
         x += rightX
@@ -96,6 +100,8 @@ internal class MutVec2fStruct(
         return this
     }
 
+    override fun dot(right: Vec2i): Float = x * right.x + y * right.y
+
     override fun plus(rightX: Long, rightY: Long): MutVec2<Float> {
         x += rightX
         y += rightY
@@ -119,6 +125,8 @@ internal class MutVec2fStruct(
         y *= right.y
         return this
     }
+
+    override fun dot(right: Vec2l): Float = x * right.x + y * right.y
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

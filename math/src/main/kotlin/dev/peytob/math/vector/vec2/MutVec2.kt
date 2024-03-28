@@ -38,6 +38,8 @@ interface MutVec2<T : Number> : Vec2Accessor<T> {
      */
     operator fun times(right: Vec2d): MutVec2<T>
 
+    fun dot(right: Vec2d): Float
+
     // Float operations
 
     operator fun plus(right: Vec2f): MutVec2<T> = plus(right.x, right.y)
@@ -58,6 +60,8 @@ interface MutVec2<T : Number> : Vec2Accessor<T> {
      * Implements scalar (component-wise) vector multiplication.
      */
     operator fun times(right: Vec2f): MutVec2<T>
+
+    fun dot(right: Vec2f): Float
 
     // Int operations
 
@@ -80,6 +84,8 @@ interface MutVec2<T : Number> : Vec2Accessor<T> {
      */
     operator fun times(right: Vec2i): MutVec2<T>
 
+    fun dot(right: Vec2i): Float
+
     // Long operations
 
     operator fun plus(right: Vec2l): MutVec2<T> = plus(right.x, right.y)
@@ -100,6 +106,8 @@ interface MutVec2<T : Number> : Vec2Accessor<T> {
      * Implements scalar (component-wise) vector multiplication.
      */
     operator fun times(right: Vec2l): MutVec2<T>
+
+    fun dot(right: Vec2l): Float
 }
 
 interface MutVec2d : MutVec2<Double>
