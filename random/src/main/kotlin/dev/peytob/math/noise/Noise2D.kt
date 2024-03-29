@@ -1,6 +1,6 @@
 package dev.peytob.math.noise
 
-import dev.peytob.math.vector.Vec2f
+import dev.peytob.math.vector.vec2.Vec2f
 
 interface Noise2D {
 

@@ -1,43 +1,35 @@
 package dev.peytob.math.vector
 
-import kotlin.math.sqrt
+import dev.peytob.math.vector.vec2.*
+import dev.peytob.math.vector.vec2.Vec2dStruct
+import dev.peytob.math.vector.vec2.Vec2fStruct
+import dev.peytob.math.vector.vec2.Vec2iStruct
 
-private val ZERO_VEC2F = Vec2f(0.0f, 0.0f)
-private val ZERO_VEC2I = Vec2i(0, 0)
+private val ZERO_VEC2D = Vec2dStruct(0.0, 0.0)
+private val ZERO_VEC2F = Vec2fStruct(0.0f, 0.0f)
+private val ZERO_VEC2I = Vec2iStruct(0, 0)
+private val ZERO_VEC2L = Vec2lStruct(0, 0)
 
-fun immutableVec2F(): Vec2f = ZERO_VEC2F
+fun immutableVec2d(): Vec2d = ZERO_VEC2D
 
-fun immutableVec2F(x: Float, y: Float): Vec2f = Vec2f(x, y)
+fun immutableVec2d(x: Double, y: Double): Vec2d = Vec2dStruct(x, y)
 
-fun immutableVec2F(from: Vec2<*>): Vec2f = if (from is Vec2f) from else Vec2f(from.x.toFloat(), from.x.toFloat())
+fun immutableVec2f(): Vec2f = ZERO_VEC2F
 
-fun immutableVec2I(): Vec2i = ZERO_VEC2I
+fun immutableVec2f(x: Float, y: Float): Vec2f = Vec2fStruct(x, y)
 
-fun immutableVec2I(x: Int, y: Int): Vec2i = Vec2i(x, y)
+fun immutableVec2i(): Vec2i = ZERO_VEC2I
 
-fun immutableVec2I(from: Vec2<*>): Vec2i = if (from is Vec2i) from else Vec2i(from.x.toInt(), from.x.toInt())
+fun immutableVec2i(x: Int, y: Int): Vec2i = Vec2iStruct(x, y)
 
-fun Vec2f.length(): Float = sqrt(this.x * this.x + this.y * this.y)
+fun immutableVec2l(): Vec2l = ZERO_VEC2L
 
-fun Vec2i.length(): Float = sqrt(this.x * this.x + this.y * this.y.toFloat())
+fun immutableVec2l(x: Long, y: Long): Vec2l = Vec2lStruct(x, y)
 
-fun Vec2<*>.length(): Float {
-    val x = this.x.toFloat()
-    val y = this.y.toFloat()
+fun mutableVec2d(x: Double, y: Double): MutVec2d = MutVec2dStruct(x, y)
 
-    return sqrt(x * x + y * y)
-}
+fun mutableVec2f(x: Float, y: Float): MutVec2f = MutVec2fStruct(x, y)
 
-fun Vec2f.normalize(): Vec2f {
-    val length = this.length()
-    return immutableVec2F(x / length, y / length)
-}
+fun mutableVec2i(x: Int = 0, y: Int = 0): MutVec2i = MutVec2iStruct(x, y)
 
-fun Vec2i.normalize(): Vec2i {
-    val length = this.length()
-    return immutableVec2I((x / length).toInt(), (y / length).toInt())
-}
-
-fun distance(p0: Vec2f, p1: Vec2f) = (p0 - p1).length()
-
-fun distance(p0: Vec2i, p1: Vec2i) = (p0 - p1).length()
+fun mutableVec2l(x: Long, y: Long): MutVec2l = MutVec2lStruct(x, y)

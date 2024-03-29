@@ -1,8 +1,8 @@
 package dev.peytob.math.geometry.rect
 
-import dev.peytob.math.vector.Vec2i
+import dev.peytob.math.vector.vec2.Vec2i
 
-data class RectI internal constructor(
+internal data class RectIStruct(
 
     override val topLeft: Vec2i,
 
@@ -14,4 +14,4 @@ data class RectI internal constructor(
 
     override val size: Vec2i
 
-): Rect<Int>
+): RectI

@@ -1,9 +1,12 @@
 package dev.peytob.math.geometry.rect
 
-import dev.peytob.math.vector.*
+import dev.peytob.math.vector.immutableVec2f
+import dev.peytob.math.vector.immutableVec2i
+import dev.peytob.math.vector.vec2.Vec2f
+import dev.peytob.math.vector.vec2.Vec2i
 
 fun rectI(topLeft: Vec2i, sizes: Vec2i): RectI =
-    RectI(
+    RectIStruct(
         topLeft,
         topLeft.plus(sizes.x, 0),
         topLeft.plus(sizes.x, sizes.y),
@@ -12,10 +15,10 @@ fun rectI(topLeft: Vec2i, sizes: Vec2i): RectI =
     )
 
 fun rectI(topLeftX: Int, topLeftY: Int, width: Int, height: Int): RectI =
-    rectI(immutableVec2I(topLeftX, topLeftY), immutableVec2I(width, height))
+    rectI(immutableVec2i(topLeftX, topLeftY), immutableVec2i(width, height))
 
 fun rectF(topLeft: Vec2f, sizes: Vec2f): RectF =
-    RectF(
+    RectFStruct(
         topLeft,
         topLeft.plus(sizes.x, 0.0f),
         topLeft.plus(sizes.x, sizes.y),
@@ -24,4 +27,4 @@ fun rectF(topLeft: Vec2f, sizes: Vec2f): RectF =
     )
 
 fun rectF(topLeftX: Float, topLeftY: Float, width: Float, height: Float): RectF =
-    rectF(immutableVec2F(topLeftX, topLeftY), immutableVec2F(width, height))
+    rectF(immutableVec2f(topLeftX, topLeftY), immutableVec2f(width, height))
