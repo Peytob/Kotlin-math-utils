@@ -14,4 +14,7 @@ internal data class RectFStruct(
 
     override val size: Vec2f
 
-): RectF
+): RectF {
+
+    override fun toString(): String = "Rectfs(topLeft=$topLeft, size=$size)"
+}

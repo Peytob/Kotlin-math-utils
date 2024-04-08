@@ -55,4 +55,6 @@ internal data class Vec2lStruct(
     override fun times(right: Vec2l): Vec2l = Vec2lStruct(x * right.x, y * right.y)
 
     override fun dot(right: Vec2l): Float = (x * right.x + y * right.y).toFloat()
+
+    override fun toString(): String = "Vec2ls(x=$x, y=$y)"
 }

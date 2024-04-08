@@ -26,10 +26,10 @@ fun immutableVec2l(): Vec2l = ZERO_VEC2L
 
 fun immutableVec2l(x: Long, y: Long): Vec2l = Vec2lStruct(x, y)
 
-fun mutableVec2d(x: Double, y: Double): MutVec2d = MutVec2dStruct(x, y)
+fun mutableVec2d(x: Double = 0.0, y: Double = 0.0): MutVec2d = MutVec2dStruct(x, y)
 
-fun mutableVec2f(x: Float, y: Float): MutVec2f = MutVec2fStruct(x, y)
+fun mutableVec2f(x: Float = 0f, y: Float = 0f): MutVec2f = MutVec2fStruct(x, y)
 
 fun mutableVec2i(x: Int = 0, y: Int = 0): MutVec2i = MutVec2iStruct(x, y)
 
-fun mutableVec2l(x: Long, y: Long): MutVec2l = MutVec2lStruct(x, y)
+fun mutableVec2l(x: Long = 0, y: Long = 0): MutVec2l = MutVec2lStruct(x, y)

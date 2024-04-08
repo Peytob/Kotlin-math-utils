@@ -58,4 +58,6 @@ internal data class Vec2fStruct(
     override fun times(right: Vec2l): Vec2f = Vec2fStruct(x * right.x, y * right.y)
 
     override fun dot(right: Vec2l): Float = x * right.x + y * right.y
+
+    override fun toString(): String = "Vec2fs(x=$x, y=$y)"
 }

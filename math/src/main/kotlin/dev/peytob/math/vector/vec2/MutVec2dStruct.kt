@@ -143,7 +143,5 @@ internal class MutVec2dStruct(
         return result
     }
 
-    override fun toString(): String {
-        return "MutVec2ds(x=$x, y=$y)"
-    }
+    override fun toString(): String = "MutVec2ds(x=$x, y=$y)"
 }

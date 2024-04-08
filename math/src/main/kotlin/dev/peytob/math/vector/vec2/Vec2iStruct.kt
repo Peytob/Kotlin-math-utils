@@ -55,4 +55,6 @@ internal data class Vec2iStruct(
     override fun times(right: Vec2l): Vec2i = Vec2iStruct(x * right.x.toInt(), y * right.y.toInt())
 
     override fun dot(right: Vec2l): Float = (x * right.x + y * right.y).toFloat()
+
+    override fun toString(): String = "Vec2is(x=$x, y=$y)"
 }

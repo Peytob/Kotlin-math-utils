@@ -14,4 +14,7 @@ internal data class RectIStruct(
 
     override val size: Vec2i
 
-): RectI
+): RectI {
+
+    override fun toString(): String = "Rectis(topLeft=$topLeft, size=$size)"
+}

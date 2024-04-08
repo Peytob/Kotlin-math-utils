@@ -53,5 +53,3 @@ fun MutVec2<Long>.normalize(): MutVec2<Long> {
 fun distance(p0: Vec2f, p1: Vec2f) = (p0 - p1).length()
 
 fun distance(p0: Vec2i, p1: Vec2i) = (p0 - p1).length()
-
-fun distance(p0: Vec2f, p1: Vec2i) = (p0 - p1).length()
