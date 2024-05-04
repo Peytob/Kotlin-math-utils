@@ -21,17 +21,17 @@ interface MutVec3<T : Number> : Vec3Accessor<T> {
 
     // Double operations
 
-    operator fun plus(right: Vec3d): MutVec3<T> = plus(right.x, right.y)
+    operator fun plus(right: Vec3d): MutVec3<T> = plus(right.x, right.y, right.z)
 
-    operator fun plus(rightScalar: Double): MutVec3<T> = plus(rightScalar, rightScalar)
+    operator fun plus(rightScalar: Double): MutVec3<T> = plus(rightScalar, rightScalar, rightScalar)
 
-    fun plus(rightX: Double, rightY: Double): MutVec3<T>
+    fun plus(rightX: Double, rightY: Double, rightZ: Double): MutVec3<T>
 
-    operator fun minus(right: Vec3d): MutVec3<T> = minus(right.x, right.y)
+    operator fun minus(right: Vec3d): MutVec3<T> = minus(right.x, right.y, right.z)
 
-    operator fun minus(rightScalar: Double): MutVec3<T> = minus(rightScalar, rightScalar)
+    operator fun minus(rightScalar: Double): MutVec3<T> = minus(rightScalar, rightScalar, rightScalar)
 
-    fun minus(rightX: Double, rightY: Double): MutVec3<T>
+    fun minus(rightX: Double, rightY: Double, rightZ: Double): MutVec3<T>
 
     operator fun times(scalar: Double): MutVec3<T>
 
@@ -44,17 +44,17 @@ interface MutVec3<T : Number> : Vec3Accessor<T> {
 
     // Float operations
 
-    operator fun plus(right: Vec3f): MutVec3<T> = plus(right.x, right.y)
+    operator fun plus(right: Vec3f): MutVec3<T> = plus(right.x, right.y, right.z)
 
-    operator fun plus(rightScalar: Float): MutVec3<T> = plus(rightScalar, rightScalar)
+    operator fun plus(rightScalar: Float): MutVec3<T> = plus(rightScalar, rightScalar, rightScalar)
 
-    fun plus(rightX: Float, rightY: Float): MutVec3<T>
+    fun plus(rightX: Float, rightY: Float, rightZ: Float): MutVec3<T>
 
-    operator fun minus(right: Vec3f): MutVec3<T> = minus(right.x, right.y)
+    operator fun minus(right: Vec3f): MutVec3<T> = minus(right.x, right.y, right.z)
 
-    operator fun minus(rightScalar: Float): MutVec3<T> = minus(rightScalar, rightScalar)
+    operator fun minus(rightScalar: Float): MutVec3<T> = minus(rightScalar, rightScalar, rightScalar)
 
-    fun minus(rightX: Float, rightY: Float): MutVec3<T>
+    fun minus(rightX: Float, rightY: Float, rightZ: Float): MutVec3<T>
 
     operator fun times(scalar: Float): MutVec3<T>
 
@@ -67,17 +67,17 @@ interface MutVec3<T : Number> : Vec3Accessor<T> {
 
     // Int operations
 
-    operator fun plus(right: Vec3i): MutVec3<T> = plus(right.x, right.y)
+    operator fun plus(right: Vec3i): MutVec3<T> = plus(right.x, right.y, right.z)
 
-    operator fun plus(rightScalar: Int): MutVec3<T> = plus(rightScalar, rightScalar)
+    operator fun plus(rightScalar: Int): MutVec3<T> = plus(rightScalar, rightScalar, rightScalar)
 
-    fun plus(rightX: Int, rightY: Int): MutVec3<T>
+    fun plus(rightX: Int, rightY: Int, rightZ: Int): MutVec3<T>
 
-    operator fun minus(right: Vec3i): MutVec3<T> = minus(right.x, right.y)
+    operator fun minus(right: Vec3i): MutVec3<T> = minus(right.x, right.y, right.z)
 
-    operator fun minus(rightScalar: Int): MutVec3<T> = minus(rightScalar, rightScalar)
+    operator fun minus(rightScalar: Int): MutVec3<T> = minus(rightScalar, rightScalar, rightScalar)
 
-    fun minus(rightX: Int, rightY: Int): MutVec3<T>
+    fun minus(rightX: Int, rightY: Int, rightZ: Int): MutVec3<T>
 
     operator fun times(scalar: Int): MutVec3<T>
 
@@ -90,17 +90,17 @@ interface MutVec3<T : Number> : Vec3Accessor<T> {
 
     // Long operations
 
-    operator fun plus(right: Vec3l): MutVec3<T> = plus(right.x, right.y)
+    operator fun plus(right: Vec3l): MutVec3<T> = plus(right.x, right.y, right.z)
 
-    operator fun plus(rightScalar: Long): MutVec3<T> = plus(rightScalar, rightScalar)
+    operator fun plus(rightScalar: Long): MutVec3<T> = plus(rightScalar, rightScalar, rightScalar)
 
-    fun plus(rightX: Long, rightY: Long): MutVec3<T>
+    fun plus(rightX: Long, rightY: Long, rightZ: Long): MutVec3<T>
 
-    operator fun minus(right: Vec3l): MutVec3<T> = minus(right.x, right.y)
+    operator fun minus(right: Vec3l): MutVec3<T> = minus(right.x, right.y, right.z)
 
-    operator fun minus(rightScalar: Long): MutVec3<T> = minus(rightScalar, rightScalar)
+    operator fun minus(rightScalar: Long): MutVec3<T> = minus(rightScalar, rightScalar, rightScalar)
 
-    fun minus(rightX: Long, rightY: Long): MutVec3<T>
+    fun minus(rightX: Long, rightY: Long, rightZ: Long): MutVec3<T>
 
     operator fun times(scalar: Long): MutVec3<T>
 
