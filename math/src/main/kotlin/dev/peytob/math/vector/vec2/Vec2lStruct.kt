@@ -4,7 +4,7 @@ internal data class Vec2lStruct(
     override val x: Long,
     override val y: Long
 ) : Vec2l {
-    override fun asMutable(): MutVec2<Long> = MutVec2lStruct(x, y)
+    override fun asMutable(): MutVec2l = MutVec2lStruct(x, y)
 
     override val elementSizeBytes: Int
         get() = Long.SIZE_BYTES
@@ -44,7 +44,7 @@ internal data class Vec2lStruct(
 
     override fun times(right: Vec2i): Vec2l = Vec2lStruct(x * right.x, y * right.y)
 
-    override fun dot(right: Vec2<Int>): Float = (x * right.x + y * right.y).toFloat()
+    override fun dot(right: Vec2i): Float = (x * right.x + y * right.y).toFloat()
 
     override fun plus(rightX: Long, rightY: Long): Vec2l = Vec2lStruct(x + rightX, y + rightY)
 
@@ -54,7 +54,17 @@ internal data class Vec2lStruct(
 
     override fun times(right: Vec2l): Vec2l = Vec2lStruct(x * right.x, y * right.y)
 
+    override fun toDouble(): Vec2d = Vec2dStruct(x.toDouble(), y.toDouble())
+
+    override fun toFloat(): Vec2f = Vec2fStruct(x.toFloat(), y.toFloat())
+
+    override fun toInt(): Vec2i = Vec2iStruct(x.toInt(), y.toInt())
+
+    override fun toLong(): Vec2l = this
+
     override fun dot(right: Vec2l): Float = (x * right.x + y * right.y).toFloat()
+
+
 
     override fun toString(): String = "Vec2ls(x=$x, y=$y)"
 }

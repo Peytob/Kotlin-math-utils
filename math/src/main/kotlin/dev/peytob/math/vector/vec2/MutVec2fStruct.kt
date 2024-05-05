@@ -128,6 +128,14 @@ internal class MutVec2fStruct(
 
     override fun dot(right: Vec2l): Float = x * right.x + y * right.y
 
+    override fun toDouble(): MutVec2d = MutVec2dStruct(x.toDouble(), y.toDouble())
+
+    override fun toFloat(): MutVec2f = this
+
+    override fun toInt(): MutVec2i = MutVec2iStruct(x.toInt(), y.toInt())
+
+    override fun toLong(): MutVec2l = MutVec2lStruct(x.toLong(), y.toLong())
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

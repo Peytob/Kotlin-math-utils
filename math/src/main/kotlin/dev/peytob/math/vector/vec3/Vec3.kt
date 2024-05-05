@@ -110,6 +110,8 @@ sealed interface Vec3<T : Number> : Vec3Accessor<T> {
 
 interface Vec3d : Vec3<Double> {
 
+    override fun asMutable(): MutVec3d
+
     override fun unaryPlus(): Vec3d
 
     override fun unaryMinus(): Vec3d
@@ -145,9 +147,51 @@ interface Vec3d : Vec3<Double> {
     override fun times(scalar: Long): Vec3d
 
     override fun times(right: Vec3l): Vec3d
+
+    override fun plus(right: Vec3d): Vec3d = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Double): Vec3d = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3d): Vec3d = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Double): Vec3d = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3d): Float
+
+    override fun plus(right: Vec3f): Vec3d = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Float): Vec3d = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3f): Vec3d = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Float): Vec3d = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3f): Float
+
+    override fun plus(right: Vec3i): Vec3d = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Int): Vec3d = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3i): Vec3d = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Int): Vec3d = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3<Int>): Float
+
+    override fun plus(right: Vec3l): Vec3d = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Long): Vec3d = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3l): Vec3d = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Long): Vec3d = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3l): Float
 }
 
 interface Vec3i : Vec3<Int> {
+
+    override fun asMutable(): MutVec3i
 
     override fun unaryPlus(): Vec3i
 
@@ -184,9 +228,51 @@ interface Vec3i : Vec3<Int> {
     override fun times(scalar: Long): Vec3i
 
     override fun times(right: Vec3l): Vec3i
+
+    override fun plus(right: Vec3d): Vec3i = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Double): Vec3i = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3d): Vec3i = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Double): Vec3i = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3d): Float
+
+    override fun plus(right: Vec3f): Vec3i = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Float): Vec3i = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3f): Vec3i = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Float): Vec3i = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3f): Float
+
+    override fun plus(right: Vec3i): Vec3i = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Int): Vec3i = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3i): Vec3i = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Int): Vec3i = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3<Int>): Float
+
+    override fun plus(right: Vec3l): Vec3i = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Long): Vec3i = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3l): Vec3i = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Long): Vec3i = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3l): Float
 }
 
 interface Vec3f : Vec3<Float> {
+
+    override fun asMutable(): MutVec3f
 
     override fun unaryPlus(): Vec3f
 
@@ -223,9 +309,49 @@ interface Vec3f : Vec3<Float> {
     override fun times(scalar: Long): Vec3f
 
     override fun times(right: Vec3l): Vec3f
+
+    override fun plus(right: Vec3d): Vec3f = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Double): Vec3f = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3d): Vec3f = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Double): Vec3f = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3d): Float
+
+    override fun plus(right: Vec3f): Vec3f = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Float): Vec3f = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3f): Vec3f = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Float): Vec3f = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3f): Float
+
+    override fun plus(right: Vec3i): Vec3f = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Int): Vec3f = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3i): Vec3f = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Int): Vec3f = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3<Int>): Float
+
+    override fun plus(right: Vec3l): Vec3f = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Long): Vec3f = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3l): Vec3f = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Long): Vec3f = minus(rightScalar, rightScalar, rightScalar)
 }
 
 interface Vec3l : Vec3<Long> {
+
+    override fun asMutable(): MutVec3l
 
     override fun unaryPlus(): Vec3l
 
@@ -262,4 +388,44 @@ interface Vec3l : Vec3<Long> {
     override fun times(scalar: Long): Vec3l
 
     override fun times(right: Vec3l): Vec3l
+
+    override fun plus(right: Vec3d): Vec3l = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Double): Vec3l = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3d): Vec3l = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Double): Vec3l = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3d): Float
+
+    override fun plus(right: Vec3f): Vec3l = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Float): Vec3l = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3f): Vec3l = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Float): Vec3l = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3f): Float
+
+    override fun plus(right: Vec3i): Vec3l = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Int): Vec3l = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3i): Vec3l = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Int): Vec3l = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3<Int>): Float
+
+    override fun plus(right: Vec3l): Vec3l = plus(right.x, right.y, right.z)
+
+    override fun plus(rightScalar: Long): Vec3l = plus(rightScalar, rightScalar, rightScalar)
+
+    override fun minus(right: Vec3l): Vec3l = minus(right.x, right.y, right.z)
+
+    override fun minus(rightScalar: Long): Vec3l = minus(rightScalar, rightScalar, rightScalar)
+
+    override fun dot(right: Vec3l): Float
 }

@@ -80,7 +80,7 @@ sealed interface Vec2<T : Number> : Vec2Accessor<T> {
      */
     operator fun times(right: Vec2i): Vec2<T>
 
-    fun dot(right: Vec2<Int>): Float
+    fun dot(right: Vec2i): Float
 
     // Long operations
 
@@ -104,11 +104,23 @@ sealed interface Vec2<T : Number> : Vec2Accessor<T> {
     operator fun times(right: Vec2l): Vec2<T>
 
     fun dot(right: Vec2l): Float
+
+    // Converts
+
+    fun toDouble(): Vec2<Double>
+
+    fun toFloat(): Vec2<Float>
+
+    fun toInt(): Vec2<Int>
+
+    fun toLong(): Vec2<Long>
 }
 
 // Usable realisations
 
 interface Vec2d : Vec2<Double> {
+
+    override fun asMutable(): MutVec2d
 
     override fun unaryPlus(): Vec2d
 
@@ -145,9 +157,51 @@ interface Vec2d : Vec2<Double> {
     override fun times(scalar: Long): Vec2d
 
     override fun times(right: Vec2l): Vec2d
+
+    override fun plus(right: Vec2d): Vec2d = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Double): Vec2d = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2d): Vec2d = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Double): Vec2d = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2f): Vec2d = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Float): Vec2d = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2f): Vec2d = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Float): Vec2d = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2i): Vec2d = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Int): Vec2d = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2i): Vec2d = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Int): Vec2d = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2l): Vec2d = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Long): Vec2d = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2l): Vec2d = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Long): Vec2d = minus(rightScalar, rightScalar)
+
+    override fun toDouble(): Vec2d
+
+    override fun toFloat(): Vec2f
+
+    override fun toInt(): Vec2i
+
+    override fun toLong(): Vec2l
 }
 
 interface Vec2i : Vec2<Int> {
+
+    override fun asMutable(): MutVec2i
 
     override fun unaryPlus(): Vec2i
 
@@ -184,9 +238,51 @@ interface Vec2i : Vec2<Int> {
     override fun times(scalar: Long): Vec2i
 
     override fun times(right: Vec2l): Vec2i
+
+    override fun plus(right: Vec2d): Vec2i = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Double): Vec2i = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2d): Vec2i = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Double): Vec2i = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2f): Vec2i = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Float): Vec2i = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2f): Vec2i = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Float): Vec2i = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2i): Vec2i = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Int): Vec2i = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2i): Vec2i = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Int): Vec2i = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2l): Vec2i = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Long): Vec2i = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2l): Vec2i = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Long): Vec2i = minus(rightScalar, rightScalar)
+
+    override fun toDouble(): Vec2d
+
+    override fun toFloat(): Vec2f
+
+    override fun toInt(): Vec2i
+
+    override fun toLong(): Vec2l
 }
 
 interface Vec2f : Vec2<Float> {
+
+    override fun asMutable(): MutVec2f
 
     override fun unaryPlus(): Vec2f
 
@@ -223,9 +319,51 @@ interface Vec2f : Vec2<Float> {
     override fun times(scalar: Long): Vec2f
 
     override fun times(right: Vec2l): Vec2f
+
+    override fun plus(right: Vec2d): Vec2f = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Double): Vec2f = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2d): Vec2f = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Double): Vec2f = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2f): Vec2f = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Float): Vec2f = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2f): Vec2f = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Float): Vec2f = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2i): Vec2f = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Int): Vec2f = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2i): Vec2f = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Int): Vec2f = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2l): Vec2f = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Long): Vec2f = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2l): Vec2f = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Long): Vec2f = minus(rightScalar, rightScalar)
+
+    override fun toDouble(): Vec2d
+
+    override fun toFloat(): Vec2f
+
+    override fun toInt(): Vec2i
+
+    override fun toLong(): Vec2l
 }
 
 interface Vec2l : Vec2<Long> {
+
+    override fun asMutable(): MutVec2l
 
     override fun unaryPlus(): Vec2l
 
@@ -262,4 +400,44 @@ interface Vec2l : Vec2<Long> {
     override fun times(scalar: Long): Vec2l
 
     override fun times(right: Vec2l): Vec2l
+
+    override fun plus(right: Vec2d): Vec2l =plus(right.x, right.y)
+
+    override fun plus(rightScalar: Double): Vec2l = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2d): Vec2l = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Double): Vec2l = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2f): Vec2l = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Float): Vec2l = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2f): Vec2l = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Float): Vec2l = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2i): Vec2l = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Int): Vec2l = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2i): Vec2l = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Int): Vec2l = minus(rightScalar, rightScalar)
+
+    override fun plus(right: Vec2l): Vec2l = plus(right.x, right.y)
+
+    override fun plus(rightScalar: Long): Vec2l = plus(rightScalar, rightScalar)
+
+    override fun minus(right: Vec2l): Vec2l = minus(right.x, right.y)
+
+    override fun minus(rightScalar: Long): Vec2l = minus(rightScalar, rightScalar)
+
+    override fun toDouble(): Vec2d
+
+    override fun toFloat(): Vec2f
+
+    override fun toInt(): Vec2i
+
+    override fun toLong(): Vec2l
 }

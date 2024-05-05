@@ -108,6 +108,14 @@ interface MutVec2<T : Number> : Vec2Accessor<T> {
     operator fun times(right: Vec2l): MutVec2<T>
 
     fun dot(right: Vec2l): Float
+
+    fun toDouble(): MutVec2<Double>
+
+    fun toFloat(): MutVec2<Float>
+
+    fun toInt(): MutVec2<Int>
+
+    fun toLong(): MutVec2<Long>
 }
 
 interface MutVec2d : MutVec2<Double>

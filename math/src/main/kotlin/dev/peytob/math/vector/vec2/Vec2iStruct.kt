@@ -44,7 +44,7 @@ internal data class Vec2iStruct(
 
     override fun times(right: Vec2i): Vec2i = Vec2iStruct(x * right.x, y * right.y)
 
-    override fun dot(right: Vec2<Int>): Float = (x * right.x + y * right.y).toFloat()
+    override fun dot(right: Vec2i): Float = (x * right.x + y * right.y).toFloat()
 
     override fun plus(rightX: Long, rightY: Long): Vec2i = Vec2iStruct(x + rightX.toInt(), y + rightY.toInt())
 
@@ -55,6 +55,14 @@ internal data class Vec2iStruct(
     override fun times(right: Vec2l): Vec2i = Vec2iStruct(x * right.x.toInt(), y * right.y.toInt())
 
     override fun dot(right: Vec2l): Float = (x * right.x + y * right.y).toFloat()
+
+    override fun toDouble(): Vec2d = Vec2dStruct(x.toDouble(), y.toDouble())
+
+    override fun toFloat(): Vec2f = Vec2fStruct(x.toFloat(), y.toFloat())
+
+    override fun toInt(): Vec2i = this
+
+    override fun toLong(): Vec2l = Vec2lStruct(x.toLong(), y.toLong())
 
     override fun toString(): String = "Vec2is(x=$x, y=$y)"
 }
