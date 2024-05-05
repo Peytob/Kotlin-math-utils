@@ -80,6 +80,26 @@ fun min(p: Vec2i, right: Int): Vec2i = immutableVec2i(min(p.x, right), min(p.y, 
 
 fun min(p: Vec2l, right: Long): Vec2l = immutableVec2l(min(p.x, right), min(p.y, right))
 
+fun normalize(p: Vec2d): Vec2d {
+    val l = p.length()
+    return immutableVec2d(p.x / l, p.y / l)
+}
+
+fun normalize(p: Vec2f): Vec2f {
+    val l = p.length()
+    return immutableVec2f(p.x / l, p.y / l)
+}
+
+fun normalize(p: Vec2i): Vec2f {
+    val l = p.length()
+    return immutableVec2f(p.x / l, p.y / l)
+}
+
+fun normalize(p: Vec2l): Vec2f {
+    val l = p.length()
+    return immutableVec2f(p.x / l, p.y / l)
+}
+
 // vec3
 
 @JvmName("length3Double")
@@ -157,3 +177,23 @@ fun min(p: Vec3f, right: Float): Vec3f = immutableVec3f(min(p.x, right), min(p.y
 fun min(p: Vec3i, right: Int): Vec3i = immutableVec3i(min(p.x, right), min(p.y, right), min(p.z, right))
 
 fun min(p: Vec3l, right: Long): Vec3l = immutableVec3l(min(p.x, right), min(p.y, right), min(p.z, right))
+
+fun normalize(p: Vec3d): Vec3d {
+    val l = p.length()
+    return immutableVec3d(p.x / l, p.y / l, p.z / l)
+}
+
+fun normalize(p: Vec3f): Vec3f {
+    val l = p.length()
+    return immutableVec3f(p.x / l, p.y / l, p.z / l)
+}
+
+fun normalize(p: Vec3i): Vec3f {
+    val l = p.length()
+    return immutableVec3f(p.x / l, p.y / l, p.z / l)
+}
+
+fun normalize(p: Vec3l): Vec3f {
+    val l = p.length()
+    return immutableVec3f(p.x / l, p.y / l, p.z / l)
+}
