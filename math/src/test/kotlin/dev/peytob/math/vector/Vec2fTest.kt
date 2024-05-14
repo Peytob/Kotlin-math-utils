@@ -3,7 +3,7 @@ package dev.peytob.math.vector
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class Vec2FTest {
+class Vec2fTest {
 
     @Test
     fun equalsMethodTest() {
