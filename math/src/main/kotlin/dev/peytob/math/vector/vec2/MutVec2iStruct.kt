@@ -11,37 +11,37 @@ internal class MutVec2iStruct(
     override val vectorSizeBytes: Int
         get() = Int.SIZE_BYTES * 2
 
-    override fun asImmutable(): Vec2<Int> = Vec2iStruct(x, y)
+    override fun asImmutable(): Vec2i = Vec2iStruct(x, y)
 
-    override fun unaryPlus(): MutVec2<Int> {
+    override fun unaryPlus(): MutVec2i {
         return this
     }
 
-    override fun unaryMinus(): MutVec2<Int> {
+    override fun unaryMinus(): MutVec2i {
         x = -x
         y = -y
         return this
     }
 
-    override fun plus(rightX: Double, rightY: Double): MutVec2<Int> {
+    override fun plus(rightX: Double, rightY: Double): MutVec2i {
         x += rightX.toInt()
         y += rightY.toInt()
         return this
     }
 
-    override fun minus(rightX: Double, rightY: Double): MutVec2<Int> {
+    override fun minus(rightX: Double, rightY: Double): MutVec2i {
         x -= rightX.toInt()
         y -= rightY.toInt()
         return this
     }
 
-    override fun times(scalar: Double): MutVec2<Int> {
+    override fun times(scalar: Double): MutVec2i {
         x *= scalar.toInt()
         y *= scalar.toInt()
         return this
     }
 
-    override fun times(right: Vec2d): MutVec2<Int> {
+    override fun times(right: Vec2d): MutVec2i {
         x *= right.x.toInt()
         y *= right.y.toInt()
         return this
@@ -49,25 +49,25 @@ internal class MutVec2iStruct(
 
     override fun dot(right: Vec2d): Float = (x * right.x + y * right.y).toFloat()
 
-    override fun plus(rightX: Float, rightY: Float): MutVec2<Int> {
+    override fun plus(rightX: Float, rightY: Float): MutVec2i {
         x += rightX.toInt()
         y += rightY.toInt()
         return this
     }
 
-    override fun minus(rightX: Float, rightY: Float): MutVec2<Int> {
+    override fun minus(rightX: Float, rightY: Float): MutVec2i {
         x -= rightX.toInt()
         y -= rightY.toInt()
         return this
     }
 
-    override fun times(scalar: Float): MutVec2<Int> {
+    override fun times(scalar: Float): MutVec2i {
         x *= scalar.toInt()
         y *= scalar.toInt()
         return this
     }
 
-    override fun times(right: Vec2f): MutVec2<Int> {
+    override fun times(right: Vec2f): MutVec2i {
         x *= right.x.toInt()
         y *= right.y.toInt()
         return this
@@ -75,26 +75,26 @@ internal class MutVec2iStruct(
 
     override fun dot(right: Vec2f): Float = x * right.x + y * right.y
 
-    override fun plus(rightX: Int, rightY: Int): MutVec2<Int> {
+    override fun plus(rightX: Int, rightY: Int): MutVec2i {
         x += rightX
         y += rightY
         return this
 
     }
 
-    override fun minus(rightX: Int, rightY: Int): MutVec2<Int> {
+    override fun minus(rightX: Int, rightY: Int): MutVec2i {
         x -= rightX
         y -= rightY
         return this
     }
 
-    override fun times(scalar: Int): MutVec2<Int> {
+    override fun times(scalar: Int): MutVec2i {
         x *= scalar
         y *= scalar
         return this
     }
 
-    override fun times(right: Vec2i): MutVec2<Int> {
+    override fun times(right: Vec2i): MutVec2i {
         x *= right.x
         y *= right.y
         return this
@@ -102,25 +102,25 @@ internal class MutVec2iStruct(
 
     override fun dot(right: Vec2i): Float = (x * right.x + y * right.y).toFloat()
 
-    override fun plus(rightX: Long, rightY: Long): MutVec2<Int> {
+    override fun plus(rightX: Long, rightY: Long): MutVec2i {
         x += rightX.toInt()
         y += rightY.toInt()
         return this
     }
 
-    override fun minus(rightX: Long, rightY: Long): MutVec2<Int> {
+    override fun minus(rightX: Long, rightY: Long): MutVec2i {
         x -= rightX.toInt()
         y -= rightY.toInt()
         return this
     }
 
-    override fun times(scalar: Long): MutVec2<Int> {
+    override fun times(scalar: Long): MutVec2i {
         x *= scalar.toInt()
         y *= scalar.toInt()
         return this
     }
 
-    override fun times(right: Vec2l): MutVec2<Int> {
+    override fun times(right: Vec2l): MutVec2i {
         x *= right.x.toInt()
         y *= right.y.toInt()
         return this
