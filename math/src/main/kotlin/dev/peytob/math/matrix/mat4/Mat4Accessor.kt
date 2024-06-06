@@ -1,4 +1,4 @@
-package dev.peytob.math.matrix
+package dev.peytob.math.matrix.mat4
 
 import dev.peytob.math.vector.vec2.Vec2i
 

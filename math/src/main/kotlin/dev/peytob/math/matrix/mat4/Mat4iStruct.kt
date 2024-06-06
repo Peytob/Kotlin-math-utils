@@ -1,8 +1,12 @@
-package dev.peytob.math.matrix
+package dev.peytob.math.matrix.mat4
+
+import dev.peytob.math.matrix.toIndex
 
 internal class Mat4iStruct internal constructor(
-    override val raw: IntArray
+    private val raw: IntArray
 ) : Mat4i {
+
+    private val rawHashcode = raw.contentHashCode()
 
     override val elementSizeBytes: Int
         get() = Int.SIZE_BYTES
@@ -18,7 +22,5 @@ internal class Mat4iStruct internal constructor(
         return raw.contentEquals(other.raw)
     }
 
-    override fun hashCode(): Int {
-        return raw.contentHashCode()
-    }
+    override fun hashCode(): Int = rawHashcode
 }
