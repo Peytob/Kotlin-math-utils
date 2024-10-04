@@ -15,6 +15,18 @@ sealed interface Mat4Accessor<T : Number> {
     val sizes: Vec2i
 
     /**
+     * Number of rows in matrix (equals to size in mat4 case)
+     */
+    val rows: Int
+        get() = size
+
+    /**
+     * Number of columns in matrix (equals to size in mat4 case)
+     */
+    val columns: Int
+        get() = size
+
+    /**
      * Returns count of elements in matrix
      */
     val elementsCount: Int
@@ -34,4 +46,9 @@ sealed interface Mat4Accessor<T : Number> {
      * Returns (x, y) element
      */
     operator fun get(row: Int, column: Int): T
+
+    /**
+     * Returns elements with given index in raw matrix.
+     */
+    operator fun get(index: Int): T
 }
