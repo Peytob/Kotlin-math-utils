@@ -11,37 +11,37 @@ internal class MutVec2fStruct(
     override val vectorSizeBytes: Int
         get() = Float.SIZE_BYTES * 2
 
-    override fun asImmutable(): Vec2<Float> = Vec2fStruct(x, y)
+    override fun asImmutable(): Vec2f = Vec2fStruct(x, y)
 
-    override fun unaryPlus(): MutVec2<Float> {
+    override fun unaryPlus(): MutVec2f {
         return this
     }
 
-    override fun unaryMinus(): MutVec2<Float> {
+    override fun unaryMinus(): MutVec2f {
         x = -x
         y = -y
         return this
     }
 
-    override fun plus(rightX: Double, rightY: Double): MutVec2<Float> {
+    override fun plus(rightX: Double, rightY: Double): MutVec2f {
         x += rightX.toFloat()
         y += rightY.toFloat()
         return this
     }
 
-    override fun minus(rightX: Double, rightY: Double): MutVec2<Float> {
+    override fun minus(rightX: Double, rightY: Double): MutVec2f {
         x -= rightX.toFloat()
         y -= rightY.toFloat()
         return this
     }
 
-    override fun times(scalar: Double): MutVec2<Float> {
+    override fun times(scalar: Double): MutVec2f {
         x *= scalar.toFloat()
         y *= scalar.toFloat()
         return this
     }
 
-    override fun times(right: Vec2d): MutVec2<Float> {
+    override fun times(right: Vec2d): MutVec2f {
         x *= right.x.toFloat()
         y *= right.y.toFloat()
         return this
@@ -49,25 +49,25 @@ internal class MutVec2fStruct(
 
     override fun dot(right: Vec2d): Float = (x * right.x + y * right.y).toFloat()
 
-    override fun plus(rightX: Float, rightY: Float): MutVec2<Float> {
+    override fun plus(rightX: Float, rightY: Float): MutVec2f {
         x += rightX
         y += rightY
         return this
     }
 
-    override fun minus(rightX: Float, rightY: Float): MutVec2<Float> {
+    override fun minus(rightX: Float, rightY: Float): MutVec2f {
         x -= rightX
         y -= rightY
         return this
     }
 
-    override fun times(scalar: Float): MutVec2<Float> {
+    override fun times(scalar: Float): MutVec2f {
         x *= scalar
         y *= scalar
         return this
     }
 
-    override fun times(right: Vec2f): MutVec2<Float> {
+    override fun times(right: Vec2f): MutVec2f {
         x *= right.x
         y *= right.y
         return this
@@ -75,26 +75,26 @@ internal class MutVec2fStruct(
 
     override fun dot(right: Vec2f): Float = x * right.x + y * right.y
 
-    override fun plus(rightX: Int, rightY: Int): MutVec2<Float> {
+    override fun plus(rightX: Int, rightY: Int): MutVec2f {
         x += rightX
         y += rightY
         return this
 
     }
 
-    override fun minus(rightX: Int, rightY: Int): MutVec2<Float> {
+    override fun minus(rightX: Int, rightY: Int): MutVec2f {
         x -= rightX
         y -= rightY
         return this
     }
 
-    override fun times(scalar: Int): MutVec2<Float> {
+    override fun times(scalar: Int): MutVec2f {
         x *= scalar
         y *= scalar
         return this
     }
 
-    override fun times(right: Vec2i): MutVec2<Float> {
+    override fun times(right: Vec2i): MutVec2f {
         x *= right.x
         y *= right.y
         return this
@@ -102,25 +102,25 @@ internal class MutVec2fStruct(
 
     override fun dot(right: Vec2i): Float = x * right.x + y * right.y
 
-    override fun plus(rightX: Long, rightY: Long): MutVec2<Float> {
+    override fun plus(rightX: Long, rightY: Long): MutVec2f {
         x += rightX
         y += rightY
         return this
     }
 
-    override fun minus(rightX: Long, rightY: Long): MutVec2<Float> {
+    override fun minus(rightX: Long, rightY: Long): MutVec2f {
         x -= rightX
         y -= rightY
         return this
     }
 
-    override fun times(scalar: Long): MutVec2<Float> {
+    override fun times(scalar: Long): MutVec2f {
         x *= scalar
         y *= scalar
         return this
     }
 
-    override fun times(right: Vec2l): MutVec2<Float> {
+    override fun times(right: Vec2l): MutVec2f {
         x *= right.x
         y *= right.y
         return this

@@ -24,7 +24,7 @@ sealed interface Vec3Accessor<T : Number> {
     operator fun get(index: Int) = when (index) {
         0 -> x
         1 -> y
-        2 -> y
+        2 -> z
         else -> throw IndexOutOfBoundsException()
     }
 }
