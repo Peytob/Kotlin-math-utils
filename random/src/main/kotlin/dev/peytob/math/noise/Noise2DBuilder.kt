@@ -1,7 +1,6 @@
 package dev.peytob.math.noise
 
 import dev.peytob.math.noise.decorator.ScaledNoiseDecorator
-import dev.peytob.math.vector.vec2.Vec2f
 
 class Noise2DBuilder(
     private var noise2D: Noise2D

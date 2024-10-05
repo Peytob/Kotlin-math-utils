@@ -1,7 +1,5 @@
 package dev.peytob.math.noise
 
-import dev.peytob.math.vector.vec2.Vec2f
-
 interface Noise2D {
 
     fun getPoint(point: Vec2f): Float

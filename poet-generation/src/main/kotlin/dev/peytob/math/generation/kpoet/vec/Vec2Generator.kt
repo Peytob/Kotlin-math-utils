@@ -1,42 +1,54 @@
 package dev.peytob.math.generation.kpoet.vec
 
-import com.squareup.kotlinpoet.FunSpec
-import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.squareup.kotlinpoet.PropertySpec
-import com.squareup.kotlinpoet.TypeSpec
-import dev.peytob.math.generation.kpoet.extractPostfix
 import dev.peytob.math.generation.kpoet.generatedAnnotation
-import dev.peytob.math.vector.vec2.Vec2Accessor
+import dev.peytob.math.generation.kpoet.model.PrimitiveDescriptor
+import dev.peytob.math.generation.kpoet.model.TargetPackage
+import dev.peytob.math.generation.kpoet.model.VectorDescriptor
 import java.lang.RuntimeException
-import kotlin.reflect.KClass
 
-fun generateTypedVec2(kClass: KClass<*>, elementSizeBytes: Int): TypeSpec {
-    println("Generating Vec2 class for ${kClass.simpleName}")
+fun generateTypedVec(primitiveDescriptor: PrimitiveDescriptor, vectorDescriptor: VectorDescriptor): TypeSpec {
+    val primitiveCls = primitiveDescriptor.cls
+    val primitiveSizeBytes = primitiveDescriptor.sizeBytes
+    val postfix = primitiveDescriptor.postfix
 
-    if (kClass.javaPrimitiveType == null) {
-        throw RuntimeException("Vec2 cant be generated from non-primitive class ${kClass.simpleName}")
+    println("Generating ${vectorDescriptor.size}-component vector class for ${primitiveCls.simpleName}")
+
+    if (primitiveCls.javaPrimitiveType == null) {
+        throw RuntimeException("Vec2 cant be generated from non-primitive class ${primitiveCls.simpleName}")
     }
 
-    val postfix = extractPostfix(kClass)
-    val vectorSizeBytes = elementSizeBytes * 2
+    val elementsCount = vectorDescriptor.size
+    val vectorSizeBytes = primitiveSizeBytes * elementsCount
 
-    return TypeSpec.classBuilder("Vec2$postfix")
-        .addSuperinterface(Vec2Accessor::class.parameterizedBy(kClass))
+    val primaryConstructor = run {
+        val builder = FunSpec.constructorBuilder()
+
+        vectorDescriptor.components.forEach {
+            builder.addParameter(it, primitiveCls)
+        }
+
+        builder.build()
+    }
+
+    val componentProperties = vectorDescriptor.components.map {
+        PropertySpec.builder(it, primitiveCls, KModifier.OVERRIDE)
+            .initializer(it)
+            .build()
+    }
+
+    return TypeSpec.classBuilder("Vec$elementsCount$postfix")
+        .addSuperinterface(vectorDescriptor.base.parameterizedBy(primitiveCls))
         .addModifiers(KModifier.DATA)
         .addAnnotation(generatedAnnotation())
-        .primaryConstructor(FunSpec.constructorBuilder()
-            .addParameter("x", kClass)
-            .addParameter("y", kClass)
-            .build())
-        .addProperty(PropertySpec.builder("x", kClass, KModifier.OVERRIDE)
-            .initializer("x")
-            .build())
-        .addProperty(PropertySpec.builder("y", kClass, KModifier.OVERRIDE)
-            .initializer("y")
-            .build())
+        .tag(vectorDescriptor)
+        .tag(primitiveDescriptor)
+        .tag(TargetPackage(vectorDescriptor.destinationPackage))
+        .primaryConstructor(primaryConstructor)
+        .addProperties(componentProperties)
         .addProperty(PropertySpec.builder("elementSizeBytes", Int::class, KModifier.OVERRIDE)
-            .initializer(elementSizeBytes.toString())
+            .initializer(primitiveSizeBytes.toString())
             .build())
         .addProperty(PropertySpec.builder("vectorSizeBytes", Int::class, KModifier.OVERRIDE)
             .initializer(vectorSizeBytes.toString())

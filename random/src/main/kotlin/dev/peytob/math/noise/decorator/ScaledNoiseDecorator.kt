@@ -2,7 +2,6 @@ package dev.peytob.math.noise.decorator
 
 import dev.peytob.math.noise.Noise2D
 import dev.peytob.math.vector.immutableVec2f
-import dev.peytob.math.vector.vec2.Vec2f
 
 /**
  * This decorator can scale and offset noise point.

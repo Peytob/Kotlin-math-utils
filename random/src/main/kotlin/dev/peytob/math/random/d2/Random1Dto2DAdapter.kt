@@ -3,8 +3,6 @@ package dev.peytob.math.random.d2
 import dev.peytob.math.random.d1.Random1D
 import dev.peytob.math.vector.immutableVec2f
 import dev.peytob.math.vector.immutableVec2i
-import dev.peytob.math.vector.vec2.Vec2f
-import dev.peytob.math.vector.vec2.Vec2i
 
 class Random1Dto2DAdapter(
     private val random: Random1D
