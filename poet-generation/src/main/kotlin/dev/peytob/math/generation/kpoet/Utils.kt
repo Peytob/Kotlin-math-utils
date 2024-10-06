@@ -18,18 +18,14 @@ fun generatedAnnotation(comment: String? = null): AnnotationSpec {
 }
 
 fun saveTypeFile(typeSpec: TypeSpec) {
-    println("Saving class ${typeSpec.name}")
-
     FileSpec.builder(typeSpec.extractPackage(), typeSpec.name!!)
         .addType(typeSpec)
         .build()
         .writeTo(BASE_DESTINATION_FOLDER)
 }
 
-fun saveExtensionsFunctionsFile(typeSpec: TypeSpec, functions: Collection<FunSpec>) {
-    println("Save extensions functions for type ${typeSpec.name}")
-
-    FileSpec.builder(typeSpec.extractPackage(), "${typeSpec.name}Operations")
+fun saveExtensionsFunctionsFile(typeSpec: TypeSpec, functions: Collection<FunSpec>, filePostfix: String) {
+    FileSpec.builder(typeSpec.extractPackage(), "${typeSpec.name}${filePostfix}")
         .addFunctions(functions)
         .build()
         .writeTo(BASE_DESTINATION_FOLDER)

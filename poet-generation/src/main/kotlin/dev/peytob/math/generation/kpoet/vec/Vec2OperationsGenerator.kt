@@ -10,25 +10,25 @@ fun generateVecOperations(vec: TypeSpec, targetOperationVectors: Collection<Type
     return targetOperationVectors.flatMap {
         println("Generating operations between ${vec.name} and ${it.name} vector types")
         listOf(
-            generateVecLiteralsOperation(vec, it,"plus", "+"),
-            generateVecOperation(vec, it, "plus", "+"),
+            generateVecLiteralOperation(vec, it,"plus", "+"),
+            generateVecOperation(vec, it, "plus"),
 
-            generateVecLiteralsOperation(vec, it,"minus", "-"),
-            generateVecOperation(vec, it, "minus", "-"),
+            generateVecLiteralOperation(vec, it,"minus", "-"),
+            generateVecOperation(vec, it, "minus"),
 
-            generateVecLiteralsOperation(vec, it,"times", "*"),
-            generateVecOperation(vec, it, "times", "*"),
+            generateVecLiteralOperation(vec, it,"times", "*"),
+            generateVecOperation(vec, it, "times"),
         )
     }
 }
 
 // TODO Find way to get functionName and operator from KOperator enum
-fun generateVecOperation(leftVec: TypeSpec, rightVec: TypeSpec, operationName: String, operator: String): FunSpec {
+fun generateVecOperation(leftVec: TypeSpec, rightVec: TypeSpec, operationName: String): FunSpec {
     val (leftVectorDescriptor, leftPrimitiveDescriptor) = leftVec.extractVectorInformation()
     val (rightVectorDescriptor, rightPrimitiveDescriptor) = rightVec.extractVectorInformation()
 
     if (leftVectorDescriptor.size != rightVectorDescriptor.size) {
-        throw RuntimeException("Plus operation generating not supported for vectors with different sizes. Operands is ${leftVec.name} and ${rightVec.name}")
+        throw RuntimeException("Vector operation generating not supported for vectors with different sizes. Operands is ${leftVec.name} and ${rightVec.name}")
     }
 
     val vectorsSize = leftVectorDescriptor.size
@@ -62,7 +62,7 @@ fun generateVecOperation(leftVec: TypeSpec, rightVec: TypeSpec, operationName: S
         .build()
 }
 
-fun generateVecLiteralsOperation(leftVec: TypeSpec, rightVec: TypeSpec, operationName: String, operator: String): FunSpec {
+fun generateVecLiteralOperation(leftVec: TypeSpec, rightVec: TypeSpec, operationName: String, operator: String): FunSpec {
     val (rightVectorDescriptor, rightPrimitiveDescriptor) = rightVec.extractVectorInformation()
     val (leftVectorDescriptor, leftPrimitiveDescriptor) = leftVec.extractVectorInformation()
 

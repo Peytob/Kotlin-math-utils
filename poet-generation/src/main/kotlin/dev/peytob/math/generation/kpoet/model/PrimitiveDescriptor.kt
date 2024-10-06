@@ -7,7 +7,8 @@ import kotlin.reflect.KClass
 data class PrimitiveDescriptor(
     val cls: KClass<*>,
     val sizeBytes: Int,
-    val numberCastMethodName: MemberName
+    val numberCastMethodName: MemberName,
+    val literal: String?
 ) {
-    val postfix: Char = extractPostfix(cls)
+    val postfix: String = extractPostfix(cls).toString()
 }
