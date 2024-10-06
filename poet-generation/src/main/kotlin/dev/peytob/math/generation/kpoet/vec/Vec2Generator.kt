@@ -4,11 +4,11 @@ import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import dev.peytob.math.generation.kpoet.generatedAnnotation
 import dev.peytob.math.generation.kpoet.model.PrimitiveDescriptor
-import dev.peytob.math.generation.kpoet.model.TargetPackage
 import dev.peytob.math.generation.kpoet.model.VectorDescriptor
+import dev.peytob.math.generation.kpoet.model.VectorSpec
 import java.lang.RuntimeException
 
-fun generateTypedVec(primitiveDescriptor: PrimitiveDescriptor, vectorDescriptor: VectorDescriptor): TypeSpec {
+fun generateTypedVec(primitiveDescriptor: PrimitiveDescriptor, vectorDescriptor: VectorDescriptor): VectorSpec {
     val primitiveCls = primitiveDescriptor.cls
     val primitiveSizeBytes = primitiveDescriptor.sizeBytes
     val postfix = primitiveDescriptor.postfix
@@ -38,13 +38,10 @@ fun generateTypedVec(primitiveDescriptor: PrimitiveDescriptor, vectorDescriptor:
             .build()
     }
 
-    return TypeSpec.classBuilder("Vec$elementsCount$postfix")
+    val typeSpec = TypeSpec.classBuilder("Vec$elementsCount$postfix")
         .addSuperinterface(vectorDescriptor.base.parameterizedBy(primitiveCls))
         .addModifiers(KModifier.DATA)
         .addAnnotation(generatedAnnotation())
-        .tag(vectorDescriptor)
-        .tag(primitiveDescriptor)
-        .tag(TargetPackage(vectorDescriptor.destinationPackage))
         .primaryConstructor(primaryConstructor)
         .addProperties(componentProperties)
         .addProperty(PropertySpec.builder("elementSizeBytes", Int::class, KModifier.OVERRIDE)
@@ -54,4 +51,6 @@ fun generateTypedVec(primitiveDescriptor: PrimitiveDescriptor, vectorDescriptor:
             .initializer(vectorSizeBytes.toString())
             .build())
         .build()
+
+    return VectorSpec(vectorDescriptor, primitiveDescriptor, typeSpec)
 }

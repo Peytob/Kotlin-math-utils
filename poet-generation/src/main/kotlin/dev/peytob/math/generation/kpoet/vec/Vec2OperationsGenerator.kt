@@ -2,102 +2,105 @@ package dev.peytob.math.generation.kpoet.vec
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import dev.peytob.math.generation.kpoet.extractPackage
-import dev.peytob.math.generation.kpoet.extractVectorInformation
-import dev.peytob.math.generation.kpoet.getClassName
+import dev.peytob.math.generation.kpoet.model.VectorSpec
 
-fun generateVecOperations(vec: TypeSpec, targetOperationVectors: Collection<TypeSpec>): Collection<FunSpec> {
+private class BiVecDefaultOperatorFactoryGeneratorTemplate(
+    private val operationName: String
+) : BiVecFunctionGeneratorTemplate() {
+
+    override fun isDifferentVectorsSizeSupported(): Boolean = false
+
+    override fun isExtension(): Boolean = true
+
+    override fun isOperator(): Boolean = true
+
+    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): ClassName = leftVec.className
+
+    override fun generateFunctionBody(leftVec: VectorSpec, rightVec: VectorSpec): CodeBlock {
+        val codeBlockBuilder = CodeBlock.builder()
+
+        leftVec.components.forEach { property ->
+            val name = property.name
+            codeBlockBuilder.addStatement("val r%1L = right.%1N", name)
+        }
+
+        val literalFunctionArgs = leftVec.components
+            .map { it.name }
+            .joinToString(", ") { "r$it = r$it" }
+
+        codeBlockBuilder.addStatement("return this.%N(%L)", operationName, literalFunctionArgs)
+        return codeBlockBuilder.build()
+    }
+
+    override fun generateMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String = operationName
+
+    override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String =
+        "${operationName}Vec${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}${rightVec.primitiveDescriptor.postfix}"
+
+    override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = listOf(
+        ParameterSpec("right", rightVec.vectorDescriptor.accessor.parameterizedBy(rightVec.primitiveDescriptor.cls))
+    )
+}
+
+private class BiVecFactoryGeneratorTemplate(
+    private val operationName: String,
+    private val operator: String
+) : BiVecFunctionGeneratorTemplate() {
+    override fun isDifferentVectorsSizeSupported(): Boolean = false
+
+    override fun isExtension(): Boolean = true
+
+    override fun isOperator(): Boolean = false
+
+    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): ClassName = leftVec.className
+
+    override fun generateFunctionBody(leftVec: VectorSpec, rightVec: VectorSpec): CodeBlock {
+        val codeBlockBuilder = CodeBlock.builder()
+
+        leftVec.components.forEach { property ->
+            val name = property.name
+            codeBlockBuilder
+                .addStatement("val %1L = (this.%1L %2L r%1L).%3N()", name, operator, leftVec.primitiveDescriptor.numberCastMethodName)
+        }
+        val constructorArgs = leftVec.components
+            .map { it.name }
+            .joinToString(", ") { "$it = $it" }
+
+        codeBlockBuilder.addStatement("return %T(%L)", leftVec.className, constructorArgs)
+
+        return codeBlockBuilder.build()
+    }
+
+    override fun generateMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String = operationName
+
+    override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String? = null
+
+    override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = rightVec.components.map {
+        ParameterSpec("r${it.name}", rightVec.primitiveDescriptor.cls.asTypeName())
+    }
+}
+
+fun generateVecOperations(vec: VectorSpec, targetOperationVectors: Collection<VectorSpec>): Collection<FunSpec> {
+    val plusFactoryGeneratorTemplate = BiVecDefaultOperatorFactoryGeneratorTemplate("plus")
+    val plusLiteralFactoryGeneratorTemplate = BiVecFactoryGeneratorTemplate("plus", "+")
+
+    val minusFactoryGeneratorTemplate = BiVecDefaultOperatorFactoryGeneratorTemplate("minus")
+    val minusLiteralFactoryGeneratorTemplate = BiVecFactoryGeneratorTemplate("minus", "-")
+
+    val timesFactoryGeneratorTemplate = BiVecDefaultOperatorFactoryGeneratorTemplate("times")
+    val timesLiteralFactoryGeneratorTemplate = BiVecFactoryGeneratorTemplate("times", "*")
+
     return targetOperationVectors.flatMap {
-        println("Generating operations between ${vec.name} and ${it.name} vector types")
+        println("Generating operations between ${vec.typeSpec.name} and ${it.typeSpec.name} vector types")
         listOf(
-            generateVecLiteralOperation(vec, it,"plus", "+"),
-            generateVecOperation(vec, it, "plus"),
+            plusLiteralFactoryGeneratorTemplate.generateFunSpec(vec, it),
+            plusFactoryGeneratorTemplate.generateFunSpec(vec, it),
 
-            generateVecLiteralOperation(vec, it,"minus", "-"),
-            generateVecOperation(vec, it, "minus"),
+            minusLiteralFactoryGeneratorTemplate.generateFunSpec(vec, it),
+            minusFactoryGeneratorTemplate.generateFunSpec(vec, it),
 
-            generateVecLiteralOperation(vec, it,"times", "*"),
-            generateVecOperation(vec, it, "times"),
+            timesLiteralFactoryGeneratorTemplate.generateFunSpec(vec, it),
+            timesFactoryGeneratorTemplate.generateFunSpec(vec, it),
         )
     }
-}
-
-// TODO Find way to get functionName and operator from KOperator enum
-fun generateVecOperation(leftVec: TypeSpec, rightVec: TypeSpec, operationName: String): FunSpec {
-    val (leftVectorDescriptor, leftPrimitiveDescriptor) = leftVec.extractVectorInformation()
-    val (rightVectorDescriptor, rightPrimitiveDescriptor) = rightVec.extractVectorInformation()
-
-    if (leftVectorDescriptor.size != rightVectorDescriptor.size) {
-        throw RuntimeException("Vector operation generating not supported for vectors with different sizes. Operands is ${leftVec.name} and ${rightVec.name}")
-    }
-
-    val vectorsSize = leftVectorDescriptor.size
-    val returnType = ClassName(leftVec.extractPackage(), leftVec.name!!)
-
-    val vectorComponentProperties = leftVec.propertySpecs
-        .filter { leftVectorDescriptor.components.contains(it.name) }
-
-    val elementsOperationCodeBlock = CodeBlock.builder()
-    vectorComponentProperties.forEach { property ->
-        val name = property.name
-        elementsOperationCodeBlock
-            .addStatement("val r%1L = right.%1N", name)
-    }
-
-    val literalFunctionArgs = vectorComponentProperties
-        .map { it.name }
-        .joinToString(", ") { "r$it = r$it" }
-
-    elementsOperationCodeBlock.addStatement("return this.%N(%L)", operationName, literalFunctionArgs)
-
-    return FunSpec.builder(operationName)
-        .addModifiers(KModifier.OPERATOR)
-        .receiver(leftVec.getClassName())
-        .returns(returnType)
-        .addAnnotation(AnnotationSpec.builder(JvmName::class)
-            .addMember("name = %S", "${operationName}Vec${vectorsSize}${leftPrimitiveDescriptor.postfix}${rightPrimitiveDescriptor.postfix}")
-            .build())
-        .addParameter("right", rightVectorDescriptor.base.parameterizedBy(rightPrimitiveDescriptor.cls))
-        .addCode(elementsOperationCodeBlock.build())
-        .build()
-}
-
-fun generateVecLiteralOperation(leftVec: TypeSpec, rightVec: TypeSpec, operationName: String, operator: String): FunSpec {
-    val (rightVectorDescriptor, rightPrimitiveDescriptor) = rightVec.extractVectorInformation()
-    val (leftVectorDescriptor, leftPrimitiveDescriptor) = leftVec.extractVectorInformation()
-
-    val vectorsSize = leftVectorDescriptor.size
-    val returnType = ClassName(leftVec.extractPackage(), leftVec.name!!)
-
-    if (leftVectorDescriptor.size != rightVectorDescriptor.size) {
-        throw RuntimeException("Literals operation generating not supported for vectors with different sizes. Operands is ${leftVec.name} and ${rightVec.name}")
-    }
-
-    val vectorComponentProperties = leftVec.propertySpecs
-        .filter { leftVectorDescriptor.components.contains(it.name) }
-
-    val elementsOperationCodeBlock = CodeBlock.builder()
-    vectorComponentProperties.forEach { property ->
-        val name = property.name
-        elementsOperationCodeBlock
-            .addStatement("val %1L = (this.%1L %2L r%1L).%3N()", name, operator, leftPrimitiveDescriptor.numberCastMethodName)
-    }
-    val constructorArgs = vectorComponentProperties
-        .map { it.name }
-        .joinToString(", ") { "$it = $it" }
-
-    elementsOperationCodeBlock.addStatement("return %T(%L)", leftVec.getClassName(), constructorArgs)
-
-    val parameters = vectorComponentProperties
-        .map { ParameterSpec.builder("r${it.name}", rightPrimitiveDescriptor.cls).build() }
-
-    return FunSpec.builder(operationName)
-        .receiver(leftVec.getClassName())
-        .returns(returnType)
-        .addAnnotation(AnnotationSpec.builder(JvmName::class)
-            .addMember("name = %S", "${operationName}Vec${vectorsSize}${leftPrimitiveDescriptor.postfix}${rightPrimitiveDescriptor.postfix}")
-            .build())
-        .addParameters(parameters)
-        .addCode(elementsOperationCodeBlock.build())
-        .build()
 }

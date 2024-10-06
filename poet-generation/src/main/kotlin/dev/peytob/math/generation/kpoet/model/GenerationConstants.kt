@@ -3,6 +3,7 @@ package dev.peytob.math.generation.kpoet.model
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.asClassName
 import dev.peytob.math.vector.vec2.Vec2
+import dev.peytob.math.vector.vec2.Vec2Accessor
 import java.nio.file.Path
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -42,7 +43,7 @@ val PRIMITIVE_DESCRIPTORS: Collection<PrimitiveDescriptor> = listOf(
         cls = Long::class,
         sizeBytes = Long.SIZE_BYTES,
         numberCastMethodName = MemberName(Number::class.asClassName(), "toLong"),
-        literal = "l"
+        literal = "L"
     )
 )
 
@@ -50,6 +51,7 @@ val VECTOR_DESCRIPTORS: Collection<VectorDescriptor> = listOf(
     VectorDescriptor(
         components = listOf("x", "y"),
         base = Vec2::class,
+        accessor = Vec2Accessor::class,
         destinationPackage = "$DESTINATION_PACKAGE_ROOT.vector.vec2"
     )
 )

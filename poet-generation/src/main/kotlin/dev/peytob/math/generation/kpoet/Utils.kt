@@ -17,15 +17,15 @@ fun generatedAnnotation(comment: String? = null): AnnotationSpec {
     return annotationSpec.build()
 }
 
-fun saveTypeFile(typeSpec: TypeSpec) {
-    FileSpec.builder(typeSpec.extractPackage(), typeSpec.name!!)
+fun saveTypeFile(targetPackage: String, typeSpec: TypeSpec) {
+    FileSpec.builder(targetPackage, typeSpec.name!!)
         .addType(typeSpec)
         .build()
         .writeTo(BASE_DESTINATION_FOLDER)
 }
 
-fun saveExtensionsFunctionsFile(typeSpec: TypeSpec, functions: Collection<FunSpec>, filePostfix: String) {
-    FileSpec.builder(typeSpec.extractPackage(), "${typeSpec.name}${filePostfix}")
+fun saveExtensionsFunctionsFile(targetPackage: String, typeSpec: TypeSpec, functions: Collection<FunSpec>, filePostfix: String) {
+    FileSpec.builder(targetPackage, "${typeSpec.name}${filePostfix}")
         .addFunctions(functions)
         .build()
         .writeTo(BASE_DESTINATION_FOLDER)
@@ -33,19 +33,4 @@ fun saveExtensionsFunctionsFile(typeSpec: TypeSpec, functions: Collection<FunSpe
 
 fun extractPostfix(kClass: KClass<*>): Char {
     return kClass.simpleName?.first()?.lowercaseChar()!!
-}
-
-fun TypeSpec.extractPackage() = this.tag(TargetPackage::class)?.destinationPackage
-    ?: throw RuntimeException("No destination package found for type ${this.name}")
-
-fun TypeSpec.getClassName() = ClassName(this.extractPackage(), this.name!!)
-
-fun TypeSpec.extractVectorInformation(): VectorInformation {
-    val vectorDescriptor = this.tag(VectorDescriptor::class)
-        ?: throw RuntimeException("No VectorDescriptor tag found in type ${this.name}. Is this type vector?")
-
-    val primitiveDescriptor = this.tag(PrimitiveDescriptor::class)
-        ?: throw RuntimeException("No PrimitiveDescriptor tag found in vector type ${this.name}. Is this type corrupted?")
-
-    return VectorInformation(vectorDescriptor, primitiveDescriptor)
 }
