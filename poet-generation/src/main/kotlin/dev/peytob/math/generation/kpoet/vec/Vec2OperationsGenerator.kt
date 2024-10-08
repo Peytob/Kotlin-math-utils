@@ -42,10 +42,11 @@ private class BiVecDefaultOperatorFactoryGeneratorTemplate(
     )
 }
 
-private class BiVecFactoryGeneratorTemplate(
+private class BiLiteralFactoryFactoryGeneratorTemplate(
     private val operationName: String,
     private val operator: String
 ) : BiVecFunctionGeneratorTemplate() {
+
     override fun isDifferentVectorsSizeSupported(): Boolean = false
 
     override fun isExtension(): Boolean = true
@@ -80,15 +81,140 @@ private class BiVecFactoryGeneratorTemplate(
     }
 }
 
+private class UnaryPlusFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTemplate() {
+
+    override fun isExtension(): Boolean = true
+
+    override fun isOperator(): Boolean = true
+
+    override fun generateReturnType(leftVec: VectorSpec): ClassName = leftVec.className
+
+    override fun generateFunctionBody(leftVec: VectorSpec): CodeBlock {
+        val codeBlockBuilder = CodeBlock.builder()
+
+        codeBlockBuilder.addStatement("return this")
+
+        return codeBlockBuilder.build()
+    }
+
+    override fun generateMethodName(leftVec: VectorSpec): String = "unaryPlus"
+
+    override fun generateJvmMethodName(leftVec: VectorSpec): String = "unaryPlus${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}"
+
+    override fun generateParameters(leftVec: VectorSpec): Collection<ParameterSpec> = listOf()
+}
+
+private class UnaryMinusFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTemplate() {
+
+    override fun isExtension(): Boolean = true
+
+    override fun isOperator(): Boolean = true
+
+    override fun generateReturnType(leftVec: VectorSpec): ClassName = leftVec.className
+
+    override fun generateFunctionBody(leftVec: VectorSpec): CodeBlock {
+        val codeBlockBuilder = CodeBlock.builder()
+
+        leftVec.components.forEach { property ->
+            val name = property.name
+            codeBlockBuilder
+                .addStatement("val %1L = -this.%1L", name)
+        }
+
+        val constructorArgs = leftVec.components
+            .map { it.name }
+            .joinToString(", ") { "$it = $it" }
+
+        codeBlockBuilder.addStatement("return %T(%L)", leftVec.className, constructorArgs)
+
+        return codeBlockBuilder.build()
+    }
+
+    override fun generateMethodName(leftVec: VectorSpec): String = "unaryMinus"
+
+    override fun generateJvmMethodName(leftVec: VectorSpec): String = "unaryMinus${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}"
+
+    override fun generateParameters(leftVec: VectorSpec): Collection<ParameterSpec> = listOf()
+}
+
+private class DotLiteralOperationFactoryGeneratorTemplate : BiVecFunctionGeneratorTemplate() {
+
+    override fun isDifferentVectorsSizeSupported(): Boolean = false
+
+    override fun isExtension(): Boolean = true
+
+    override fun isOperator(): Boolean = false
+
+    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): ClassName = Float::class.asClassName()
+
+    override fun generateFunctionBody(leftVec: VectorSpec, rightVec: VectorSpec): CodeBlock {
+        val codeBlockBuilder = CodeBlock.builder()
+
+        val sum = leftVec.components
+            .map { it.name }
+            .joinToString(" + ") { "$it * r$it" }
+
+        codeBlockBuilder.addStatement("val sum = %L", sum)
+        codeBlockBuilder.addStatement("return sum.toFloat()", leftVec.className, sum)
+
+        return codeBlockBuilder.build()
+    }
+
+    override fun generateMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String = "dot"
+
+    override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String? = null
+
+    override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = rightVec.components.map {
+        ParameterSpec("r${it.name}", rightVec.primitiveDescriptor.cls.asTypeName())
+    }
+}
+
+private class DotOperationFactoryGeneratorTemplate : BiVecFunctionGeneratorTemplate() {
+
+    override fun isDifferentVectorsSizeSupported(): Boolean = false
+
+    override fun isExtension(): Boolean = true
+
+    override fun isOperator(): Boolean = false
+
+    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): ClassName = Float::class.asClassName()
+
+    override fun generateFunctionBody(leftVec: VectorSpec, rightVec: VectorSpec): CodeBlock {
+        val codeBlockBuilder = CodeBlock.builder()
+
+        val dotArgs = leftVec.components
+            .map { it.name }
+            .joinToString(", ") { "r$it = right.$it" }
+
+        codeBlockBuilder.addStatement("return this.dot(%L)", dotArgs)
+
+        return codeBlockBuilder.build()
+    }
+
+    override fun generateMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String = "dot"
+
+    override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String = "dot${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}${rightVec.primitiveDescriptor.postfix}"
+
+    override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = listOf(
+        ParameterSpec("right", rightVec.vectorDescriptor.accessor.parameterizedBy(rightVec.primitiveDescriptor.cls))
+    )
+}
+
 fun generateVecOperations(vec: VectorSpec, targetOperationVectors: Collection<VectorSpec>): Collection<FunSpec> {
     val plusFactoryGeneratorTemplate = BiVecDefaultOperatorFactoryGeneratorTemplate("plus")
-    val plusLiteralFactoryGeneratorTemplate = BiVecFactoryGeneratorTemplate("plus", "+")
+    val plusLiteralFactoryGeneratorTemplate = BiLiteralFactoryFactoryGeneratorTemplate("plus", "+")
 
     val minusFactoryGeneratorTemplate = BiVecDefaultOperatorFactoryGeneratorTemplate("minus")
-    val minusLiteralFactoryGeneratorTemplate = BiVecFactoryGeneratorTemplate("minus", "-")
+    val minusLiteralFactoryGeneratorTemplate = BiLiteralFactoryFactoryGeneratorTemplate("minus", "-")
 
     val timesFactoryGeneratorTemplate = BiVecDefaultOperatorFactoryGeneratorTemplate("times")
-    val timesLiteralFactoryGeneratorTemplate = BiVecFactoryGeneratorTemplate("times", "*")
+    val timesLiteralFactoryGeneratorTemplate = BiLiteralFactoryFactoryGeneratorTemplate("times", "*")
+
+    val unaryVecFunctionGeneratorTemplate = UnaryPlusFactoryGeneratorTemplate()
+    val unaryMinusFactoryGeneratorTemplate = UnaryMinusFactoryGeneratorTemplate()
+
+    val dotLiteralOperationFactoryGeneratorTemplate = DotLiteralOperationFactoryGeneratorTemplate()
+    val dotOperationFactoryGeneratorTemplate = DotOperationFactoryGeneratorTemplate()
 
     return targetOperationVectors.flatMap {
         println("Generating operations between ${vec.typeSpec.name} and ${it.typeSpec.name} vector types")
@@ -101,6 +227,12 @@ fun generateVecOperations(vec: VectorSpec, targetOperationVectors: Collection<Ve
 
             timesLiteralFactoryGeneratorTemplate.generateFunSpec(vec, it),
             timesFactoryGeneratorTemplate.generateFunSpec(vec, it),
+
+            dotLiteralOperationFactoryGeneratorTemplate.generateFunSpec(vec, it),
+            dotOperationFactoryGeneratorTemplate.generateFunSpec(vec, it)
         )
-    }
+    } + listOf(
+        unaryVecFunctionGeneratorTemplate.generateFunSpec(vec),
+        unaryMinusFactoryGeneratorTemplate.generateFunSpec(vec)
+    )
 }

@@ -5,19 +5,19 @@ import dev.peytob.math.generation.kpoet.model.VectorSpec
 
 abstract class UnaryVecFunctionGeneratorTemplate {
 
-    abstract fun isExtension(): Boolean
+    protected abstract fun isExtension(): Boolean
 
-    abstract fun isOperator(): Boolean
+    protected abstract fun isOperator(): Boolean
 
-    abstract fun generateReturnType(leftVec: VectorSpec): ClassName
+    protected abstract fun generateReturnType(leftVec: VectorSpec): ClassName
 
-    abstract fun generateFunctionBody(leftVec: VectorSpec): CodeBlock
+    protected abstract fun generateFunctionBody(leftVec: VectorSpec): CodeBlock
 
-    abstract fun generateMethodName(leftVec: VectorSpec): String
+    protected abstract fun generateMethodName(leftVec: VectorSpec): String
 
-    abstract fun generateJvmMethodName(leftVec: VectorSpec): String?
+    protected abstract fun generateJvmMethodName(leftVec: VectorSpec): String?
 
-    abstract fun generateParameters(leftVec: VectorSpec): Collection<ParameterSpec>
+    protected abstract fun generateParameters(leftVec: VectorSpec): Collection<ParameterSpec>
 
     fun generateFunSpec(leftVec: VectorSpec): FunSpec {
         val returnType = generateReturnType(leftVec)
