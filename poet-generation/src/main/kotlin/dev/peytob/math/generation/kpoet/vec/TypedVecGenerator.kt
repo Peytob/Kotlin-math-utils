@@ -8,12 +8,12 @@ import dev.peytob.math.generation.kpoet.model.VectorDescriptor
 import dev.peytob.math.generation.kpoet.model.VectorSpec
 import java.lang.RuntimeException
 
-fun generateTypedVec(primitiveDescriptor: PrimitiveDescriptor, vectorDescriptor: VectorDescriptor): VectorSpec {
+fun generateTypedStructVec(primitiveDescriptor: PrimitiveDescriptor, vectorDescriptor: VectorDescriptor): VectorSpec {
     val primitiveCls = primitiveDescriptor.cls
     val primitiveSizeBytes = primitiveDescriptor.sizeBytes
     val postfix = primitiveDescriptor.postfix
 
-    println("Generating ${vectorDescriptor.size}-component vector class for ${primitiveCls.simpleName}")
+    println("Generating ${vectorDescriptor.size}-component vector structure class for ${primitiveCls.simpleName}")
 
     if (primitiveCls.javaPrimitiveType == null) {
         throw RuntimeException("Vec2 cant be generated from non-primitive class ${primitiveCls.simpleName}")
@@ -38,9 +38,9 @@ fun generateTypedVec(primitiveDescriptor: PrimitiveDescriptor, vectorDescriptor:
             .build()
     }
 
-    val typeSpec = TypeSpec.classBuilder("Vec$elementsCount$postfix")
+    val typeSpec = TypeSpec.classBuilder("StructVec$elementsCount$postfix")
         .addSuperinterface(vectorDescriptor.base.parameterizedBy(primitiveCls))
-        .addModifiers(KModifier.DATA)
+        .addModifiers(KModifier.DATA, KModifier.INTERNAL)
         .addAnnotation(generatedAnnotation())
         .primaryConstructor(primaryConstructor)
         .addProperties(componentProperties)

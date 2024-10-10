@@ -12,7 +12,7 @@ abstract class BiVecFunctionGeneratorTemplate {
 
     protected abstract fun isOperator(): Boolean
 
-    protected abstract fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): ClassName
+    protected abstract fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): TypeName?
 
     protected abstract fun generateFunctionBody(leftVec: VectorSpec, rightVec: VectorSpec): CodeBlock
 
@@ -32,7 +32,6 @@ abstract class BiVecFunctionGeneratorTemplate {
         val bodyCodeBlock = generateFunctionBody(leftVec, rightVec)
 
         val funSpecBuilder = FunSpec.builder(generateMethodName(leftVec, rightVec))
-            .returns(returnType)
             .addAnnotation(generatedAnnotation())
             .addParameters(generateParameters(leftVec, rightVec))
             .addCode(bodyCodeBlock)
@@ -45,8 +44,12 @@ abstract class BiVecFunctionGeneratorTemplate {
             funSpecBuilder.addAnnotation(annotation)
         }
 
+        if (returnType != null) {
+            funSpecBuilder.returns(returnType)
+        }
+
         if (isExtension()) {
-            funSpecBuilder.receiver(leftVec.className)
+            funSpecBuilder.receiver(leftVec.baseClassName)
         }
 
         if (isOperator()) {

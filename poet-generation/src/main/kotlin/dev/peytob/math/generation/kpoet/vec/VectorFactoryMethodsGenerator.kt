@@ -11,7 +11,7 @@ private class BiVecCopyingFactoryGeneratorTemplate : BiVecFunctionGeneratorTempl
 
     override fun isOperator(): Boolean = false
 
-    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): ClassName = leftVec.className
+    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): TypeName = leftVec.baseClassName
 
     override fun generateFunctionBody(leftVec: VectorSpec, rightVec: VectorSpec): CodeBlock {
         val codeBlockBuilder = CodeBlock.builder()
@@ -49,7 +49,7 @@ private class BiVecLiteralFactoryGeneratorTemplate : BiVecFunctionGeneratorTempl
 
     override fun isOperator(): Boolean = false
 
-    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): ClassName = leftVec.className
+    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): TypeName = leftVec.baseClassName
 
     override fun generateFunctionBody(leftVec: VectorSpec, rightVec: VectorSpec): CodeBlock {
         val codeBlockBuilder = CodeBlock.builder()
@@ -84,7 +84,7 @@ private class UnaryVecZeroFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTe
 
     override fun isOperator(): Boolean = false
 
-    override fun generateReturnType(leftVec: VectorSpec): ClassName = leftVec.className
+    override fun generateReturnType(leftVec: VectorSpec): TypeName = leftVec.baseClassName
 
     // TODO Add memorization
     override fun generateFunctionBody(leftVec: VectorSpec): CodeBlock {
@@ -113,7 +113,7 @@ fun generateImmutableVecFactoryMethods(vec: VectorSpec, targetOperationVectors: 
     val unaryVecZeroFactoryGeneratorTemplate = UnaryVecZeroFactoryGeneratorTemplate()
 
     return targetOperationVectors.flatMap {
-        println("Generating factory methods for ${vec.typeSpec.name} vector type")
+        println("Generating factory methods for ${vec.baseClassName} vector type")
         listOf(
             biVecLiteralFactoryGeneratorTemplate.generateFunSpec(vec, it),
             biVecCopyingFactoryGeneratorTemplate.generateFunSpec(vec, it),

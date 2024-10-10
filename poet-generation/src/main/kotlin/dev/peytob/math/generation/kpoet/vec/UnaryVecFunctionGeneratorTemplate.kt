@@ -9,7 +9,7 @@ abstract class UnaryVecFunctionGeneratorTemplate {
 
     protected abstract fun isOperator(): Boolean
 
-    protected abstract fun generateReturnType(leftVec: VectorSpec): ClassName
+    protected abstract fun generateReturnType(leftVec: VectorSpec): TypeName?
 
     protected abstract fun generateFunctionBody(leftVec: VectorSpec): CodeBlock
 
@@ -25,7 +25,6 @@ abstract class UnaryVecFunctionGeneratorTemplate {
         val bodyCodeBlock = generateFunctionBody(leftVec)
 
         val funSpecBuilder = FunSpec.builder(generateMethodName(leftVec))
-            .returns(returnType)
             .addParameters(generateParameters(leftVec))
             .addCode(bodyCodeBlock)
 
@@ -37,8 +36,12 @@ abstract class UnaryVecFunctionGeneratorTemplate {
             funSpecBuilder.addAnnotation(annotation)
         }
 
+        if (returnType != null) {
+            funSpecBuilder.returns(returnType)
+        }
+
         if (isExtension()) {
-            funSpecBuilder.receiver(leftVec.className)
+            funSpecBuilder.receiver(leftVec.baseClassName)
         }
 
         if (isOperator()) {

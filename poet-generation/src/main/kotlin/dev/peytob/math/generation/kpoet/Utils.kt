@@ -24,8 +24,8 @@ fun saveTypeFile(targetPackage: String, typeSpec: TypeSpec) {
         .writeTo(BASE_DESTINATION_FOLDER)
 }
 
-fun saveExtensionsFunctionsFile(targetPackage: String, typeSpec: TypeSpec, functions: Collection<FunSpec>, filePostfix: String) {
-    FileSpec.builder(targetPackage, "${typeSpec.name}${filePostfix}")
+fun saveExtensionsFunctionsFile(targetPackage: String, functions: Collection<FunSpec>, fileName: String) {
+    FileSpec.builder(targetPackage, fileName)
         .addFunctions(functions)
         .build()
         .writeTo(BASE_DESTINATION_FOLDER)

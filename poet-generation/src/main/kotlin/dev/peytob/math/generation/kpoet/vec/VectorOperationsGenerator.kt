@@ -14,7 +14,7 @@ private class BiVecDefaultOperatorFactoryGeneratorTemplate(
 
     override fun isOperator(): Boolean = true
 
-    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): ClassName = leftVec.className
+    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): TypeName = leftVec.baseClassName
 
     override fun generateFunctionBody(leftVec: VectorSpec, rightVec: VectorSpec): CodeBlock {
         val codeBlockBuilder = CodeBlock.builder()
@@ -53,7 +53,7 @@ private class BiLiteralFactoryFactoryGeneratorTemplate(
 
     override fun isOperator(): Boolean = false
 
-    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): ClassName = leftVec.className
+    override fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): TypeName = leftVec.baseClassName
 
     override fun generateFunctionBody(leftVec: VectorSpec, rightVec: VectorSpec): CodeBlock {
         val codeBlockBuilder = CodeBlock.builder()
@@ -87,7 +87,7 @@ private class UnaryPlusFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTempl
 
     override fun isOperator(): Boolean = true
 
-    override fun generateReturnType(leftVec: VectorSpec): ClassName = leftVec.className
+    override fun generateReturnType(leftVec: VectorSpec): TypeName = leftVec.baseClassName
 
     override fun generateFunctionBody(leftVec: VectorSpec): CodeBlock {
         val codeBlockBuilder = CodeBlock.builder()
@@ -110,7 +110,7 @@ private class UnaryMinusFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTemp
 
     override fun isOperator(): Boolean = true
 
-    override fun generateReturnType(leftVec: VectorSpec): ClassName = leftVec.className
+    override fun generateReturnType(leftVec: VectorSpec): TypeName = leftVec.baseClassName
 
     override fun generateFunctionBody(leftVec: VectorSpec): CodeBlock {
         val codeBlockBuilder = CodeBlock.builder()
@@ -217,7 +217,7 @@ fun generateVecOperations(vec: VectorSpec, targetOperationVectors: Collection<Ve
     val dotOperationFactoryGeneratorTemplate = DotOperationFactoryGeneratorTemplate()
 
     return targetOperationVectors.flatMap {
-        println("Generating operations between ${vec.typeSpec.name} and ${it.typeSpec.name} vector types")
+        println("Generating operations between ${vec.baseClassName} and ${it.baseClassName} vector types")
         listOf(
             plusLiteralFactoryGeneratorTemplate.generateFunSpec(vec, it),
             plusFactoryGeneratorTemplate.generateFunSpec(vec, it),
