@@ -18,4 +18,6 @@ class VectorSpec(
         .filter { vectorDescriptor.components.contains(it.name) }
 
     val baseClassName = vectorDescriptor.base.asClassName().parameterizedBy(primitiveDescriptor.cls.asTypeName())
+
+    val alias = "Vec${components.size}${primitiveDescriptor.postfix}"
 }

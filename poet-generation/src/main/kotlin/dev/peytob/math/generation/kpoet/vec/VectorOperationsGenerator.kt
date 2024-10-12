@@ -35,7 +35,7 @@ private class BiVecDefaultOperatorFactoryGeneratorTemplate(
     override fun generateMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String = operationName
 
     override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String =
-        "${operationName}Vec${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}${rightVec.primitiveDescriptor.postfix}"
+        "${operationName}Vec${leftVec.alias}${rightVec.primitiveDescriptor.postfix}"
 
     override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = listOf(
         ParameterSpec("right", rightVec.vectorDescriptor.accessor.parameterizedBy(rightVec.primitiveDescriptor.cls))
@@ -99,7 +99,7 @@ private class UnaryPlusFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTempl
 
     override fun generateMethodName(leftVec: VectorSpec): String = "unaryPlus"
 
-    override fun generateJvmMethodName(leftVec: VectorSpec): String = "unaryPlus${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}"
+    override fun generateJvmMethodName(leftVec: VectorSpec): String = "unaryPlus${leftVec.alias}"
 
     override fun generateParameters(leftVec: VectorSpec): Collection<ParameterSpec> = listOf()
 }
@@ -132,7 +132,7 @@ private class UnaryMinusFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTemp
 
     override fun generateMethodName(leftVec: VectorSpec): String = "unaryMinus"
 
-    override fun generateJvmMethodName(leftVec: VectorSpec): String = "unaryMinus${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}"
+    override fun generateJvmMethodName(leftVec: VectorSpec): String = "unaryMinus${leftVec.alias}"
 
     override fun generateParameters(leftVec: VectorSpec): Collection<ParameterSpec> = listOf()
 }
@@ -193,7 +193,7 @@ private class DotOperationFactoryGeneratorTemplate : BiVecFunctionGeneratorTempl
 
     override fun generateMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String = "dot"
 
-    override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String = "dot${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}${rightVec.primitiveDescriptor.postfix}"
+    override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String = "dot${leftVec.alias}${rightVec.primitiveDescriptor.postfix}"
 
     override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = listOf(
         ParameterSpec("right", rightVec.vectorDescriptor.accessor.parameterizedBy(rightVec.primitiveDescriptor.cls))

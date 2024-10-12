@@ -1,8 +1,6 @@
 package dev.peytob.math.generation.kpoet
 
-import dev.peytob.math.generation.kpoet.model.BASE_DESTINATION_FOLDER
-import dev.peytob.math.generation.kpoet.model.PRIMITIVE_DESCRIPTORS
-import dev.peytob.math.generation.kpoet.model.VECTOR_DESCRIPTORS
+import dev.peytob.math.generation.kpoet.model.*
 import dev.peytob.math.generation.kpoet.vec.generateTypedStructVec
 import dev.peytob.math.generation.kpoet.vec.generateImmutableVecFactoryMethods
 import dev.peytob.math.generation.kpoet.vec.generateVecBufferOperations
@@ -21,31 +19,33 @@ fun main() {
         .let { println("-> Target generation vectors: $it") }
     println()
 
-    println("Generating vec2 types")
-    val vec2Types = PRIMITIVE_DESCRIPTORS.flatMap { primitiveDescriptor ->
-        VECTOR_DESCRIPTORS.map { vectorDescriptor ->
+    val generatingResultStorage = GeneratingResultStorage()
+
+    println("Generating vectors types")
+    VECTOR_DESCRIPTORS.forEach { vectorDescriptor ->
+        PRIMITIVE_DESCRIPTORS.mapTo(generatingResultStorage.vectorTypes[vectorDescriptor]) { primitiveDescriptor ->
             generateTypedStructVec(primitiveDescriptor, vectorDescriptor)
         }
     }
 
-    println("Generating vec2 factory methods")
-    val vec2FactoryMethods = vec2Types
-        .associateWith { generateImmutableVecFactoryMethods(it, vec2Types) }
+    println("Generating vectors methods")
+    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
+        val factoryMethods = generateImmutableVecFactoryMethods(vectorSpec, generatingResultStorage.vectorTypes.values())
+        generatingResultStorage.factories.putAll(vectorSpec, factoryMethods)
+    }
 
-    println("Generating vec2 operations")
-    val vec2Operations = vec2Types
-        .associateWith { generateVecOperations(it, vec2Types) }
+    println("Generating vectors operations")
+    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
+        val operationsException = generateVecOperations(vectorSpec, generatingResultStorage.vectorTypes.values())
+        generatingResultStorage.operations.putAll(vectorSpec, operationsException)
+    }
 
-    println("Generating vec2 buffer operations")
-    val vec2BufferOperations = vec2Types
-        .associateWith { generateVecBufferOperations(it) }
+    println("Generating vectors buffer operations")
+    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
+        val bufferOperations = generateVecBufferOperations(vectorSpec)
+        generatingResultStorage.bufferOperations.putAll(vectorSpec, bufferOperations)
+    }
 
     println("All generations completed! Saving data...")
-    vec2Types.forEach { saveTypeFile(it.vectorDescriptor.destinationPackage, it.typeSpec) }
-    vec2Operations.forEach { saveExtensionsFunctionsFile(it.key.vectorDescriptor.destinationPackage, it.value, "Vec2${it.key.primitiveDescriptor.postfix}Operations") }
-    vec2FactoryMethods.forEach { saveExtensionsFunctionsFile(it.key.vectorDescriptor.destinationPackage, it.value, "Vec2${it.key.primitiveDescriptor.postfix}Factories") }
-    vec2BufferOperations
-        .asSequence()
-        .groupBy({Pair(it.key.vectorDescriptor.destinationPackage, it.key.components.size)}, {it.value})
-        .forEach { saveExtensionsFunctionsFile(it.key.first, it.value.flatten(), "Vec${it.key.second}NioBufferUtils") }
+    saveGeneratingResults(generatingResultStorage)
 }

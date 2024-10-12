@@ -33,6 +33,4 @@ class Mat4f internal constructor(
     override fun hashCode(): Int {
         return raw.contentHashCode()
     }
-
-
 }

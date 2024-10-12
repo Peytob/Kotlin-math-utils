@@ -54,7 +54,7 @@ private class UnaryByteVecBufferInsertFactoryGeneratorTemplate : UnaryVecFunctio
 
     override fun generateMethodName(leftVec: VectorSpec): String = "to"
 
-    override fun generateJvmMethodName(leftVec: VectorSpec): String = "toByteBufferVec${leftVec.components.size}${leftVec.primitiveDescriptor.postfix}"
+    override fun generateJvmMethodName(leftVec: VectorSpec): String = "toByteBuffer${leftVec.alias}"
 
     override fun generateParameters(leftVec: VectorSpec): Collection<ParameterSpec> = listOf(
         ParameterSpec("buffer", ByteBuffer::class.asTypeName())

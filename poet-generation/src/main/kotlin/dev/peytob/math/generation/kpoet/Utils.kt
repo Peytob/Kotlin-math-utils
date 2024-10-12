@@ -17,20 +17,6 @@ fun generatedAnnotation(comment: String? = null): AnnotationSpec {
     return annotationSpec.build()
 }
 
-fun saveTypeFile(targetPackage: String, typeSpec: TypeSpec) {
-    FileSpec.builder(targetPackage, typeSpec.name!!)
-        .addType(typeSpec)
-        .build()
-        .writeTo(BASE_DESTINATION_FOLDER)
-}
-
-fun saveExtensionsFunctionsFile(targetPackage: String, functions: Collection<FunSpec>, fileName: String) {
-    FileSpec.builder(targetPackage, fileName)
-        .addFunctions(functions)
-        .build()
-        .writeTo(BASE_DESTINATION_FOLDER)
-}
-
 fun extractPostfix(kClass: KClass<*>): Char {
     return kClass.simpleName?.first()?.lowercaseChar()!!
 }

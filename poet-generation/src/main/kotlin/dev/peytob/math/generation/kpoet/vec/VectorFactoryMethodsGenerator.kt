@@ -32,10 +32,10 @@ private class BiVecCopyingFactoryGeneratorTemplate : BiVecFunctionGeneratorTempl
     }
 
     override fun generateMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String =
-        "immutableVec${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}"
+        "immutable${leftVec.alias}"
 
     override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String =
-        "immutableVec${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}${rightVec.primitiveDescriptor.postfix}"
+        "immutable${leftVec.alias}${rightVec.primitiveDescriptor.postfix}"
 
     override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = listOf(
         ParameterSpec("right", rightVec.vectorDescriptor.accessor.parameterizedBy(rightVec.primitiveDescriptor.cls))
@@ -69,7 +69,7 @@ private class BiVecLiteralFactoryGeneratorTemplate : BiVecFunctionGeneratorTempl
     }
 
     override fun generateMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String =
-        "immutableVec${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}"
+        "immutable${leftVec.alias}"
 
     override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String? = null
 
@@ -100,7 +100,7 @@ private class UnaryVecZeroFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTe
     }
 
     override fun generateMethodName(leftVec: VectorSpec): String =
-        "immutableVec${leftVec.vectorDescriptor.size}${leftVec.primitiveDescriptor.postfix}"
+        "immutable${leftVec.alias}"
 
     override fun generateJvmMethodName(leftVec: VectorSpec): String? = null
 
@@ -113,7 +113,7 @@ fun generateImmutableVecFactoryMethods(vec: VectorSpec, targetOperationVectors: 
     val unaryVecZeroFactoryGeneratorTemplate = UnaryVecZeroFactoryGeneratorTemplate()
 
     return targetOperationVectors.flatMap {
-        println("Generating factory methods for ${vec.baseClassName} vector type")
+        println("Generating factory methods for ${vec.baseClassName} from ${it.baseClassName}")
         listOf(
             biVecLiteralFactoryGeneratorTemplate.generateFunSpec(vec, it),
             biVecCopyingFactoryGeneratorTemplate.generateFunSpec(vec, it),
