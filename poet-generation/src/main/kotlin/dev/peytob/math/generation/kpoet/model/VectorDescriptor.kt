@@ -4,10 +4,10 @@ import kotlin.reflect.KClass
 
 data class VectorDescriptor(
     val components: Collection<String>,
-    val base: KClass<*>,
+    val immutableBase: KClass<*>,
+    val mutableBase: KClass<*>,
     val accessor: KClass<*>,
-    val destinationPackage: String,
-    val isImmutable: Boolean
+    val destinationPackage: String
 ) {
     val size: Int = components.size
 }

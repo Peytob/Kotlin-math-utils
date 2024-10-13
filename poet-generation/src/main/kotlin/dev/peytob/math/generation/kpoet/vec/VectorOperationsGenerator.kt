@@ -272,7 +272,7 @@ private class NormalizeFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTempl
 }
 
 fun generateImmutableVecOperations(vec: VectorSpec, targetOperationVectors: Collection<VectorSpec>): Collection<FunSpec> {
-    if (!vec.vectorDescriptor.isImmutable) {
+    if (!vec.isImmutable) {
         return emptyList()
     }
 

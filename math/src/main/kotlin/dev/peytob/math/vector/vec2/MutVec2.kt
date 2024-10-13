@@ -9,5 +9,5 @@ interface MutVec2<T : Number> : Vec2Accessor<T> {
     /**
      * Creates immutable copy of this vector
      */
-    fun asImmutable(): Vec2<T>
+//    fun asImmutable(): Vec2<T>
 }
