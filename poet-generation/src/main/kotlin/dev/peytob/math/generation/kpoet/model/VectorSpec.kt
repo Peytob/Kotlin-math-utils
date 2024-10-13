@@ -9,7 +9,7 @@ import com.squareup.kotlinpoet.asTypeName
 class VectorSpec(
     val vectorDescriptor: VectorDescriptor,
     val primitiveDescriptor: PrimitiveDescriptor,
-    val typeSpec: TypeSpec
+    val typeSpec: TypeSpec,
 ) {
 
     val className = ClassName(vectorDescriptor.destinationPackage, typeSpec.name!!)

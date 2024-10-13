@@ -52,6 +52,7 @@ val VECTOR_DESCRIPTORS: Collection<VectorDescriptor> = listOf(
         components = listOf("x", "y"),
         base = Vec2::class,
         accessor = Vec2Accessor::class,
-        destinationPackage = "$DESTINATION_PACKAGE_ROOT.vector.vec2"
+        destinationPackage = "$DESTINATION_PACKAGE_ROOT.vector.vec2",
+        isImmutable = true
     )
 )

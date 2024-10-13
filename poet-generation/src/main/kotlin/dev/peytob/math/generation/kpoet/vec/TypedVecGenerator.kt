@@ -6,17 +6,21 @@ import dev.peytob.math.generation.kpoet.generatedAnnotation
 import dev.peytob.math.generation.kpoet.model.PrimitiveDescriptor
 import dev.peytob.math.generation.kpoet.model.VectorDescriptor
 import dev.peytob.math.generation.kpoet.model.VectorSpec
-import java.lang.RuntimeException
+import kotlin.RuntimeException
 
-fun generateTypedStructVec(primitiveDescriptor: PrimitiveDescriptor, vectorDescriptor: VectorDescriptor): VectorSpec {
+fun generateTypedImmutableStructVec(primitiveDescriptor: PrimitiveDescriptor, vectorDescriptor: VectorDescriptor): VectorSpec {
     val primitiveCls = primitiveDescriptor.cls
     val primitiveSizeBytes = primitiveDescriptor.sizeBytes
     val postfix = primitiveDescriptor.postfix
 
+    if (!vectorDescriptor.isImmutable) {
+        throw RuntimeException("Trying to generate immutable factories for mutable vector")
+    }
+
     println("Generating ${vectorDescriptor.size}-component vector structure class for ${primitiveCls.simpleName}")
 
     if (primitiveCls.javaPrimitiveType == null) {
-        throw RuntimeException("Vec2 cant be generated from non-primitive class ${primitiveCls.simpleName}")
+        throw RuntimeException("Vectors cant be generated from non-primitive class ${primitiveCls.simpleName}")
     }
 
     val elementsCount = vectorDescriptor.size
@@ -52,5 +56,9 @@ fun generateTypedStructVec(primitiveDescriptor: PrimitiveDescriptor, vectorDescr
             .build())
         .build()
 
-    return VectorSpec(vectorDescriptor, primitiveDescriptor, typeSpec)
+    return VectorSpec(
+        vectorDescriptor = vectorDescriptor,
+        primitiveDescriptor = primitiveDescriptor,
+        typeSpec = typeSpec
+    )
 }

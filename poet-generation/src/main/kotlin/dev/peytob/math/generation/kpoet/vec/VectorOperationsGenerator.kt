@@ -200,7 +200,82 @@ private class DotOperationFactoryGeneratorTemplate : BiVecFunctionGeneratorTempl
     )
 }
 
-fun generateVecOperations(vec: VectorSpec, targetOperationVectors: Collection<VectorSpec>): Collection<FunSpec> {
+private class LengthFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTemplate() {
+
+    private companion object {
+        private val SQRT = MemberName("kotlin.math", "sqrt")
+    }
+
+    override fun isExtension(): Boolean = true
+
+    override fun isOperator(): Boolean = false
+
+    override fun generateReturnType(leftVec: VectorSpec): TypeName = Double::class.asClassName()
+
+    override fun generateFunctionBody(leftVec: VectorSpec): CodeBlock {
+        val codeBlockBuilder = CodeBlock.builder()
+
+        codeBlockBuilder.addStatement("var s = 0.0")
+
+        leftVec.components.forEach { property ->
+            val name = property.name
+            codeBlockBuilder
+                .addStatement("s += this.%1L * this.%1L", name)
+        }
+
+        codeBlockBuilder.addStatement("return %M(s)", SQRT)
+
+        return codeBlockBuilder.build()
+    }
+
+    override fun generateMethodName(leftVec: VectorSpec): String = "length"
+
+    override fun generateJvmMethodName(leftVec: VectorSpec): String = "length${leftVec.alias}"
+
+    override fun generateParameters(leftVec: VectorSpec): Collection<ParameterSpec> = listOf()
+}
+
+private class NormalizeFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTemplate() {
+
+    override fun isExtension(): Boolean = true
+
+    override fun isOperator(): Boolean = false
+
+    override fun generateReturnType(leftVec: VectorSpec): TypeName = leftVec.baseClassName
+
+    override fun generateFunctionBody(leftVec: VectorSpec): CodeBlock {
+        val codeBlockBuilder = CodeBlock.builder()
+
+        codeBlockBuilder
+            .addStatement("val l = this.length()")
+
+        leftVec.components.forEach { property ->
+            val name = property.name
+            codeBlockBuilder
+                .addStatement("val %1L = (this.%1L / l).%2N()", name, leftVec.primitiveDescriptor.numberCastMethodName)
+        }
+
+        val constructorArgs = leftVec.components
+            .map { it.name }
+            .joinToString(", ") { "$it = $it" }
+
+        codeBlockBuilder.addStatement("return %T(%L)", leftVec.className, constructorArgs)
+
+        return codeBlockBuilder.build()
+    }
+
+    override fun generateMethodName(leftVec: VectorSpec): String = "normalize"
+
+    override fun generateJvmMethodName(leftVec: VectorSpec): String = "normalize${leftVec.alias}"
+
+    override fun generateParameters(leftVec: VectorSpec): Collection<ParameterSpec> = listOf()
+}
+
+fun generateImmutableVecOperations(vec: VectorSpec, targetOperationVectors: Collection<VectorSpec>): Collection<FunSpec> {
+    if (!vec.vectorDescriptor.isImmutable) {
+        return emptyList()
+    }
+
     val plusFactoryGeneratorTemplate = BiVecDefaultOperatorFactoryGeneratorTemplate("plus")
     val plusLiteralFactoryGeneratorTemplate = BiLiteralFactoryFactoryGeneratorTemplate("plus", "+")
 
@@ -210,11 +285,14 @@ fun generateVecOperations(vec: VectorSpec, targetOperationVectors: Collection<Ve
     val timesFactoryGeneratorTemplate = BiVecDefaultOperatorFactoryGeneratorTemplate("times")
     val timesLiteralFactoryGeneratorTemplate = BiLiteralFactoryFactoryGeneratorTemplate("times", "*")
 
-    val unaryVecFunctionGeneratorTemplate = UnaryPlusFactoryGeneratorTemplate()
+    val unaryPlusVecFunctionGeneratorTemplate = UnaryPlusFactoryGeneratorTemplate()
     val unaryMinusFactoryGeneratorTemplate = UnaryMinusFactoryGeneratorTemplate()
 
     val dotLiteralOperationFactoryGeneratorTemplate = DotLiteralOperationFactoryGeneratorTemplate()
     val dotOperationFactoryGeneratorTemplate = DotOperationFactoryGeneratorTemplate()
+
+    val lengthFactoryGeneratorTemplate = LengthFactoryGeneratorTemplate()
+    val normalizeFactoryGeneratorTemplate = NormalizeFactoryGeneratorTemplate()
 
     return targetOperationVectors.flatMap {
         println("Generating operations between ${vec.baseClassName} and ${it.baseClassName} vector types")
@@ -232,7 +310,9 @@ fun generateVecOperations(vec: VectorSpec, targetOperationVectors: Collection<Ve
             dotOperationFactoryGeneratorTemplate.generateFunSpec(vec, it)
         )
     } + listOf(
-        unaryVecFunctionGeneratorTemplate.generateFunSpec(vec),
-        unaryMinusFactoryGeneratorTemplate.generateFunSpec(vec)
+        unaryPlusVecFunctionGeneratorTemplate.generateFunSpec(vec),
+        unaryMinusFactoryGeneratorTemplate.generateFunSpec(vec),
+        lengthFactoryGeneratorTemplate.generateFunSpec(vec),
+        normalizeFactoryGeneratorTemplate.generateFunSpec(vec)
     )
 }

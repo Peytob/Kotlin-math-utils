@@ -1,10 +1,10 @@
 package dev.peytob.math.generation.kpoet
 
 import dev.peytob.math.generation.kpoet.model.*
-import dev.peytob.math.generation.kpoet.vec.generateTypedStructVec
+import dev.peytob.math.generation.kpoet.vec.generateTypedImmutableStructVec
 import dev.peytob.math.generation.kpoet.vec.generateImmutableVecFactoryMethods
 import dev.peytob.math.generation.kpoet.vec.generateVecBufferOperations
-import dev.peytob.math.generation.kpoet.vec.generateVecOperations
+import dev.peytob.math.generation.kpoet.vec.generateImmutableVecOperations
 
 fun main() {
     println("Starting vectors and matrix types generation")
@@ -21,10 +21,10 @@ fun main() {
 
     val generatingResultStorage = GeneratingResultStorage()
 
-    println("Generating vectors types")
-    VECTOR_DESCRIPTORS.forEach { vectorDescriptor ->
+    println("Generating struct vectors types")
+    VECTOR_DESCRIPTORS.filter { it.isImmutable }.forEach { vectorDescriptor ->
         PRIMITIVE_DESCRIPTORS.mapTo(generatingResultStorage.vectorTypes[vectorDescriptor]) { primitiveDescriptor ->
-            generateTypedStructVec(primitiveDescriptor, vectorDescriptor)
+            generateTypedImmutableStructVec(primitiveDescriptor, vectorDescriptor)
         }
     }
 
@@ -34,9 +34,9 @@ fun main() {
         generatingResultStorage.factories.putAll(vectorSpec, factoryMethods)
     }
 
-    println("Generating vectors operations")
+    println("Generating immutable vectors operations")
     generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
-        val operationsException = generateVecOperations(vectorSpec, generatingResultStorage.vectorTypes.values())
+        val operationsException = generateImmutableVecOperations(vectorSpec, generatingResultStorage.vectorTypes.values())
         generatingResultStorage.operations.putAll(vectorSpec, operationsException)
     }
 

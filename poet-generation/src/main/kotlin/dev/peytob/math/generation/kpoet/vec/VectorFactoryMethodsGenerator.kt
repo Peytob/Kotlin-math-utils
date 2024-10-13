@@ -108,6 +108,10 @@ private class UnaryVecZeroFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTe
 }
 
 fun generateImmutableVecFactoryMethods(vec: VectorSpec, targetOperationVectors: Collection<VectorSpec>): Collection<FunSpec> {
+    if (!vec.vectorDescriptor.isImmutable) {
+        return emptyList()
+    }
+
     val biVecCopyingFactoryGeneratorTemplate = BiVecCopyingFactoryGeneratorTemplate()
     val biVecLiteralFactoryGeneratorTemplate = BiVecLiteralFactoryGeneratorTemplate()
     val unaryVecZeroFactoryGeneratorTemplate = UnaryVecZeroFactoryGeneratorTemplate()
