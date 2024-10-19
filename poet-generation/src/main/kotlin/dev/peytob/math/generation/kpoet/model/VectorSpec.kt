@@ -21,4 +21,6 @@ class VectorSpec(
     val baseClassName = (if (isImmutable) vectorDescriptor.immutableBase else vectorDescriptor.mutableBase).asClassName().parameterizedBy(primitiveDescriptor.cls.asTypeName())
 
     val alias = (if (isImmutable) "" else "Mutable") + "Vec${components.size}${primitiveDescriptor.postfix}"
+
+    val parameterizedAccessor = vectorDescriptor.accessor.asTypeName().parameterizedBy(primitiveDescriptor.cls.asTypeName())
 }

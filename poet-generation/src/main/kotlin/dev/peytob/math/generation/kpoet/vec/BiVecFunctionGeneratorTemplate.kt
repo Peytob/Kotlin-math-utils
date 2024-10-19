@@ -1,7 +1,8 @@
 package dev.peytob.math.generation.kpoet.vec
 
 import com.squareup.kotlinpoet.*
-import dev.peytob.math.generation.kpoet.generatedAnnotation
+import dev.peytob.math.generation.kpoet.generated
+import dev.peytob.math.generation.kpoet.jvmName
 import dev.peytob.math.generation.kpoet.model.VectorSpec
 
 abstract class BiVecFunctionGeneratorTemplate {
@@ -13,6 +14,8 @@ abstract class BiVecFunctionGeneratorTemplate {
     protected abstract fun isOperator(): Boolean
 
     protected abstract fun generateReturnType(leftVec: VectorSpec, rightVec: VectorSpec): TypeName?
+
+    protected open fun generateReceiverType(leftVec: VectorSpec, rightVec: VectorSpec): TypeName? = null
 
     protected abstract fun generateFunctionBody(leftVec: VectorSpec, rightVec: VectorSpec): CodeBlock
 
@@ -32,24 +35,18 @@ abstract class BiVecFunctionGeneratorTemplate {
         val bodyCodeBlock = generateFunctionBody(leftVec, rightVec)
 
         val funSpecBuilder = FunSpec.builder(generateMethodName(leftVec, rightVec))
-            .addAnnotation(generatedAnnotation())
+            .generated()
+            .jvmName(generateJvmMethodName(leftVec, rightVec))
             .addParameters(generateParameters(leftVec, rightVec))
             .addCode(bodyCodeBlock)
-
-        generateJvmMethodName(leftVec, rightVec)?.let {
-            val annotation = AnnotationSpec.builder(JvmName::class)
-                .addMember("name = %S", it)
-                .build()
-
-            funSpecBuilder.addAnnotation(annotation)
-        }
 
         if (returnType != null) {
             funSpecBuilder.returns(returnType)
         }
 
         if (isExtension()) {
-            funSpecBuilder.receiver(leftVec.baseClassName)
+            val receiverType = generateReceiverType(leftVec, rightVec) ?: leftVec.baseClassName
+            funSpecBuilder.receiver(receiverType)
         }
 
         if (isOperator()) {

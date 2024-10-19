@@ -38,7 +38,7 @@ private class BiVecDefaultOperatorFactoryGeneratorTemplate(
         "${operationName}Vec${leftVec.alias}${rightVec.primitiveDescriptor.postfix}"
 
     override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = listOf(
-        ParameterSpec("right", rightVec.vectorDescriptor.accessor.parameterizedBy(rightVec.primitiveDescriptor.cls))
+        ParameterSpec("right", rightVec.parameterizedAccessor)
     )
 }
 
@@ -295,7 +295,12 @@ fun generateImmutableVecOperations(vec: VectorSpec, targetOperationVectors: Coll
     val normalizeFactoryGeneratorTemplate = NormalizeFactoryGeneratorTemplate()
 
     return targetOperationVectors.flatMap {
+        if (vec.vectorDescriptor.size != it.vectorDescriptor.size) {
+            return@flatMap emptyList()
+        }
+
         println("Generating operations between ${vec.baseClassName} and ${it.baseClassName} vector types")
+
         listOf(
             plusLiteralFactoryGeneratorTemplate.generateFunSpec(vec, it),
             plusFactoryGeneratorTemplate.generateFunSpec(vec, it),

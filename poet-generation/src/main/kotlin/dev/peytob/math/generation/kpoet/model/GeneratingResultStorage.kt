@@ -8,5 +8,5 @@ data class GeneratingResultStorage(
     val vectorTypes: Multimap<VectorDescriptor, VectorSpec> = HashMultimap.create(),
     val factories: Multimap<VectorSpec, FunSpec> = HashMultimap.create(),
     val operations: Multimap<VectorSpec, FunSpec> = HashMultimap.create(),
-    val bufferOperations: Multimap<VectorSpec, FunSpec> = HashMultimap.create(),
+    val bufferOperations: Multimap<VectorDescriptor, FunSpec> = HashMultimap.create(),
 )

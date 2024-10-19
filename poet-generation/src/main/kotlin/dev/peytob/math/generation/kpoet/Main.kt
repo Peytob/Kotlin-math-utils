@@ -45,9 +45,11 @@ fun main() {
     }
 
     println("Generating vectors buffer operations")
-    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
-        val bufferOperations = generateVecBufferOperations(vectorSpec)
-        generatingResultStorage.bufferOperations.putAll(vectorSpec, bufferOperations)
+    VECTOR_DESCRIPTORS.forEach { vectorDescriptor ->
+        PRIMITIVE_DESCRIPTORS.forEach { primitiveDescriptor ->
+            val bufferOperations = generateVecBufferOperations(vectorDescriptor, primitiveDescriptor)
+            generatingResultStorage.bufferOperations.putAll(vectorDescriptor, bufferOperations)
+        }
     }
 
     println("All generations completed! Saving data...")

@@ -27,20 +27,10 @@ fun saveGeneratingResults(generatingResultStorage: GeneratingResultStorage) {
             .writeTo(BASE_DESTINATION_FOLDER)
     }
 
-    groupByVectorDescriptor(generatingResultStorage.bufferOperations).asMap().forEach { (vectorDescriptor, functions) ->
+    generatingResultStorage.bufferOperations.asMap().forEach { (vectorDescriptor, functions) ->
         FileSpec.builder(vectorDescriptor.destinationPackage, "Vec${vectorDescriptor.size}NioBufferUtils")
             .addFunctions(functions)
             .build()
             .writeTo(BASE_DESTINATION_FOLDER)
     }
-}
-
-fun groupByVectorDescriptor(functions: Multimap<VectorSpec, FunSpec>): Multimap<VectorDescriptor, FunSpec> {
-    val multimap = HashMultimap.create<VectorDescriptor, FunSpec>()
-
-    functions.forEach { vectorType, function ->
-        multimap.put(vectorType.vectorDescriptor, function)
-    }
-
-    return multimap
 }

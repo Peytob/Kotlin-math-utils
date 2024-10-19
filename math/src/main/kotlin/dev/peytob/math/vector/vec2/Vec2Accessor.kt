@@ -22,6 +22,6 @@ sealed interface Vec2Accessor<T : Number> {
     operator fun get(index: Int) = when (index) {
         0 -> x
         1 -> y
-        else -> throw IndexOutOfBoundsException();
+        else -> throw IndexOutOfBoundsException()
     }
 }

@@ -20,3 +20,19 @@ fun generatedAnnotation(comment: String? = null): AnnotationSpec {
 fun extractPostfix(kClass: KClass<*>): Char {
     return kClass.simpleName?.first()?.lowercaseChar()!!
 }
+
+fun FunSpec.Builder.generated(): FunSpec.Builder {
+    return this.addAnnotation(generatedAnnotation())
+}
+
+fun FunSpec.Builder.jvmName(name: String?): FunSpec.Builder {
+    if (name == null) {
+        return this
+    }
+
+    val annotation = AnnotationSpec.builder(JvmName::class)
+        .addMember("name = %S", name)
+        .build()
+
+    return this.addAnnotation(annotation)
+}

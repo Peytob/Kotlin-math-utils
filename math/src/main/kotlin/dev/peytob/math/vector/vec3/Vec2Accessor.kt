@@ -19,12 +19,12 @@ sealed interface Vec3Accessor<T : Number> {
 
     operator fun component1() = x
     operator fun component2() = y
-    operator fun component3() = z
+    operator fun component3() = y
 
     operator fun get(index: Int) = when (index) {
         0 -> x
         1 -> y
-        2 -> y
+        2 -> z
         else -> throw IndexOutOfBoundsException()
     }
 }

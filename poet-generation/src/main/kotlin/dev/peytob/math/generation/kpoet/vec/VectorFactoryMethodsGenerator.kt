@@ -5,6 +5,7 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import dev.peytob.math.generation.kpoet.model.VectorSpec
 
 private class BiVecCopyingFactoryGeneratorTemplate : BiVecFunctionGeneratorTemplate() {
+
     override fun isDifferentVectorsSizeSupported(): Boolean = false
 
     override fun isExtension(): Boolean = false
@@ -38,7 +39,7 @@ private class BiVecCopyingFactoryGeneratorTemplate : BiVecFunctionGeneratorTempl
         "immutable${leftVec.alias}${rightVec.primitiveDescriptor.postfix}"
 
     override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = listOf(
-        ParameterSpec("right", rightVec.vectorDescriptor.accessor.parameterizedBy(rightVec.primitiveDescriptor.cls))
+        ParameterSpec("right", rightVec.parameterizedAccessor)
     )
 }
 
@@ -113,7 +114,12 @@ fun generateVecFactoryMethods(vec: VectorSpec, targetOperationVectors: Collectio
     val unaryVecZeroFactoryGeneratorTemplate = UnaryVecZeroFactoryGeneratorTemplate()
 
     return targetOperationVectors.flatMap {
+        if (vec.vectorDescriptor.size != it.vectorDescriptor.size) {
+            return@flatMap emptyList()
+        }
+
         println("Generating factory methods for ${vec.baseClassName} from ${it.baseClassName}")
+
         listOf(
             biVecLiteralFactoryGeneratorTemplate.generateFunSpec(vec, it),
             biVecCopyingFactoryGeneratorTemplate.generateFunSpec(vec, it),
