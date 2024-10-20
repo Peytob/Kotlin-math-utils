@@ -12,7 +12,7 @@ import java.nio.ByteBuffer
 fun generateByteVecBufferInsertFunction(vector: VectorDescriptor, primitive: PrimitiveDescriptor): FunSpec {
     val codeBlockBuilder = CodeBlock.builder()
 
-    val primitiveName = primitive.cls.simpleName!!
+    val primitiveName = primitive.cls.simpleName
 
     vector.components.forEach {
         codeBlockBuilder.addStatement("buffer.put%L(%L)", primitiveName, it)
@@ -22,7 +22,7 @@ fun generateByteVecBufferInsertFunction(vector: VectorDescriptor, primitive: Pri
         .generated()
         .jvmName("toByteBuffer${vector.components.size}${primitive.postfix}")
         .addModifiers(KModifier.INFIX)
-        .receiver(vector.accessor.parameterizedBy(primitive.cls.asTypeName()))
+        .receiver(vector.accessor.parameterizedBy(primitive.cls))
         .addParameter(ParameterSpec("buffer", ByteBuffer::class.asTypeName()))
         .addCode(codeBlockBuilder.build())
         .build()
@@ -41,7 +41,7 @@ fun generateTypedVecBufferInsertFunction(vector: VectorDescriptor, primitive: Pr
         .generated()
         .jvmName("toBuffer${vector.components.size}${primitive.postfix}")
         .addModifiers(KModifier.INFIX)
-        .receiver(vector.accessor.parameterizedBy(primitive.cls.asTypeName()))
+        .receiver(vector.accessor.parameterizedBy(primitive.cls))
         .addParameter(ParameterSpec("buffer", bufferType))
         .addCode(codeBlockBuilder.build())
         .build()

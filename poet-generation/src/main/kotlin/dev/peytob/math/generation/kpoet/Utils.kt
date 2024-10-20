@@ -1,9 +1,10 @@
 package dev.peytob.math.generation.kpoet
 
-import com.squareup.kotlinpoet.*
-import dev.peytob.math.generation.kpoet.model.*
+import com.squareup.kotlinpoet.AnnotationSpec
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.TypeSpec
+import dev.peytob.math.generation.kpoet.model.GENERATED_DATE
 import javax.annotation.processing.Generated
-import kotlin.reflect.KClass
 
 fun generatedAnnotation(comment: String? = null): AnnotationSpec {
     val annotationSpec = AnnotationSpec.builder(Generated::class)
@@ -15,10 +16,6 @@ fun generatedAnnotation(comment: String? = null): AnnotationSpec {
     }
 
     return annotationSpec.build()
-}
-
-fun extractPostfix(kClass: KClass<*>): Char {
-    return kClass.simpleName?.first()?.lowercaseChar()!!
 }
 
 fun TypeSpec.Builder.generated(): TypeSpec.Builder {

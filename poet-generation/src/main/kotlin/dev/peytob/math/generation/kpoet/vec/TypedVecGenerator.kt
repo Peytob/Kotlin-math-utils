@@ -8,7 +8,6 @@ import dev.peytob.math.generation.kpoet.model.PrimitiveDescriptor
 import dev.peytob.math.generation.kpoet.model.VectorDescriptor
 import dev.peytob.math.generation.kpoet.model.VectorOrder
 import dev.peytob.math.generation.kpoet.model.VectorSpec
-import kotlin.RuntimeException
 
 fun generateTypedImmutableStructVec(primitive: PrimitiveDescriptor, vector: VectorDescriptor): VectorSpec {
     val typeSpec = generateTypedStructVecTemplate(primitive, vector) {
@@ -29,7 +28,7 @@ fun generateTypedImmutableStructVec(primitive: PrimitiveDescriptor, vector: Vect
         }
 
         TypeSpec.classBuilder("StructVec${vector.size}${primitive.postfix}")
-            .addSuperinterface(vector.immutableBase.parameterizedBy(primitive.cls.asTypeName()))
+            .addSuperinterface(vector.immutableBase.parameterizedBy(primitive.cls))
             .addModifiers(KModifier.DATA, KModifier.INTERNAL)
             .addAnnotation(generatedAnnotation())
             .primaryConstructor(primaryConstructor)
@@ -75,7 +74,7 @@ fun generateTypedMutableStructVec(primitive: PrimitiveDescriptor, vector: Vector
         }
 
         TypeSpec.classBuilder("StructMutVec${vector.size}${primitive.postfix}")
-            .addSuperinterface(vector.mutableBase.parameterizedBy(primitive.cls.asTypeName()))
+            .addSuperinterface(vector.mutableBase.parameterizedBy(primitive.cls))
             .addModifiers(KModifier.INTERNAL)
             .addAnnotation(generatedAnnotation())
             .primaryConstructor(primaryConstructor)
@@ -103,10 +102,6 @@ fun generateTypedMutableStructVec(primitive: PrimitiveDescriptor, vector: Vector
 
 private fun generateTypedStructVecTemplate(primitive: PrimitiveDescriptor, vector: VectorDescriptor, typeSpecGenerator: () -> TypeSpec): TypeSpec {
     println("Generating ${vector.size}-component vector structure class for ${primitive.cls.simpleName}")
-
-    if (primitive.cls.javaPrimitiveType == null) {
-        throw RuntimeException("Vectors cant be generated from non-primitive class ${primitive.cls.simpleName}")
-    }
 
     return typeSpecGenerator()
 }

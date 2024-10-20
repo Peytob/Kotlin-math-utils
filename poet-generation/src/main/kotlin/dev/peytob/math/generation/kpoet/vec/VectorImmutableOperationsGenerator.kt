@@ -77,7 +77,7 @@ private class BiLiteralFactoryFactoryGeneratorTemplate(
     override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String? = null
 
     override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = rightVec.components.map {
-        ParameterSpec("r${it.name}", rightVec.primitiveDescriptor.cls.asTypeName())
+        ParameterSpec("r${it.name}", rightVec.primitiveDescriptor.cls)
     }
 }
 
@@ -165,7 +165,7 @@ private class DotLiteralOperationFactoryGeneratorTemplate : BiVecFunctionGenerat
     override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String? = null
 
     override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = rightVec.components.map {
-        ParameterSpec("r${it.name}", rightVec.primitiveDescriptor.cls.asTypeName())
+        ParameterSpec("r${it.name}", rightVec.primitiveDescriptor.cls)
     }
 }
 
@@ -196,7 +196,7 @@ private class DotOperationFactoryGeneratorTemplate : BiVecFunctionGeneratorTempl
     override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String = "dot${leftVec.alias}${rightVec.primitiveDescriptor.postfix}"
 
     override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = listOf(
-        ParameterSpec("right", rightVec.vectorDescriptor.accessor.parameterizedBy(rightVec.primitiveDescriptor.cls.asTypeName()))
+        ParameterSpec("right", rightVec.vectorDescriptor.accessor.parameterizedBy(rightVec.primitiveDescriptor.cls))
     )
 }
 

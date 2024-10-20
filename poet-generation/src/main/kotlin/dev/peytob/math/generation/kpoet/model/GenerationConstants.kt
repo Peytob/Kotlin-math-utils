@@ -17,31 +17,35 @@ val GENERATED_DATE: String = DateTimeFormatter.ISO_DATE.format(LocalDateTime.now
 
 val PRIMITIVE_DESCRIPTORS: Collection<PrimitiveDescriptor> = listOf(
     PrimitiveDescriptor(
-        cls = Double::class,
+        cls = Double::class.asClassName(),
         sizeBytes = Double.SIZE_BYTES,
         numberCastMethodName = MemberName(Number::class.asClassName(), "toDouble"),
-        literal = ".0"
+        literal = ".0",
+        postfix = "d"
     ),
 
     PrimitiveDescriptor(
-        cls = Float::class,
+        cls = Float::class.asClassName(),
         sizeBytes = Float.SIZE_BYTES,
         numberCastMethodName = MemberName(Number::class.asClassName(), "toFloat"),
-        literal = "f"
+        literal = "f",
+        postfix = "f"
     ),
 
     PrimitiveDescriptor(
-        cls = Int::class,
+        cls = Int::class.asClassName(),
         sizeBytes = Int.SIZE_BYTES,
         numberCastMethodName = MemberName(Number::class.asClassName(), "toInt"),
-        literal = null
+        literal = null,
+        postfix = "i"
     ),
 
     PrimitiveDescriptor(
-        cls = Long::class,
+        cls = Long::class.asClassName(),
         sizeBytes = Long.SIZE_BYTES,
         numberCastMethodName = MemberName(Number::class.asClassName(), "toLong"),
-        literal = "L"
+        literal = "L",
+        postfix = "l"
     )
 )
 

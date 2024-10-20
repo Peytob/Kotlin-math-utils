@@ -7,10 +7,7 @@ fun main() {
     println("Starting vectors and matrix types generation")
     println("Configuration:")
     println("-> Destination folder: $BASE_DESTINATION_FOLDER")
-    PRIMITIVE_DESCRIPTORS
-        .mapNotNull { it.cls.simpleName }
-        .joinToString(", ")
-        .let { println("-> Target generation primitives: $it") }
+    println("-> Target generation primitives: ${PRIMITIVE_DESCRIPTORS.joinToString(", ") { it.cls.simpleName }}")
     VECTOR_ORDERS
         .joinToString(", ") { it.components.joinToString(",", prefix = "[", postfix = "]") }
         .let { println("-> Target generation vectors: $it") }
