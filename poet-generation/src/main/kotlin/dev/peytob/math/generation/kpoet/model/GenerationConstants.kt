@@ -2,12 +2,6 @@ package dev.peytob.math.generation.kpoet.model
 
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.asClassName
-import dev.peytob.math.vector.vec2.MutVec2
-import dev.peytob.math.vector.vec2.Vec2
-import dev.peytob.math.vector.vec2.Vec2Accessor
-import dev.peytob.math.vector.vec3.MutVec3
-import dev.peytob.math.vector.vec3.Vec3
-import dev.peytob.math.vector.vec3.Vec3Accessor
 import java.nio.file.Path
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -51,20 +45,14 @@ val PRIMITIVE_DESCRIPTORS: Collection<PrimitiveDescriptor> = listOf(
     )
 )
 
-val VECTOR_DESCRIPTORS: Collection<VectorDescriptor> = listOf(
-    VectorDescriptor(
+val VECTOR_ORDERS: Collection<VectorOrder> = listOf(
+    VectorOrder(
         components = listOf("x", "y"),
-        immutableBase = Vec2::class,
-        mutableBase = MutVec2::class,
-        accessor = Vec2Accessor::class,
         destinationPackage = "$DESTINATION_PACKAGE_ROOT.vector.vec2"
     ),
 
-    VectorDescriptor(
+    VectorOrder(
         components = listOf("x", "y", "z"),
-        immutableBase = Vec3::class,
-        mutableBase = MutVec3::class,
-        accessor = Vec3Accessor::class,
         destinationPackage = "$DESTINATION_PACKAGE_ROOT.vector.vec3"
     )
 )

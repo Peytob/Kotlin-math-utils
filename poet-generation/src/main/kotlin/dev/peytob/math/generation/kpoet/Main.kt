@@ -11,22 +11,26 @@ fun main() {
         .mapNotNull { it.cls.simpleName }
         .joinToString(", ")
         .let { println("-> Target generation primitives: $it") }
-    VECTOR_DESCRIPTORS
+    VECTOR_ORDERS
         .joinToString(", ") { it.components.joinToString(",", prefix = "[", postfix = "]") }
         .let { println("-> Target generation vectors: $it") }
     println()
 
-    val generatingResultStorage = GeneratingResultStorage()
+    println("Generating vector descriptors")
+    val generateVector = generateVectorDescriptors(VECTOR_ORDERS)
+    val generatingResultStorage = GeneratingResultStorage(
+        vectorDescriptors = generateVector
+    )
 
     println("Generating immutable struct vectors types")
-    VECTOR_DESCRIPTORS.forEach { vectorDescriptor ->
+    generatingResultStorage.vectorDescriptors.forEach { vectorDescriptor ->
         PRIMITIVE_DESCRIPTORS.mapTo(generatingResultStorage.vectorTypes[vectorDescriptor]) { primitiveDescriptor ->
             generateTypedImmutableStructVec(primitiveDescriptor, vectorDescriptor)
         }
     }
 
     println("Generating mutable struct vectors types")
-    VECTOR_DESCRIPTORS.forEach { vectorDescriptor ->
+    generatingResultStorage.vectorDescriptors.forEach { vectorDescriptor ->
         PRIMITIVE_DESCRIPTORS.mapTo(generatingResultStorage.vectorTypes[vectorDescriptor]) { primitiveDescriptor ->
             generateTypedMutableStructVec(primitiveDescriptor, vectorDescriptor)
         }
@@ -51,7 +55,7 @@ fun main() {
     }
 
     println("Generating vectors buffer operations")
-    VECTOR_DESCRIPTORS.forEach { vectorDescriptor ->
+    generatingResultStorage.vectorDescriptors.forEach { vectorDescriptor ->
         PRIMITIVE_DESCRIPTORS.forEach { primitiveDescriptor ->
             val bufferOperations = generateVecBufferOperations(vectorDescriptor, primitiveDescriptor)
             generatingResultStorage.bufferOperations.putAll(vectorDescriptor, bufferOperations)

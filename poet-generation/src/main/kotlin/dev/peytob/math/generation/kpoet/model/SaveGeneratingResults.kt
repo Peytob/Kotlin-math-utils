@@ -3,6 +3,23 @@ package dev.peytob.math.generation.kpoet.model
 import com.squareup.kotlinpoet.FileSpec
 
 fun saveGeneratingResults(generatingResultStorage: GeneratingResultStorage) {
+    generatingResultStorage.vectorDescriptors.forEach { vectorDescriptor ->
+        FileSpec.builder(vectorDescriptor.immutableBase)
+            .addType(vectorDescriptor.immutableBaseTypeSpec)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
+
+        FileSpec.builder(vectorDescriptor.mutableBase)
+            .addType(vectorDescriptor.mutableBaseTypeSpec)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
+
+        FileSpec.builder(vectorDescriptor.accessor)
+            .addType(vectorDescriptor.accessorTypeSpec)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
+    }
+
     generatingResultStorage.vectorTypes.values().forEach { vectorType ->
         FileSpec.builder(vectorType.className)
             .addType(vectorType.typeSpec)

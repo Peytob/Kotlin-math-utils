@@ -21,6 +21,10 @@ fun extractPostfix(kClass: KClass<*>): Char {
     return kClass.simpleName?.first()?.lowercaseChar()!!
 }
 
+fun TypeSpec.Builder.generated(): TypeSpec.Builder {
+    return this.addAnnotation(generatedAnnotation())
+}
+
 fun FunSpec.Builder.generated(): FunSpec.Builder {
     return this.addAnnotation(generatedAnnotation())
 }
