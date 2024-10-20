@@ -1,0 +1,19 @@
+package dev.peytob.math.vector.vec3
+
+import javax.`annotation`.processing.Generated
+import kotlin.Int
+import kotlin.Long
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+internal class StructMutVec3l(
+  override var x: Long,
+  override var y: Long,
+  override var z: Long,
+) : MutVec3<Long> {
+  override val elementSizeBytes: Int = 8
+
+  override val vectorSizeBytes: Int = 24
+}
