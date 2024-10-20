@@ -1,7 +1,8 @@
 package dev.peytob.math.generation.kpoet.model
 
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.TypeSpec
 
 class VectorSpec(
     val vectorDescriptor: VectorDescriptor,
@@ -17,7 +18,7 @@ class VectorSpec(
 
     val baseClassName = (if (isImmutable) vectorDescriptor.immutableBase else vectorDescriptor.mutableBase).parameterizedBy(primitiveDescriptor.cls)
 
-    val alias = (if (isImmutable) "" else "Mutable") + "Vec${components.size}${primitiveDescriptor.postfix}"
+    val alias = (if (isImmutable) "" else "Mut") + "Vec${components.size}${primitiveDescriptor.postfix}"
 
     val parameterizedAccessor = vectorDescriptor.accessor.parameterizedBy(primitiveDescriptor.cls)
 }

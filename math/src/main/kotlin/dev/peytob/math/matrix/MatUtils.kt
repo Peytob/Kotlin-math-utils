@@ -1,6 +1,6 @@
 package dev.peytob.math.matrix
 
-import dev.peytob.math.vector.immutableVec2i
+import dev.peytob.math.vector.vec2.immutableVec2i
 
 internal const val MAT4_SIZE = 4
 internal val MAT4_SIZES = immutableVec2i(MAT4_SIZE, MAT4_SIZE)

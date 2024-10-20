@@ -100,6 +100,13 @@ fun generateTypedMutableStructVec(primitive: PrimitiveDescriptor, vector: Vector
     )
 }
 
+fun generateVectorAliases(vectorSpec: VectorSpec): TypeAliasSpec {
+    println("Generating type alias for vector ${vectorSpec.alias}")
+
+    return TypeAliasSpec.builder(vectorSpec.alias, vectorSpec.baseClassName)
+        .build()
+}
+
 private fun generateTypedStructVecTemplate(primitive: PrimitiveDescriptor, vector: VectorDescriptor, typeSpecGenerator: () -> TypeSpec): TypeSpec {
     println("Generating ${vector.size}-component vector structure class for ${primitive.cls.simpleName}")
 

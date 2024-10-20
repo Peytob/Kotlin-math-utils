@@ -1,11 +1,6 @@
 package dev.peytob.math.vector.vec2
 
-import javax.`annotation`.processing.Generated
-import kotlin.Double
-import kotlin.Float
-import kotlin.Int
-import kotlin.Long
-import kotlin.jvm.JvmName
+import javax.annotation.processing.Generated
 
 @Generated(
   value = ["poet", "kmu"],

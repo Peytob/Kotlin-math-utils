@@ -14,9 +14,10 @@ fun main() {
     println()
 
     println("Generating vector descriptors")
-    val generateVector = generateVectorDescriptors(VECTOR_ORDERS)
+    val vectorDescriptors = generateVectorDescriptors(VECTOR_ORDERS)
+
     val generatingResultStorage = GeneratingResultStorage(
-        vectorDescriptors = generateVector
+        vectorDescriptors = vectorDescriptors
     )
 
     println("Generating immutable struct vectors types")
@@ -31,6 +32,12 @@ fun main() {
         PRIMITIVE_DESCRIPTORS.mapTo(generatingResultStorage.vectorTypes[vectorDescriptor]) { primitiveDescriptor ->
             generateTypedMutableStructVec(primitiveDescriptor, vectorDescriptor)
         }
+    }
+
+    println("Generating vectors aliases")
+    generatingResultStorage.vectorTypes.forEach { vectorDescriptor, vectorSpec ->
+        val aliases = generateVectorAliases(vectorSpec)
+        generatingResultStorage.vectorAliases[vectorDescriptor].add(aliases)
     }
 
     println("Generating vectors methods")
