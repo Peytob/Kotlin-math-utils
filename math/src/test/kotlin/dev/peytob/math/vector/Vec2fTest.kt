@@ -1,9 +1,12 @@
 package dev.peytob.math.vector
 
+import dev.peytob.math.vector.vec2.immutableVec2f
+import dev.peytob.math.vector.vec2.minus
+import dev.peytob.math.vector.vec2.plus
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class Vec2FTest {
+class Vec2fTest {
 
     @Test
     fun equalsMethodTest() {

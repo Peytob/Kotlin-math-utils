@@ -1,5 +1,7 @@
 package dev.peytob.math.vector
 
+import dev.peytob.math.vector.vec2.mutableVec2f
+import dev.peytob.math.vector.vec2.normalize
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

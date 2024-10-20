@@ -1,9 +1,6 @@
 package dev.peytob.math.generation.kpoet.model
 
-import com.google.common.collect.HashMultimap
-import com.google.common.collect.Multimap
 import com.squareup.kotlinpoet.FileSpec
-import com.squareup.kotlinpoet.FunSpec
 
 fun saveGeneratingResults(generatingResultStorage: GeneratingResultStorage) {
     generatingResultStorage.vectorTypes.values().forEach { vectorType ->

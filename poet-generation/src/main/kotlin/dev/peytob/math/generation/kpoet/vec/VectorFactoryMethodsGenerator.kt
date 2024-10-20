@@ -1,7 +1,6 @@
 package dev.peytob.math.generation.kpoet.vec
 
 import com.squareup.kotlinpoet.*
-import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import dev.peytob.math.generation.kpoet.model.VectorSpec
 
 private class BiVecCopyingFactoryGeneratorTemplate : BiVecFunctionGeneratorTemplate() {
@@ -33,10 +32,10 @@ private class BiVecCopyingFactoryGeneratorTemplate : BiVecFunctionGeneratorTempl
     }
 
     override fun generateMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String =
-        "immutable${leftVec.alias}"
+        (if (leftVec.isImmutable) "immutable" else "mutable") + "Vec${leftVec.components.size}${leftVec.primitiveDescriptor.postfix}"
 
     override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String =
-        "immutable${leftVec.alias}${rightVec.primitiveDescriptor.postfix}"
+        (if (leftVec.isImmutable) "immutable" else "mutable") + "Vec${leftVec.components.size}${leftVec.primitiveDescriptor.postfix}${rightVec.primitiveDescriptor.postfix}"
 
     override fun generateParameters(leftVec: VectorSpec, rightVec: VectorSpec): Collection<ParameterSpec> = listOf(
         ParameterSpec("right", rightVec.parameterizedAccessor)
@@ -70,7 +69,7 @@ private class BiVecLiteralFactoryGeneratorTemplate : BiVecFunctionGeneratorTempl
     }
 
     override fun generateMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String =
-        "immutable${leftVec.alias}"
+        (if (leftVec.isImmutable) "immutable" else "mutable") + "Vec${leftVec.components.size}${leftVec.primitiveDescriptor.postfix}"
 
     override fun generateJvmMethodName(leftVec: VectorSpec, rightVec: VectorSpec): String? = null
 
@@ -101,7 +100,7 @@ private class UnaryVecZeroFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTe
     }
 
     override fun generateMethodName(leftVec: VectorSpec): String =
-        "immutable${leftVec.alias}"
+        (if (leftVec.isImmutable) "immutable" else "mutable") + "Vec${leftVec.components.size}${leftVec.primitiveDescriptor.postfix}"
 
     override fun generateJvmMethodName(leftVec: VectorSpec): String? = null
 

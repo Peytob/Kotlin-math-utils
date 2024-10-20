@@ -1,10 +1,7 @@
 package dev.peytob.math.generation.kpoet.model
 
-import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.squareup.kotlinpoet.TypeSpec
-import com.squareup.kotlinpoet.asClassName
-import com.squareup.kotlinpoet.asTypeName
 
 class VectorSpec(
     val vectorDescriptor: VectorDescriptor,

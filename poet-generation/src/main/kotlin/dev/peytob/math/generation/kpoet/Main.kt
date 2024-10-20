@@ -44,6 +44,12 @@ fun main() {
         generatingResultStorage.operations.putAll(vectorSpec, operationsException)
     }
 
+    println("Generating immutable vectors operations")
+    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
+        val operationsException = generateMutableVecOperations(vectorSpec, generatingResultStorage.vectorTypes.values())
+        generatingResultStorage.operations.putAll(vectorSpec, operationsException)
+    }
+
     println("Generating vectors buffer operations")
     VECTOR_DESCRIPTORS.forEach { vectorDescriptor ->
         PRIMITIVE_DESCRIPTORS.forEach { primitiveDescriptor ->
