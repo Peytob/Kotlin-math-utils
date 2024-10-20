@@ -170,6 +170,18 @@ operator fun Vec3<Double>.minus(right: Vec3Accessor<Int>): Vec3<Double> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "times3di")
+operator fun Vec3<Double>.times(scalar: Int): Vec3<Double> {
+  val x = (this.x * scalar).toDouble()
+  val y = (this.y * scalar).toDouble()
+  val z = (this.z * scalar).toDouble()
+  return StructVec3d(x = x, y = y, z = z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 @JvmName(name = "dotVec3dl")
 fun Vec3<Double>.dot(right: Vec3Accessor<Long>): Float = this.dot(rx = right.x, ry = right.y,
     rz = right.z)
@@ -184,19 +196,6 @@ operator fun Vec3<Double>.times(right: Vec3Accessor<Float>): Vec3<Double> {
   val ry = right.y
   val rz = right.z
   return this.times(rx = rx, ry = ry, rz = rz)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
-@JvmName(name = "lengthVec3d")
-fun Vec3<Double>.length(): Double {
-  var s = 0.0
-  s += this.x * this.x
-  s += this.y * this.y
-  s += this.z * this.z
-  return sqrt(s)
 }
 
 @Generated(
@@ -235,6 +234,18 @@ fun Vec3<Double>.plus(
   val x = (this.x + rx).toDouble()
   val y = (this.y + ry).toDouble()
   val z = (this.z + rz).toDouble()
+  return StructVec3d(x = x, y = y, z = z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "times3dl")
+operator fun Vec3<Double>.times(scalar: Long): Vec3<Double> {
+  val x = (this.x * scalar).toDouble()
+  val y = (this.y * scalar).toDouble()
+  val z = (this.z * scalar).toDouble()
   return StructVec3d(x = x, y = y, z = z)
 }
 
@@ -321,6 +332,18 @@ operator fun Vec3<Double>.times(right: Vec3Accessor<Double>): Vec3<Double> {
   val ry = right.y
   val rz = right.z
   return this.times(rx = rx, ry = ry, rz = rz)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "times3df")
+operator fun Vec3<Double>.times(scalar: Float): Vec3<Double> {
+  val x = (this.x * scalar).toDouble()
+  val y = (this.y * scalar).toDouble()
+  val z = (this.z * scalar).toDouble()
+  return StructVec3d(x = x, y = y, z = z)
 }
 
 @Generated(
@@ -435,6 +458,18 @@ fun Vec3<Double>.plus(
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "times3dd")
+operator fun Vec3<Double>.times(scalar: Double): Vec3<Double> {
+  val x = (this.x * scalar).toDouble()
+  val y = (this.y * scalar).toDouble()
+  val z = (this.z * scalar).toDouble()
+  return StructVec3d(x = x, y = y, z = z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 fun Vec3<Double>.minus(
   rx: Double,
   ry: Double,
@@ -459,4 +494,17 @@ fun Vec3<Double>.plus(
   val y = (this.y + ry).toDouble()
   val z = (this.z + rz).toDouble()
   return StructVec3d(x = x, y = y, z = z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "lengthVec3d")
+fun Vec3<Double>.length(): Float {
+  var s = 0.0
+  s += this.x * this.x
+  s += this.y * this.y
+  s += this.z * this.z
+  return sqrt(s).toFloat()
 }

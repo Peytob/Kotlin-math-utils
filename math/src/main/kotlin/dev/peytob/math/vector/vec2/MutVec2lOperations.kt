@@ -62,6 +62,17 @@ fun MutVec2<Long>.minus(rx: Int, ry: Int): MutVec2<Long> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "timesMut2ld")
+operator fun MutVec2<Long>.times(scalar: Double): MutVec2<Long> {
+  this.x = (this.x * scalar).toLong()
+  this.y = (this.y * scalar).toLong()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 fun MutVec2<Long>.plus(rx: Long, ry: Long): MutVec2<Long> {
   this.x = (this.x + rx).toLong()
   this.y = (this.y + ry).toLong()
@@ -114,10 +125,44 @@ fun MutVec2<Long>.times(rx: Float, ry: Float): MutVec2<Long> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "timesMut2li")
+operator fun MutVec2<Long>.times(scalar: Int): MutVec2<Long> {
+  this.x = (this.x * scalar).toLong()
+  this.y = (this.y * scalar).toLong()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "lengthMutVec2l")
+fun MutVec2<Long>.length(): Float {
+  var s = 0.0
+  s += this.x * this.x
+  s += this.y * this.y
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 @JvmName(name = "unaryMinusMutVec2l")
 operator fun MutVec2<Long>.unaryMinus(): MutVec2<Long> {
   this.x = -this.x
   this.y = -this.y
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "timesMut2lf")
+operator fun MutVec2<Long>.times(scalar: Float): MutVec2<Long> {
+  this.x = (this.x * scalar).toLong()
+  this.y = (this.y * scalar).toLong()
   return this
 }
 
@@ -241,18 +286,6 @@ operator fun MutVec2<Long>.plus(right: Vec2Accessor<Double>): MutVec2<Long> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
-@JvmName(name = "lengthMutVec2l")
-fun MutVec2<Long>.length(): Double {
-  var s = 0.0
-  s += this.x * this.x
-  s += this.y * this.y
-  return sqrt(s)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
 fun MutVec2<Long>.plus(rx: Int, ry: Int): MutVec2<Long> {
   this.x = (this.x + rx).toLong()
   this.y = (this.y + ry).toLong()
@@ -268,6 +301,17 @@ operator fun MutVec2<Long>.minus(right: Vec2Accessor<Float>): MutVec2<Long> {
   val rx = right.x
   val ry = right.y
   return this.minus(rx = rx, ry = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "timesMut2ll")
+operator fun MutVec2<Long>.times(scalar: Long): MutVec2<Long> {
+  this.x = (this.x * scalar).toLong()
+  this.y = (this.y * scalar).toLong()
+  return this
 }
 
 @Generated(

@@ -36,6 +36,18 @@ operator fun MutVec3<Double>.minus(right: Vec3Accessor<Float>): MutVec3<Double> 
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "timesMut3df")
+operator fun MutVec3<Double>.times(scalar: Float): MutVec3<Double> {
+  this.x = (this.x * scalar).toDouble()
+  this.y = (this.y * scalar).toDouble()
+  this.z = (this.z * scalar).toDouble()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 fun MutVec3<Double>.times(
   rx: Float,
   ry: Float,
@@ -96,19 +108,6 @@ operator fun MutVec3<Double>.times(right: Vec3Accessor<Long>): MutVec3<Double> {
   val ry = right.y
   val rz = right.z
   return this.times(rx = rx, ry = ry, rz = rz)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
-@JvmName(name = "lengthMutVec3d")
-fun MutVec3<Double>.length(): Double {
-  var s = 0.0
-  s += this.x * this.x
-  s += this.y * this.y
-  s += this.z * this.z
-  return sqrt(s)
 }
 
 @Generated(
@@ -187,12 +186,36 @@ operator fun MutVec3<Double>.times(right: Vec3Accessor<Int>): MutVec3<Double> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "timesMut3di")
+operator fun MutVec3<Double>.times(scalar: Int): MutVec3<Double> {
+  this.x = (this.x * scalar).toDouble()
+  this.y = (this.y * scalar).toDouble()
+  this.z = (this.z * scalar).toDouble()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 @JvmName(name = "minusVecMutVec3dl")
 operator fun MutVec3<Double>.minus(right: Vec3Accessor<Long>): MutVec3<Double> {
   val rx = right.x
   val ry = right.y
   val rz = right.z
   return this.minus(rx = rx, ry = ry, rz = rz)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "timesMut3dd")
+operator fun MutVec3<Double>.times(scalar: Double): MutVec3<Double> {
+  this.x = (this.x * scalar).toDouble()
+  this.y = (this.y * scalar).toDouble()
+  this.z = (this.z * scalar).toDouble()
+  return this
 }
 
 @Generated(
@@ -207,6 +230,18 @@ fun MutVec3<Double>.times(
   this.x = (this.x * rx).toDouble()
   this.y = (this.y * ry).toDouble()
   this.z = (this.z * rz).toDouble()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "timesMut3dl")
+operator fun MutVec3<Double>.times(scalar: Long): MutVec3<Double> {
+  this.x = (this.x * scalar).toDouble()
+  this.y = (this.y * scalar).toDouble()
+  this.z = (this.z * scalar).toDouble()
   return this
 }
 
@@ -345,6 +380,19 @@ fun MutVec3<Double>.minus(
   this.y = (this.y - ry).toDouble()
   this.z = (this.z - rz).toDouble()
   return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "lengthMutVec3d")
+fun MutVec3<Double>.length(): Float {
+  var s = 0.0
+  s += this.x * this.x
+  s += this.y * this.y
+  s += this.z * this.z
+  return sqrt(s).toFloat()
 }
 
 @Generated(

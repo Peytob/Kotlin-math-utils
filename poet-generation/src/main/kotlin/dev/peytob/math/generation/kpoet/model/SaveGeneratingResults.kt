@@ -55,12 +55,20 @@ fun saveGeneratingResults(generatingResultStorage: GeneratingResultStorage) {
             .writeTo(BASE_DESTINATION_FOLDER)
     }
 
+    generatingResultStorage.accessorOperations.asMap().forEach { (vectorDescriptor, functions) ->
+        FileSpec.builder(vectorDescriptor.destinationPackage, "Vec${vectorDescriptor.size}AccessorOperations")
+            .addFunctions(functions)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
+    }
+
     generatingResultStorage.bufferOperations.asMap().forEach { (vectorDescriptor, functions) ->
         FileSpec.builder(vectorDescriptor.destinationPackage, "Vec${vectorDescriptor.size}NioBufferUtils")
             .addFunctions(functions)
             .build()
             .writeTo(BASE_DESTINATION_FOLDER)
     }
+
 }
 
 fun <T> groupByVectorDescriptor(vectorData: Multimap<VectorSpec, T>): Multimap<VectorDescriptor, T> {

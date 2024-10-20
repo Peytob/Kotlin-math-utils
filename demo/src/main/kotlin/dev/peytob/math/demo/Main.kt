@@ -8,8 +8,8 @@ import dev.peytob.math.noise.PerlinNoise2D
 import dev.peytob.math.noise.WorleyNoise2D
 import dev.peytob.math.noise.decorator.ScaledNoiseDecorator
 import dev.peytob.math.random.d1.JdkRandom1DWrapper
-import dev.peytob.math.vector.immutableVec2f
-import dev.peytob.math.vector.immutableVec2i
+import dev.peytob.math.vector.vec2.immutableVec2f
+import dev.peytob.math.vector.vec2.immutableVec2i
 import kotlin.random.Random
 
 fun main() {

@@ -12,12 +12,11 @@ import kotlin.math.sqrt
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
-@JvmName(name = "lengthMutVec2i")
-fun MutVec2<Int>.length(): Double {
-  var s = 0.0
-  s += this.x * this.x
-  s += this.y * this.y
-  return sqrt(s)
+@JvmName(name = "timesMut2if")
+operator fun MutVec2<Int>.times(scalar: Float): MutVec2<Int> {
+  this.x = (this.x * scalar).toInt()
+  this.y = (this.y * scalar).toInt()
+  return this
 }
 
 @Generated(
@@ -139,6 +138,18 @@ operator fun MutVec2<Int>.minus(right: Vec2Accessor<Double>): MutVec2<Int> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "lengthMutVec2i")
+fun MutVec2<Int>.length(): Float {
+  var s = 0.0
+  s += this.x * this.x
+  s += this.y * this.y
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 fun MutVec2<Int>.times(rx: Long, ry: Long): MutVec2<Int> {
   this.x = (this.x * rx).toInt()
   this.y = (this.y * ry).toInt()
@@ -182,9 +193,31 @@ operator fun MutVec2<Int>.plus(right: Vec2Accessor<Int>): MutVec2<Int> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "timesMut2il")
+operator fun MutVec2<Int>.times(scalar: Long): MutVec2<Int> {
+  this.x = (this.x * scalar).toInt()
+  this.y = (this.y * scalar).toInt()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 fun MutVec2<Int>.times(rx: Int, ry: Int): MutVec2<Int> {
   this.x = (this.x * rx).toInt()
   this.y = (this.y * ry).toInt()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "timesMut2ii")
+operator fun MutVec2<Int>.times(scalar: Int): MutVec2<Int> {
+  this.x = (this.x * scalar).toInt()
+  this.y = (this.y * scalar).toInt()
   return this
 }
 
@@ -239,6 +272,17 @@ fun MutVec2<Int>.normalize(): MutVec2<Int> {
   val l = this.length()
   this.x = (this.x / l).toInt()
   this.y = (this.y / l).toInt()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "timesMut2id")
+operator fun MutVec2<Int>.times(scalar: Double): MutVec2<Int> {
+  this.x = (this.x * scalar).toInt()
+  this.y = (this.y * scalar).toInt()
   return this
 }
 

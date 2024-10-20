@@ -161,18 +161,6 @@ operator fun MutVec2<Float>.times(right: Vec2Accessor<Float>): MutVec2<Float> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
-@JvmName(name = "lengthMutVec2f")
-fun MutVec2<Float>.length(): Double {
-  var s = 0.0
-  s += this.x * this.x
-  s += this.y * this.y
-  return sqrt(s)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
 @JvmName(name = "timesVecMutVec2fi")
 operator fun MutVec2<Float>.times(right: Vec2Accessor<Int>): MutVec2<Float> {
   val rx = right.x
@@ -206,6 +194,17 @@ operator fun MutVec2<Float>.times(right: Vec2Accessor<Long>): MutVec2<Float> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "timesMut2ff")
+operator fun MutVec2<Float>.times(scalar: Float): MutVec2<Float> {
+  this.x = (this.x * scalar).toFloat()
+  this.y = (this.y * scalar).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 fun MutVec2<Float>.times(rx: Long, ry: Long): MutVec2<Float> {
   this.x = (this.x * rx).toFloat()
   this.y = (this.y * ry).toFloat()
@@ -231,6 +230,17 @@ operator fun MutVec2<Float>.minus(right: Vec2Accessor<Float>): MutVec2<Float> {
   val rx = right.x
   val ry = right.y
   return this.minus(rx = rx, ry = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "timesMut2fl")
+operator fun MutVec2<Float>.times(scalar: Long): MutVec2<Float> {
+  this.x = (this.x * scalar).toFloat()
+  this.y = (this.y * scalar).toFloat()
+  return this
 }
 
 @Generated(
@@ -275,6 +285,17 @@ operator fun MutVec2<Float>.unaryPlus(): MutVec2<Float> = this
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "timesMut2fd")
+operator fun MutVec2<Float>.times(scalar: Double): MutVec2<Float> {
+  this.x = (this.x * scalar).toFloat()
+  this.y = (this.y * scalar).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 fun MutVec2<Float>.times(rx: Double, ry: Double): MutVec2<Float> {
   this.x = (this.x * rx).toFloat()
   this.y = (this.y * ry).toFloat()
@@ -285,9 +306,32 @@ fun MutVec2<Float>.times(rx: Double, ry: Double): MutVec2<Float> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "lengthMutVec2f")
+fun MutVec2<Float>.length(): Float {
+  var s = 0.0
+  s += this.x * this.x
+  s += this.y * this.y
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 fun MutVec2<Float>.plus(rx: Long, ry: Long): MutVec2<Float> {
   this.x = (this.x + rx).toFloat()
   this.y = (this.y + ry).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "timesMut2fi")
+operator fun MutVec2<Float>.times(scalar: Int): MutVec2<Float> {
+  this.x = (this.x * scalar).toFloat()
+  this.y = (this.y * scalar).toFloat()
   return this
 }
 

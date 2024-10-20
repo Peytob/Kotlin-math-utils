@@ -68,6 +68,17 @@ fun Vec2<Int>.plus(rx: Int, ry: Int): Vec2<Int> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "times2ii")
+operator fun Vec2<Int>.times(scalar: Int): Vec2<Int> {
+  val x = (this.x * scalar).toInt()
+  val y = (this.y * scalar).toInt()
+  return StructVec2i(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 @JvmName(name = "minusVecVec2if")
 operator fun Vec2<Int>.minus(right: Vec2Accessor<Float>): Vec2<Int> {
   val rx = right.x
@@ -153,6 +164,29 @@ operator fun Vec2<Int>.times(right: Vec2Accessor<Int>): Vec2<Int> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "lengthVec2i")
+fun Vec2<Int>.length(): Float {
+  var s = 0.0
+  s += this.x * this.x
+  s += this.y * this.y
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "times2if")
+operator fun Vec2<Int>.times(scalar: Float): Vec2<Int> {
+  val x = (this.x * scalar).toInt()
+  val y = (this.y * scalar).toInt()
+  return StructVec2i(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 @JvmName(name = "unaryPlusVec2i")
 operator fun Vec2<Int>.unaryPlus(): Vec2<Int> = this
 
@@ -219,18 +253,6 @@ operator fun Vec2<Int>.minus(right: Vec2Accessor<Int>): Vec2<Int> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
-@JvmName(name = "lengthVec2i")
-fun Vec2<Int>.length(): Double {
-  var s = 0.0
-  s += this.x * this.x
-  s += this.y * this.y
-  return sqrt(s)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
 @JvmName(name = "normalizeVec2i")
 fun Vec2<Int>.normalize(): Vec2<Int> {
   val l = this.length()
@@ -281,9 +303,31 @@ fun Vec2<Int>.plus(rx: Float, ry: Float): Vec2<Int> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "times2il")
+operator fun Vec2<Int>.times(scalar: Long): Vec2<Int> {
+  val x = (this.x * scalar).toInt()
+  val y = (this.y * scalar).toInt()
+  return StructVec2i(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 fun Vec2<Int>.times(rx: Int, ry: Int): Vec2<Int> {
   val x = (this.x * rx).toInt()
   val y = (this.y * ry).toInt()
+  return StructVec2i(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "times2id")
+operator fun Vec2<Int>.times(scalar: Double): Vec2<Int> {
+  val x = (this.x * scalar).toInt()
+  val y = (this.y * scalar).toInt()
   return StructVec2i(x = x, y = y)
 }
 

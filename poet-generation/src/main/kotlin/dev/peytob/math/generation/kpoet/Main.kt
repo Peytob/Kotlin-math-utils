@@ -46,16 +46,34 @@ fun main() {
         generatingResultStorage.factories.putAll(vectorSpec, factoryMethods)
     }
 
-    println("Generating immutable vectors operations")
+    println("Generating immutable vector-vector operations")
     generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
         val operationsException = generateImmutableVecOperations(vectorSpec, generatingResultStorage.vectorTypes.values())
         generatingResultStorage.operations.putAll(vectorSpec, operationsException)
     }
 
-    println("Generating immutable vectors operations")
+    println("Generating immutable vectors-vector operations")
     generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
         val operationsException = generateMutableVecOperations(vectorSpec, generatingResultStorage.vectorTypes.values())
         generatingResultStorage.operations.putAll(vectorSpec, operationsException)
+    }
+
+    println("Generating immutable vectors-scalar operations")
+    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
+        val operationsException = generateImmutableVecScalarOperations(vectorSpec, PRIMITIVE_DESCRIPTORS)
+        generatingResultStorage.operations.putAll(vectorSpec, operationsException)
+    }
+
+    println("Generating mutable vectors-scalar operations")
+    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
+        val operationsException = generateMutableVecScalarOperations(vectorSpec, PRIMITIVE_DESCRIPTORS)
+        generatingResultStorage.operations.putAll(vectorSpec, operationsException)
+    }
+
+    println("Generating vectors accessor operations")
+    generatingResultStorage.vectorDescriptors.forEach { vectorDescriptor ->
+        val vectorAccessorOperations = generateVectorAccessorOperations(vectorDescriptor, PRIMITIVE_DESCRIPTORS)
+        generatingResultStorage.accessorOperations.putAll(vectorDescriptor, vectorAccessorOperations)
     }
 
     println("Generating vectors buffer operations")

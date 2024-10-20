@@ -63,6 +63,7 @@ private class BiLiteralFactoryFactoryGeneratorTemplate(
             codeBlockBuilder
                 .addStatement("val %1L = (this.%1L %2L r%1L).%3N()", name, operator, leftVec.primitiveDescriptor.numberCastMethodName)
         }
+
         val constructorArgs = leftVec.components
             .map { it.name }
             .joinToString(", ") { "$it = $it" }
@@ -210,7 +211,7 @@ private class LengthFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTemplate
 
     override fun isOperator(): Boolean = false
 
-    override fun generateReturnType(leftVec: VectorSpec): TypeName = Double::class.asClassName()
+    override fun generateReturnType(leftVec: VectorSpec): TypeName = Float::class.asClassName()
 
     override fun generateFunctionBody(leftVec: VectorSpec): CodeBlock {
         val codeBlockBuilder = CodeBlock.builder()
@@ -223,7 +224,7 @@ private class LengthFactoryGeneratorTemplate : UnaryVecFunctionGeneratorTemplate
                 .addStatement("s += this.%1L * this.%1L", name)
         }
 
-        codeBlockBuilder.addStatement("return %M(s)", SQRT)
+        codeBlockBuilder.addStatement("return %M(s).toFloat()", SQRT)
 
         return codeBlockBuilder.build()
     }

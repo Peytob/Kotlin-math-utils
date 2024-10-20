@@ -73,6 +73,17 @@ fun Vec2<Double>.minus(rx: Float, ry: Float): Vec2<Double> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "times2di")
+operator fun Vec2<Double>.times(scalar: Int): Vec2<Double> {
+  val x = (this.x * scalar).toDouble()
+  val y = (this.y * scalar).toDouble()
+  return StructVec2d(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 fun Vec2<Double>.times(rx: Double, ry: Double): Vec2<Double> {
   val x = (this.x * rx).toDouble()
   val y = (this.y * ry).toDouble()
@@ -86,6 +97,17 @@ fun Vec2<Double>.times(rx: Double, ry: Double): Vec2<Double> {
 fun Vec2<Double>.times(rx: Float, ry: Float): Vec2<Double> {
   val x = (this.x * rx).toDouble()
   val y = (this.y * ry).toDouble()
+  return StructVec2d(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "times2dl")
+operator fun Vec2<Double>.times(scalar: Long): Vec2<Double> {
+  val x = (this.x * scalar).toDouble()
+  val y = (this.y * scalar).toDouble()
   return StructVec2d(x = x, y = y)
 }
 
@@ -145,6 +167,17 @@ fun Vec2<Double>.dot(rx: Float, ry: Float): Float {
 fun Vec2<Double>.times(rx: Int, ry: Int): Vec2<Double> {
   val x = (this.x * rx).toDouble()
   val y = (this.y * ry).toDouble()
+  return StructVec2d(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "times2dd")
+operator fun Vec2<Double>.times(scalar: Double): Vec2<Double> {
+  val x = (this.x * scalar).toDouble()
+  val y = (this.y * scalar).toDouble()
   return StructVec2d(x = x, y = y)
 }
 
@@ -214,6 +247,18 @@ operator fun Vec2<Double>.times(right: Vec2Accessor<Double>): Vec2<Double> {
   val rx = right.x
   val ry = right.y
   return this.times(rx = rx, ry = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "lengthVec2d")
+fun Vec2<Double>.length(): Float {
+  var s = 0.0
+  s += this.x * this.x
+  s += this.y * this.y
+  return sqrt(s).toFloat()
 }
 
 @Generated(
@@ -340,12 +385,11 @@ fun Vec2<Double>.dot(right: Vec2Accessor<Float>): Float = this.dot(rx = right.x,
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
-@JvmName(name = "lengthVec2d")
-fun Vec2<Double>.length(): Double {
-  var s = 0.0
-  s += this.x * this.x
-  s += this.y * this.y
-  return sqrt(s)
+@JvmName(name = "times2df")
+operator fun Vec2<Double>.times(scalar: Float): Vec2<Double> {
+  val x = (this.x * scalar).toDouble()
+  val y = (this.y * scalar).toDouble()
+  return StructVec2d(x = x, y = y)
 }
 
 @Generated(

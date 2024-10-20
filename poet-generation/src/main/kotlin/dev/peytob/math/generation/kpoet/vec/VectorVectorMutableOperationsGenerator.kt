@@ -139,7 +139,7 @@ private class MutableLengthFactoryGeneratorTemplate : UnaryVecFunctionGeneratorT
 
     override fun isOperator(): Boolean = false
 
-    override fun generateReturnType(leftVec: VectorSpec): TypeName = Double::class.asClassName()
+    override fun generateReturnType(leftVec: VectorSpec): TypeName = Float::class.asClassName()
 
     override fun generateFunctionBody(leftVec: VectorSpec): CodeBlock {
         val codeBlockBuilder = CodeBlock.builder()
@@ -152,7 +152,7 @@ private class MutableLengthFactoryGeneratorTemplate : UnaryVecFunctionGeneratorT
                 .addStatement("s += this.%1L * this.%1L", name)
         }
 
-        codeBlockBuilder.addStatement("return %M(s)", SQRT)
+        codeBlockBuilder.addStatement("return %M(s).toFloat()", SQRT)
 
         return codeBlockBuilder.build()
     }

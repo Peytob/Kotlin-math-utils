@@ -141,18 +141,6 @@ fun Vec2<Float>.times(rx: Double, ry: Double): Vec2<Float> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
-@JvmName(name = "lengthVec2f")
-fun Vec2<Float>.length(): Double {
-  var s = 0.0
-  s += this.x * this.x
-  s += this.y * this.y
-  return sqrt(s)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
 fun Vec2<Float>.minus(rx: Int, ry: Int): Vec2<Float> {
   val x = (this.x - rx).toFloat()
   val y = (this.y - ry).toFloat()
@@ -203,8 +191,30 @@ fun Vec2<Float>.dot(rx: Float, ry: Float): Float {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "times2fd")
+operator fun Vec2<Float>.times(scalar: Double): Vec2<Float> {
+  val x = (this.x * scalar).toFloat()
+  val y = (this.y * scalar).toFloat()
+  return StructVec2f(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 @JvmName(name = "dotVec2fl")
 fun Vec2<Float>.dot(right: Vec2Accessor<Long>): Float = this.dot(rx = right.x, ry = right.y)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "times2ff")
+operator fun Vec2<Float>.times(scalar: Float): Vec2<Float> {
+  val x = (this.x * scalar).toFloat()
+  val y = (this.y * scalar).toFloat()
+  return StructVec2f(x = x, y = y)
+}
 
 @Generated(
   value = ["poet", "kmu"],
@@ -220,6 +230,17 @@ fun Vec2<Float>.dot(right: Vec2Accessor<Int>): Float = this.dot(rx = right.x, ry
 fun Vec2<Float>.dot(rx: Long, ry: Long): Float {
   val sum = x * rx + y * ry
   return sum.toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "times2fi")
+operator fun Vec2<Float>.times(scalar: Int): Vec2<Float> {
+  val x = (this.x * scalar).toFloat()
+  val y = (this.y * scalar).toFloat()
+  return StructVec2f(x = x, y = y)
 }
 
 @Generated(
@@ -244,10 +265,33 @@ fun Vec2<Float>.minus(rx: Double, ry: Double): Vec2<Float> {
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
+@JvmName(name = "times2fl")
+operator fun Vec2<Float>.times(scalar: Long): Vec2<Float> {
+  val x = (this.x * scalar).toFloat()
+  val y = (this.y * scalar).toFloat()
+  return StructVec2f(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
 fun Vec2<Float>.times(rx: Float, ry: Float): Vec2<Float> {
   val x = (this.x * rx).toFloat()
   val y = (this.y * ry).toFloat()
   return StructVec2f(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+@JvmName(name = "lengthVec2f")
+fun Vec2<Float>.length(): Float {
+  var s = 0.0
+  s += this.x * this.x
+  s += this.y * this.y
+  return sqrt(s).toFloat()
 }
 
 @Generated(

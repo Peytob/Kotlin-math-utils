@@ -2,8 +2,10 @@ package dev.peytob.math.noise
 
 import dev.peytob.math.PHI
 import dev.peytob.math.random.d1.Random1D
-import dev.peytob.math.vector.*
-import kotlin.math.*
+import dev.peytob.math.vector.vec2.*
+import kotlin.math.floor
+import kotlin.math.min
+import kotlin.math.tan
 
 /**
  * Worley, Voronoi or cellular noise.
