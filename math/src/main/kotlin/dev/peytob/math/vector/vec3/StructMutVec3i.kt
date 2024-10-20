@@ -1,13 +1,12 @@
 package dev.peytob.math.vector.vec3
 
-import javax.`annotation`.processing.Generated
-import kotlin.Int
+import javax.annotation.processing.Generated
 
 @Generated(
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
-internal class StructMutVec3i(
+internal data class StructMutVec3i(
   override var x: Int,
   override var y: Int,
   override var z: Int,

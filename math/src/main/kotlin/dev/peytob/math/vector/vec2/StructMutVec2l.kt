@@ -1,14 +1,12 @@
 package dev.peytob.math.vector.vec2
 
-import javax.`annotation`.processing.Generated
-import kotlin.Int
-import kotlin.Long
+import javax.annotation.processing.Generated
 
 @Generated(
   value = ["poet", "kmu"],
   date = "2024-10-20",
 )
-internal class StructMutVec2l(
+internal data class StructMutVec2l(
   override var x: Long,
   override var y: Long,
 ) : MutVec2<Long> {

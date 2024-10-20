@@ -75,7 +75,7 @@ fun generateTypedMutableStructVec(primitive: PrimitiveDescriptor, vector: Vector
 
         TypeSpec.classBuilder("StructMutVec${vector.size}${primitive.postfix}")
             .addSuperinterface(vector.mutableBase.parameterizedBy(primitive.cls))
-            .addModifiers(KModifier.INTERNAL)
+            .addModifiers(KModifier.DATA, KModifier.INTERNAL)
             .addAnnotation(generatedAnnotation())
             .primaryConstructor(primaryConstructor)
             .addProperties(componentProperties)
