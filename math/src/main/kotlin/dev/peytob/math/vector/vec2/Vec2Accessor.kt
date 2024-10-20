@@ -1,27 +1,34 @@
 package dev.peytob.math.vector.vec2
 
-/**
- * Adds vector reading operations.
- * Don't use this type in application-level code!
- */
-sealed interface Vec2Accessor<T : Number> {
+import javax.`annotation`.processing.Generated
+import kotlin.Int
+import kotlin.Number
 
-    val x: T
-    val y: T
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+interface Vec2Accessor<T : Number> {
+  val elementSizeBytes: Int
 
-    val elementsCount: Int
-        get() = 2
+  val vectorSizeBytes: Int
 
-    val elementSizeBytes: Int
+  val elementsCount: Int
+    get() = 2
 
-    val vectorSizeBytes: Int
+  val x: T
 
-    operator fun component1() = x
-    operator fun component2() = y
+  val y: T
 
-    operator fun get(index: Int) = when (index) {
-        0 -> x
-        1 -> y
-        else -> throw IndexOutOfBoundsException();
+  operator fun component0(): T = x
+
+  operator fun component1(): T = y
+
+  operator fun `get`(index: Int) {
+    when (index) {
+      0 -> x
+      1 -> y
+      else -> throw IndexOutOfBoundsException()
     }
+  }
 }

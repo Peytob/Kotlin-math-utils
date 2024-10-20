@@ -1,9 +1,6 @@
 package dev.peytob.math.geometry.rect
 
-import dev.peytob.math.vector.immutableVec2f
-import dev.peytob.math.vector.immutableVec2i
-import dev.peytob.math.vector.vec2.Vec2f
-import dev.peytob.math.vector.vec2.Vec2i
+import dev.peytob.math.vector.vec2.*
 
 fun rectI(topLeft: Vec2i, sizes: Vec2i): RectI =
     RectIStruct(

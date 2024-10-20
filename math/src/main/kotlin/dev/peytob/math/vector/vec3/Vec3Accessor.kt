@@ -1,30 +1,39 @@
 package dev.peytob.math.vector.vec3
 
-/**
- * Adds vector reading operations.
- * Don't use this type in application-level code!
- */
-sealed interface Vec3Accessor<T : Number> {
+import javax.`annotation`.processing.Generated
+import kotlin.Int
+import kotlin.Number
 
-    val x: T
-    val y: T
-    val z: T
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-20",
+)
+interface Vec3Accessor<T : Number> {
+  val elementSizeBytes: Int
 
-    val elementsCount: Int
-        get() = 3
+  val vectorSizeBytes: Int
 
-    val elementSizeBytes: Int
+  val elementsCount: Int
+    get() = 3
 
-    val vectorSizeBytes: Int
+  val x: T
 
-    operator fun component1() = x
-    operator fun component2() = y
-    operator fun component3() = z
+  val y: T
 
-    operator fun get(index: Int) = when (index) {
-        0 -> x
-        1 -> y
-        2 -> z
-        else -> throw IndexOutOfBoundsException()
+  val z: T
+
+  operator fun component0(): T = x
+
+  operator fun component1(): T = y
+
+  operator fun component2(): T = z
+
+  operator fun `get`(index: Int) {
+    when (index) {
+      0 -> x
+      1 -> y
+      2 -> z
+      else -> throw IndexOutOfBoundsException()
     }
+  }
 }

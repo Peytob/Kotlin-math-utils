@@ -1,7 +1,5 @@
 package dev.peytob.math.noise
 
-import dev.peytob.math.vector.vec2.Vec2f
-
 /**
  * Fractal Brownian Motion.
  * Decorates noise to add additional noise iterations (octaves) with different amplitude and frequency. But it is not
