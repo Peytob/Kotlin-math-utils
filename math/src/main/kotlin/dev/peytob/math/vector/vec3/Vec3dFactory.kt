@@ -9,67 +9,7 @@ import kotlin.jvm.JvmName
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
-fun immutableVec3d(): Vec3<Double> = StructVec3d(0.0, 0.0, 0.0)
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
-@JvmName(name = "immutableVec3dd")
-fun immutableVec3d(right: Vec3Accessor<Double>): Vec3<Double> {
-  val rx = right.x
-  val ry = right.y
-  val rz = right.z
-  return immutableVec3d(rx = rx, ry = ry, rz = rz)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
-fun immutableVec3d(
-  rx: Double,
-  ry: Double,
-  rz: Double,
-): Vec3<Double> {
-  val x = rx.toDouble()
-  val y = ry.toDouble()
-  val z = rz.toDouble()
-  return StructVec3d(x = x, y = y, z = z)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
-@JvmName(name = "immutableVec3df")
-fun immutableVec3d(right: Vec3Accessor<Float>): Vec3<Double> {
-  val rx = right.x
-  val ry = right.y
-  val rz = right.z
-  return immutableVec3d(rx = rx, ry = ry, rz = rz)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
-fun immutableVec3d(
-  rx: Float,
-  ry: Float,
-  rz: Float,
-): Vec3<Double> {
-  val x = rx.toDouble()
-  val y = ry.toDouble()
-  val z = rz.toDouble()
-  return StructVec3d(x = x, y = y, z = z)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
 )
 fun immutableVec3d(
   rx: Long,
@@ -84,7 +24,25 @@ fun immutableVec3d(
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
+)
+fun immutableVec3d(): Vec3<Double> = StructVec3d(0.0, 0.0, 0.0)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-22",
+)
+@JvmName(name = "immutableVec3dd")
+fun immutableVec3d(right: Vec3Accessor<Double>): Vec3<Double> {
+  val rx = right.x
+  val ry = right.y
+  val rz = right.z
+  return immutableVec3d(rx = rx, ry = ry, rz = rz)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-22",
 )
 @JvmName(name = "immutableVec3dl")
 fun immutableVec3d(right: Vec3Accessor<Long>): Vec3<Double> {
@@ -96,7 +54,22 @@ fun immutableVec3d(right: Vec3Accessor<Long>): Vec3<Double> {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
+)
+fun immutableVec3d(
+  rx: Double,
+  ry: Double,
+  rz: Double,
+): Vec3<Double> {
+  val x = rx.toDouble()
+  val y = ry.toDouble()
+  val z = rz.toDouble()
+  return StructVec3d(x = x, y = y, z = z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-22",
 )
 @JvmName(name = "immutableVec3di")
 fun immutableVec3d(right: Vec3Accessor<Int>): Vec3<Double> {
@@ -108,7 +81,7 @@ fun immutableVec3d(right: Vec3Accessor<Int>): Vec3<Double> {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
 )
 fun immutableVec3d(
   rx: Int,
@@ -119,4 +92,31 @@ fun immutableVec3d(
   val y = ry.toDouble()
   val z = rz.toDouble()
   return StructVec3d(x = x, y = y, z = z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-22",
+)
+fun immutableVec3d(
+  rx: Float,
+  ry: Float,
+  rz: Float,
+): Vec3<Double> {
+  val x = rx.toDouble()
+  val y = ry.toDouble()
+  val z = rz.toDouble()
+  return StructVec3d(x = x, y = y, z = z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-22",
+)
+@JvmName(name = "immutableVec3df")
+fun immutableVec3d(right: Vec3Accessor<Float>): Vec3<Double> {
+  val rx = right.x
+  val ry = right.y
+  val rz = right.z
+  return immutableVec3d(rx = rx, ry = ry, rz = rz)
 }

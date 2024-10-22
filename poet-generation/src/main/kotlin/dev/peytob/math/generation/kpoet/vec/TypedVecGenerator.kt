@@ -27,7 +27,9 @@ fun generateTypedImmutableStructVec(primitive: PrimitiveDescriptor, vector: Vect
                 .build()
         }
 
-        TypeSpec.classBuilder("StructVec${vector.size}${primitive.postfix}")
+        val vectorName = "StructVec${vector.size}${primitive.postfix}"
+
+        TypeSpec.classBuilder(vectorName)
             .addSuperinterface(vector.immutableBase.parameterizedBy(primitive.cls))
             .addModifiers(KModifier.DATA, KModifier.INTERNAL)
             .addAnnotation(generatedAnnotation())
@@ -43,6 +45,7 @@ fun generateTypedImmutableStructVec(primitive: PrimitiveDescriptor, vector: Vect
                     .initializer((primitive.sizeBytes * vector.size).toString())
                     .build()
             )
+            .addFunction(generateToString(vectorName, vector))
             .build()
     }
 
@@ -73,7 +76,9 @@ fun generateTypedMutableStructVec(primitive: PrimitiveDescriptor, vector: Vector
                 .build()
         }
 
-        TypeSpec.classBuilder("StructMutVec${vector.size}${primitive.postfix}")
+        val vectorName = "StructMutVec${vector.size}${primitive.postfix}"
+
+        TypeSpec.classBuilder(vectorName)
             .addSuperinterface(vector.mutableBase.parameterizedBy(primitive.cls))
             .addModifiers(KModifier.DATA, KModifier.INTERNAL)
             .addAnnotation(generatedAnnotation())
@@ -89,6 +94,7 @@ fun generateTypedMutableStructVec(primitive: PrimitiveDescriptor, vector: Vector
                     .initializer((primitive.sizeBytes * vector.size).toString())
                     .build()
             )
+            .addFunction(generateToString(vectorName, vector))
             .build()
     }
 
@@ -210,5 +216,19 @@ private fun generateImmutableBase(vectorOrder: VectorOrder, accessorClassName: C
         .generated()
         .addTypeVariable(typeVariable)
         .addSuperinterface(accessorClassName.parameterizedBy(typeVariable))
+        .build()
+}
+
+fun generateToString(
+    vectorName: String,
+    vector: VectorDescriptor,
+): FunSpec {
+    val vectorStringPattern = vector.components
+        .joinToString(prefix = "$vectorName[", postfix = "]", separator = ", ") { "$it=\$$it" }
+
+    return FunSpec.builder("toString")
+        .addModifiers(KModifier.OVERRIDE)
+        .returns(String::class)
+        .addCode("return \"%L\"", vectorStringPattern)
         .build()
 }

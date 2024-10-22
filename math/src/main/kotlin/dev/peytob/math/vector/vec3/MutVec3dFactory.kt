@@ -9,34 +9,13 @@ import kotlin.jvm.JvmName
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
 )
-@JvmName(name = "mutableVec3dl")
-fun mutableVec3d(right: Vec3Accessor<Long>): MutVec3<Double> {
-  val rx = right.x
-  val ry = right.y
-  val rz = right.z
-  return mutableVec3d(rx = rx, ry = ry, rz = rz)
-}
+fun mutableVec3d(): MutVec3<Double> = StructMutVec3d(0.0, 0.0, 0.0)
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
-)
-fun mutableVec3d(
-  rx: Double,
-  ry: Double,
-  rz: Double,
-): MutVec3<Double> {
-  val x = rx.toDouble()
-  val y = ry.toDouble()
-  val z = rz.toDouble()
-  return StructMutVec3d(x = x, y = y, z = z)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
 )
 fun mutableVec3d(
   rx: Long,
@@ -51,10 +30,10 @@ fun mutableVec3d(
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
 )
-@JvmName(name = "mutableVec3df")
-fun mutableVec3d(right: Vec3Accessor<Float>): MutVec3<Double> {
+@JvmName(name = "mutableVec3dl")
+fun mutableVec3d(right: Vec3Accessor<Long>): MutVec3<Double> {
   val rx = right.x
   val ry = right.y
   val rz = right.z
@@ -63,7 +42,7 @@ fun mutableVec3d(right: Vec3Accessor<Float>): MutVec3<Double> {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
 )
 fun mutableVec3d(
   rx: Int,
@@ -78,7 +57,19 @@ fun mutableVec3d(
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
+)
+@JvmName(name = "mutableVec3df")
+fun mutableVec3d(right: Vec3Accessor<Float>): MutVec3<Double> {
+  val rx = right.x
+  val ry = right.y
+  val rz = right.z
+  return mutableVec3d(rx = rx, ry = ry, rz = rz)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2024-10-22",
 )
 fun mutableVec3d(
   rx: Float,
@@ -93,16 +84,25 @@ fun mutableVec3d(
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
 )
-fun mutableVec3d(): MutVec3<Double> = StructMutVec3d(0.0, 0.0, 0.0)
+fun mutableVec3d(
+  rx: Double,
+  ry: Double,
+  rz: Double,
+): MutVec3<Double> {
+  val x = rx.toDouble()
+  val y = ry.toDouble()
+  val z = rz.toDouble()
+  return StructMutVec3d(x = x, y = y, z = z)
+}
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
 )
-@JvmName(name = "mutableVec3di")
-fun mutableVec3d(right: Vec3Accessor<Int>): MutVec3<Double> {
+@JvmName(name = "mutableVec3dd")
+fun mutableVec3d(right: Vec3Accessor<Double>): MutVec3<Double> {
   val rx = right.x
   val ry = right.y
   val rz = right.z
@@ -111,10 +111,10 @@ fun mutableVec3d(right: Vec3Accessor<Int>): MutVec3<Double> {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
 )
-@JvmName(name = "mutableVec3dd")
-fun mutableVec3d(right: Vec3Accessor<Double>): MutVec3<Double> {
+@JvmName(name = "mutableVec3di")
+fun mutableVec3d(right: Vec3Accessor<Int>): MutVec3<Double> {
   val rx = right.x
   val ry = right.y
   val rz = right.z

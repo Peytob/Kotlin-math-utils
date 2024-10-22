@@ -3,10 +3,11 @@ package dev.peytob.math.vector.vec3
 import javax.`annotation`.processing.Generated
 import kotlin.Double
 import kotlin.Int
+import kotlin.String
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
 )
 internal data class StructVec3d(
   override val x: Double,
@@ -16,4 +17,6 @@ internal data class StructVec3d(
   override val elementSizeBytes: Int = 8
 
   override val vectorSizeBytes: Int = 24
+
+  override fun toString(): String = "StructVec3d[x=$x, y=$y, z=$z]"
 }

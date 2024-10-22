@@ -9,7 +9,7 @@ import kotlin.Number
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-20",
+  date = "2024-10-22",
 )
 interface MutVec2<T : Number> : Vec2Accessor<T> {
   override var x: T
