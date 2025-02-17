@@ -19,7 +19,7 @@ dependencies {
 }
 
 application {
-    mainClassName = "dev.peytob.math.demo.MainKt"
+    mainClass.set("dev.peytob.math.demo.MainKt")
 }
 
 tasks.test {
