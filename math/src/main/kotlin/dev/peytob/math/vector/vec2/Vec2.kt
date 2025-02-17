@@ -9,7 +9,7 @@ import kotlin.Number
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-22",
+  date = "2025-02-17",
 )
 interface Vec2<T : Number> : Vec2Accessor<T>
 

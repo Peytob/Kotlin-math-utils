@@ -41,13 +41,6 @@ fun saveGeneratingResults(generatingResultStorage: GeneratingResultStorage) {
             .writeTo(BASE_DESTINATION_FOLDER)
     }
 
-    generatingResultStorage.operations.asMap().forEach { (vectorType, functions) ->
-        FileSpec.builder(vectorType.vectorDescriptor.destinationPackage, "${vectorType.alias}Operations")
-            .addFunctions(functions)
-            .build()
-            .writeTo(BASE_DESTINATION_FOLDER)
-    }
-
     generatingResultStorage.factories.asMap().forEach { (vectorType, functions) ->
         FileSpec.builder(vectorType.vectorDescriptor.destinationPackage, "${vectorType.alias}Factory")
             .addFunctions(functions)
@@ -55,20 +48,40 @@ fun saveGeneratingResults(generatingResultStorage: GeneratingResultStorage) {
             .writeTo(BASE_DESTINATION_FOLDER)
     }
 
-    generatingResultStorage.accessorOperations.asMap().forEach { (vectorDescriptor, functions) ->
-        FileSpec.builder(vectorDescriptor.destinationPackage, "Vec${vectorDescriptor.size}AccessorOperations")
+    generatingResultStorage.arithmeticOperations.asMap().forEach { (vectorType, functions) ->
+        FileSpec.builder(vectorType.vectorDescriptor.destinationPackage, "${vectorType.alias}ArithmeticOperations")
             .addFunctions(functions)
             .build()
             .writeTo(BASE_DESTINATION_FOLDER)
     }
 
     generatingResultStorage.bufferOperations.asMap().forEach { (vectorDescriptor, functions) ->
-        FileSpec.builder(vectorDescriptor.destinationPackage, "Vec${vectorDescriptor.size}NioBufferUtils")
+        FileSpec.builder(vectorDescriptor.destinationPackage, "Vec${vectorDescriptor.size}BufferOperations")
             .addFunctions(functions)
             .build()
             .writeTo(BASE_DESTINATION_FOLDER)
     }
 
+    generatingResultStorage.distanceOperations.asMap().forEach { (vectorDescriptor, functions) ->
+        FileSpec.builder(vectorDescriptor.destinationPackage, "Vec${vectorDescriptor.size}DistanceOperations")
+            .addFunctions(functions)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
+    }
+
+    generatingResultStorage.lengthOperations.asMap().forEach { (vectorDescriptor, functions) ->
+        FileSpec.builder(vectorDescriptor.destinationPackage, "Vec${vectorDescriptor.size}LengthOperations")
+            .addFunctions(functions)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
+    }
+
+    groupByVectorDescriptor(generatingResultStorage.normalizeOperations).asMap().forEach { (vectorDescriptor, functions) ->
+        FileSpec.builder(vectorDescriptor.destinationPackage, "Vec${vectorDescriptor.size}NormalizeOperations")
+            .addFunctions(functions)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
+    }
 }
 
 fun <T> groupByVectorDescriptor(vectorData: Multimap<VectorSpec, T>): Multimap<VectorDescriptor, T> {

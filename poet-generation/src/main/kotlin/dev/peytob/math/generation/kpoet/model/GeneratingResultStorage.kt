@@ -9,8 +9,10 @@ data class GeneratingResultStorage(
     val vectorDescriptors: Collection<VectorDescriptor>,
     val vectorTypes: Multimap<VectorDescriptor, VectorSpec> = HashMultimap.create(),
     val factories: Multimap<VectorSpec, FunSpec> = HashMultimap.create(),
-    val operations: Multimap<VectorSpec, FunSpec> = HashMultimap.create(),
+    val arithmeticOperations: Multimap<VectorSpec, FunSpec> = HashMultimap.create(),
     val vectorAliases: Multimap<VectorDescriptor, TypeAliasSpec> = HashMultimap.create(),
     val bufferOperations: Multimap<VectorDescriptor, FunSpec> = HashMultimap.create(),
-    val accessorOperations: Multimap<VectorDescriptor, FunSpec> = HashMultimap.create(),
+    val distanceOperations: Multimap<VectorDescriptor, FunSpec> = HashMultimap.create(),
+    val lengthOperations: Multimap<VectorDescriptor, FunSpec> = HashMultimap.create(),
+    val normalizeOperations: Multimap<VectorSpec, FunSpec> = HashMultimap.create(),
 )

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class Vec2fTest {
 
     @Test
-    fun equalsMethodTest() {
+    fun equalsMethod() {
         val x = 431.543f
         val y = -223.3425f
         val first = immutableVec2f(x, y)
@@ -18,7 +18,7 @@ class Vec2fTest {
     }
 
     @Test
-    fun additionOperationTest() {
+    fun additionOperation() {
         val left = immutableVec2f(1.0f, 6.2f)
         val right = immutableVec2f(2.3f, 1.1f)
         val result = left.plus(right)
@@ -27,7 +27,7 @@ class Vec2fTest {
     }
 
     @Test
-    fun subtractionOperationTest() {
+    fun subtractionOperation() {
         val left = immutableVec2f(-4.2f, -10.0f)
         val right = immutableVec2f(3.1f, 5.3f)
         val result = left.minus(right)

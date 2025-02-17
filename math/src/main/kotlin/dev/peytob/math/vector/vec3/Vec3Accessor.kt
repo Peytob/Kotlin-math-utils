@@ -6,7 +6,7 @@ import kotlin.Number
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2024-10-22",
+  date = "2025-02-17",
 )
 interface Vec3Accessor<T : Number> {
   val elementSizeBytes: Int
