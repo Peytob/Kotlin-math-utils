@@ -8,15 +8,13 @@ import kotlin.math.floor
 
 /**
  * Classic Perlin noise.
- * Please note that at grid nodes (i.e. points with integer coordinates) the noise value is always 0.
+ * Please note that at grid nodes (i.e. points with integer coordinates) the noise value is always 0.5 due to normalization.
  */
 class PerlinNoise2D(
     random: Random1D
 ) : Noise2D {
 
     private companion object {
-        const val RANDOM_TABLE_SIZE = 512 // Should be any positive degree of 2
-        const val CELL_LIMIT = RANDOM_TABLE_SIZE / 2
         val GRADIENT_VECTORS = arrayOf(
             immutableVec2f(1.0f, 1.0f),
             immutableVec2f(-1.0f, 1.0f),
@@ -25,8 +23,8 @@ class PerlinNoise2D(
         )
 
         fun generatePermutationTable(random: Random1D): List<Int> =
-            (0 ..< CELL_LIMIT)
-            .plus(0 ..< CELL_LIMIT)
+            (0 ..< 256)
+            .plus(0 ..< 256)
             .shuffled(random.asKotlinRandom())
             .toList()
     }
@@ -36,11 +34,11 @@ class PerlinNoise2D(
     override fun getPoint(point: Vec2f): Float = getPoint(point.x, point.y)
 
     override fun getPoint(x: Float, y: Float): Float {
-        val integerX = floor(x).toInt() and (CELL_LIMIT - 1)
-        val integerY = floor(y).toInt() and (CELL_LIMIT - 1)
+        val integerX = floor(x).toInt() and 255
+        val integerY = floor(y).toInt() and 255
 
-        val fractionalX = x - integerX
-        val fractionalY = y - integerY
+        val fractionalX = x - floor(x)
+        val fractionalY = y - floor(y)
 
         // TODO Garbage collector, forgive me
 

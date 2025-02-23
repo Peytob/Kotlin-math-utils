@@ -1,0 +1,9 @@
+package dev.peytob.math.noise
+
+import dev.peytob.math.random.d1.JdkRandom1DWrapper
+import kotlin.random.Random
+
+class GoldNoise2DTest : Noise2DTest() {
+
+    override fun getNoise2D(): Noise2D = GoldNoise2D(JdkRandom1DWrapper(Random.Default))
+}

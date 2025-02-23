@@ -1,7 +1,8 @@
 package dev.peytob.math.noise
 
-import dev.peytob.math.vector.immutableVec2f
+import dev.peytob.math.vector.vec2.immutableVec2f
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test
 
 abstract class Noise2DTest {
@@ -18,5 +19,21 @@ abstract class Noise2DTest {
         val secondNoiseValue = noise2D.getPoint(someCoordinates)
 
         assertEquals(firstNoiseValue, secondNoiseValue)
+    }
+
+    @Test
+    fun aroundZeroRectInContractRange() {
+        val noise2D = getNoise2D()
+
+        for (x in -500..500) {
+            for (y in -500..500) {
+                val coordinates = immutableVec2f(x / 10f, y / 10f)
+                val value = noise2D.getPoint(coordinates)
+
+                if (value > 1.0f || value < -1.0f) {
+                    fail<String>("Bad noise value found. Coordinates: (${coordinates.x}, ${coordinates.y}). Value: $value")
+                }
+            }
+        }
     }
 }
