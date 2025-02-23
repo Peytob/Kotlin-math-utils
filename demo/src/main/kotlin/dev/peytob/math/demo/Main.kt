@@ -1,11 +1,10 @@
 package dev.peytob.math.demo
 
+import dev.peytob.math.field.CurlNoise2D
+import dev.peytob.math.field.Field2D
 import dev.peytob.math.geometry.rect.RectI
 import dev.peytob.math.geometry.rect.rectI
-import dev.peytob.math.noise.FbmNoise2D
-import dev.peytob.math.noise.Noise2D
-import dev.peytob.math.noise.PerlinNoise2D
-import dev.peytob.math.noise.WorleyNoise2D
+import dev.peytob.math.noise.*
 import dev.peytob.math.noise.decorator.ScaledNoiseDecorator
 import dev.peytob.math.random.d1.JdkRandom1DWrapper
 import dev.peytob.math.vector.vec2.immutableVec2f
@@ -39,10 +38,27 @@ fun main() {
         rectI(immutableVec2i(), defaultImageSize),
         "worley_noise"
     )
+
+    buildNoiseImage(
+        GoldNoise2D(random1),
+        rectI(immutableVec2i(), defaultImageSize),
+        "gold_noise"
+    )
+    buildFieldImage(
+        CurlNoise2D(ScaledNoiseDecorator(PerlinNoise2D(random1), 0.05f, immutableVec2f())),
+        rectI(immutableVec2i(), defaultImageSize),
+        "curl_noise"
+    )
 }
 
 fun buildNoiseImage(noise2D: Noise2D, noiseRect: RectI, filename: String) {
     val noiseImageBuilder = NoiseImageBuilder(noise2D)
+    val buildImage = noiseImageBuilder.buildImage(noiseRect)
+    buildImage.saveAsFile(filename, "png")
+}
+
+fun buildFieldImage(field2D: Field2D, noiseRect: RectI, filename: String) {
+    val noiseImageBuilder = FieldImageBuilder(field2D)
     val buildImage = noiseImageBuilder.buildImage(noiseRect)
     buildImage.saveAsFile(filename, "png")
 }

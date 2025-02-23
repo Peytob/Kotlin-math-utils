@@ -1,11 +1,9 @@
 package dev.peytob.math.noise
 
-import dev.peytob.math.PHI
 import dev.peytob.math.random.d1.Random1D
 import dev.peytob.math.vector.vec2.*
 import kotlin.math.floor
 import kotlin.math.min
-import kotlin.math.tan
 
 /**
  * Worley, Voronoi or cellular noise.
@@ -16,7 +14,8 @@ class WorleyNoise2D(
     random1D: Random1D
 ) : Noise2D {
 
-    private val seed = random1D.nextFloat()
+    private val goldNoise2DX = GoldNoise2D(random1D)
+    private val goldNoise2DY = GoldNoise2D(random1D)
 
     override fun getPoint(point: Vec2f): Float {
         val integerPoint = immutableVec2i(
@@ -29,7 +28,8 @@ class WorleyNoise2D(
         for (y in -1..1) {
             for (x in -1..1) {
                 val neighbour = immutableVec2f(x.toFloat(), y.toFloat())
-                val neighbourPoint = getStaticRandomPoint(neighbour.x + integerPoint.x, neighbour.y + integerPoint.y)
+                val xy = immutableVec2f(neighbour.x + integerPoint.x, neighbour.y + integerPoint.y)
+                val neighbourPoint = immutableVec2f(goldNoise2DX.getPoint(xy), goldNoise2DY.getPoint(xy))
                 val diff = neighbour + neighbourPoint - fractionalPoint
                 val dist = diff.length()
                 minimalDistance = min(minimalDistance, dist)
@@ -40,15 +40,4 @@ class WorleyNoise2D(
     }
 
     override fun getPoint(x: Float, y: Float) = getPoint(immutableVec2f(x, y))
-
-    private fun getStaticRandomPoint(x: Float, y: Float): Vec2f {
-        val xy = immutableVec2f(x, y)
-        return immutableVec2f(goldNoise(xy, 0.124f), goldNoise(xy, seed * 0.775f))
-    }
-
-    private fun goldNoise(point: Vec2f, seed: Float): Float {
-        val dist = distance(point, point * PHI)
-        val tan = tan(dist) * seed * point.x
-        return tan - floor(tan)
-    }
 }
