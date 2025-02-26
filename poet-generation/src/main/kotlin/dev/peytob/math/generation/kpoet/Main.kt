@@ -1,109 +1,149 @@
 package dev.peytob.math.generation.kpoet
 
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.MemberName
+import com.squareup.kotlinpoet.asClassName
+import dev.peytob.math.generation.kpoet.generation.vector.*
 import dev.peytob.math.generation.kpoet.model.*
-import dev.peytob.math.generation.kpoet.vec.*
-import dev.peytob.math.generation.kpoet.vec.operation.arithmetic.generateImmutableVecOperations
-import dev.peytob.math.generation.kpoet.vec.operation.arithmetic.generateImmutableVecScalarOperations
-import dev.peytob.math.generation.kpoet.vec.operation.arithmetic.generateMutableVecOperations
-import dev.peytob.math.generation.kpoet.vec.operation.arithmetic.generateMutableVecScalarOperations
-import dev.peytob.math.generation.kpoet.vec.operation.buffer.generateVecBufferOperations
-import dev.peytob.math.generation.kpoet.vec.operation.algebra.generateVectorDistanceOperations
-import dev.peytob.math.generation.kpoet.vec.operation.algebra.generateVectorLengthOperations
-import dev.peytob.math.generation.kpoet.vec.operation.algebra.generateVectorNormalizeOperations
 
 fun main() {
+    val generationContext = GenerationContext(
+        primitives = listOf(
+            Primitive(
+                cls = Double::class.asClassName(),
+                sizeBytes = Double.SIZE_BYTES,
+                numberCastMethodName = MemberName(Number::class.asClassName(), "toDouble"),
+                literal = ".0",
+                postfix = "d"
+            ),
+
+            Primitive(
+                cls = Float::class.asClassName(),
+                sizeBytes = Float.SIZE_BYTES,
+                numberCastMethodName = MemberName(Number::class.asClassName(), "toFloat"),
+                literal = "f",
+                postfix = "f"
+            ),
+
+            Primitive(
+                cls = Int::class.asClassName(),
+                sizeBytes = Int.SIZE_BYTES,
+                numberCastMethodName = MemberName(Number::class.asClassName(), "toInt"),
+                literal = null,
+                postfix = "i"
+            ),
+
+            Primitive(
+                cls = Long::class.asClassName(),
+                sizeBytes = Long.SIZE_BYTES,
+                numberCastMethodName = MemberName(Number::class.asClassName(), "toLong"),
+                literal = "L",
+                postfix = "l"
+            )
+        ),
+
+        vectorAccessors = listOf(
+            VectorAccessor(
+                components = listOf("x", "y"),
+                destinationPackage = "$DESTINATION_PACKAGE_ROOT.vector.vec2"
+            ),
+
+            VectorAccessor(
+                components = listOf("x", "y", "z"),
+                destinationPackage = "$DESTINATION_PACKAGE_ROOT.vector.vec3"
+            )
+        )
+    )
+
     println("Starting vectors and matrix types generation")
     println("Configuration:")
     println("-> Destination folder: $BASE_DESTINATION_FOLDER")
-    println("-> Target generation primitives: ${PRIMITIVE_DESCRIPTORS.joinToString(", ") { it.cls.simpleName }}")
-    VECTOR_ORDERS
+    println("-> Target generation primitives: ${generationContext.getPrimitives().joinToString(", ") { it.cls.simpleName }}")
+    generationContext.getVectorAccessors()
         .joinToString(", ") { it.components.joinToString(",", prefix = "[", postfix = "]") }
-        .let { println("-> Target generation vectors: $it") }
+        .let { println("-> Target vector accessors: $it") }
     println()
 
-    println("Generating vector descriptors")
-    val vectorDescriptors = generateVectorDescriptors(VECTOR_ORDERS)
+    // Vectors
 
-    val generatingResultStorage = GeneratingResultStorage(
-        vectorDescriptors = vectorDescriptors
-    )
+    println("Generation type specs for vector accessors")
+    generationContext.getVectorAccessors().forEach {
+        println("-> Generation vector accessor class for ${it.size}-vector")
+        it.typeSpec = generateVectorAccessor(it)
+        it.className = ClassName(it.destinationPackage, it.typeSpec.name!!)
+    }
+    println()
 
-    println("Generating immutable struct vectors types")
-    generatingResultStorage.vectorDescriptors.forEach { vectorDescriptor ->
-        PRIMITIVE_DESCRIPTORS.mapTo(generatingResultStorage.vectorTypes[vectorDescriptor]) { primitiveDescriptor ->
-            generateTypedImmutableStructVec(primitiveDescriptor, vectorDescriptor)
+    println("Generation vectors bases for vector accessors")
+    val vectorBases = generationContext.getVectorAccessors().flatMap { accessor ->
+        println("-> Generation vector bases for accessor ${accessor.className.simpleName}")
+
+        listOf(
+            VectorBase(
+                accessor = accessor,
+                isMutable = false,
+                typeSpec = generateVectorImmutableBase(accessor)
+            ),
+
+            VectorBase(
+                accessor = accessor,
+                isMutable = true,
+                typeSpec = generateVectorMutableBase(accessor)
+            )
+        )
+    }
+    println()
+
+    println("Generating typed struct vector realisations")
+    vectorBases
+        .flatMap { base ->
+            generationContext.getPrimitives().map { primitive ->
+                println("-> Generation vector ${base.className.simpleName} struct realisation for primitive ${primitive.cls.simpleName}")
+
+                val typeSpec = if (base.isMutable)
+                    generateVectorStructMutableRealisation(base, primitive)
+                else
+                    generateVectorStructImmutableRealisation(base, primitive)
+
+                Vector(
+                    base = base,
+                    primitive = primitive,
+                    typeSpec = typeSpec
+                )
+            }
         }
+        .forEach(generationContext::registerVector)
+
+    // Saving
+
+    println("Saving ${generationContext.getVectorAccessors().size} vector accessors")
+    generationContext.getVectorAccessors().forEach { accessor ->
+        FileSpec.builder(accessor.className)
+            .addType(accessor.typeSpec)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
     }
 
-    println("Generating mutable struct vectors types")
-    generatingResultStorage.vectorDescriptors.forEach { vectorDescriptor ->
-        PRIMITIVE_DESCRIPTORS.mapTo(generatingResultStorage.vectorTypes[vectorDescriptor]) { primitiveDescriptor ->
-            generateTypedMutableStructVec(primitiveDescriptor, vectorDescriptor)
-        }
+    println("Saving ${vectorBases.size} vector bases with vectors aliases")
+    vectorBases.forEach { base ->
+        FileSpec.builder(base.className)
+            .addType(base.typeSpec)
+            .apply {
+                generationContext.getVectors()
+                    .filter { vector -> vector.base == base }
+                    .map(Vector::alias)
+                    .forEach(this::addTypeAlias)
+            }
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
     }
 
-    println("Generating vectors aliases")
-    generatingResultStorage.vectorTypes.forEach { vectorDescriptor, vectorSpec ->
-        val aliases = generateVectorAliases(vectorSpec)
-        generatingResultStorage.vectorAliases[vectorDescriptor].add(aliases)
+    println("Saving vectors realisations")
+    generationContext.getVectors().forEach { vector ->
+        FileSpec.builder(vector.className)
+            .addType(vector.typeSpec)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
     }
-
-    println("Generating vectors methods")
-    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
-        val factoryMethods = generateVecFactoryMethods(vectorSpec, generatingResultStorage.vectorTypes.values())
-        generatingResultStorage.factories.putAll(vectorSpec, factoryMethods)
-    }
-
-    println("Generating immutable vector-vector operations")
-    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
-        val operationsException = generateImmutableVecOperations(vectorSpec, generatingResultStorage.vectorTypes.values())
-        generatingResultStorage.arithmeticOperations.putAll(vectorSpec, operationsException)
-    }
-
-    println("Generating immutable vectors-vector operations")
-    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
-        val operationsException = generateMutableVecOperations(vectorSpec, generatingResultStorage.vectorTypes.values())
-        generatingResultStorage.arithmeticOperations.putAll(vectorSpec, operationsException)
-    }
-
-    println("Generating immutable vectors-scalar operations")
-    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
-        val operationsException = generateImmutableVecScalarOperations(vectorSpec, PRIMITIVE_DESCRIPTORS)
-        generatingResultStorage.arithmeticOperations.putAll(vectorSpec, operationsException)
-    }
-
-    println("Generating mutable vectors-scalar operations")
-    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
-        val operationsException = generateMutableVecScalarOperations(vectorSpec, PRIMITIVE_DESCRIPTORS)
-        generatingResultStorage.arithmeticOperations.putAll(vectorSpec, operationsException)
-    }
-
-    println("Generating vectors buffer operations")
-    generatingResultStorage.vectorDescriptors.forEach { vectorDescriptor ->
-        PRIMITIVE_DESCRIPTORS.forEach { primitiveDescriptor ->
-            val bufferOperations = generateVecBufferOperations(vectorDescriptor, primitiveDescriptor)
-            generatingResultStorage.bufferOperations.putAll(vectorDescriptor, bufferOperations)
-        }
-    }
-
-    println("Generating vectors distance operations")
-    generatingResultStorage.vectorDescriptors.forEach { vectorDescriptor ->
-        val vectorAccessorOperations = generateVectorDistanceOperations(vectorDescriptor, PRIMITIVE_DESCRIPTORS)
-        generatingResultStorage.distanceOperations.putAll(vectorDescriptor, vectorAccessorOperations)
-    }
-
-    println("Generating vectors length operations")
-    generatingResultStorage.vectorDescriptors.forEach { vectorDescriptor ->
-        val vectorAccessorOperations = generateVectorLengthOperations(vectorDescriptor, PRIMITIVE_DESCRIPTORS)
-        generatingResultStorage.lengthOperations.putAll(vectorDescriptor, vectorAccessorOperations)
-    }
-
-    println("Generating vectors normalize operations")
-    generatingResultStorage.vectorTypes.forEach { _, vectorSpec ->
-        val vectorAccessorOperations = generateVectorNormalizeOperations(vectorSpec)
-        generatingResultStorage.normalizeOperations.putAll(vectorSpec, vectorAccessorOperations)
-    }
-
-    println("All generations completed! Saving data...")
-    saveGeneratingResults(generatingResultStorage)
 }

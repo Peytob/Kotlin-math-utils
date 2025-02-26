@@ -3,7 +3,6 @@ package dev.peytob.math.generation.kpoet
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.TypeSpec
-import dev.peytob.math.generation.kpoet.model.GENERATED_DATE
 import javax.annotation.processing.Generated
 
 fun generatedAnnotation(comment: String? = null): AnnotationSpec {
