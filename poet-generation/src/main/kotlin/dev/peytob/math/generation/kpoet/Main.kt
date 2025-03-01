@@ -1,11 +1,12 @@
 package dev.peytob.math.generation.kpoet
 
-import com.squareup.kotlinpoet.ClassName
-import com.squareup.kotlinpoet.FileSpec
-import com.squareup.kotlinpoet.MemberName
-import com.squareup.kotlinpoet.asClassName
-import dev.peytob.math.generation.kpoet.generation.vector.*
+import com.squareup.kotlinpoet.*
+import dev.peytob.math.generation.kpoet.generation.vector.instance.*
+import dev.peytob.math.generation.kpoet.generation.vector.operation.generateStructVectorEmptyConstructor
+import dev.peytob.math.generation.kpoet.generation.vector.operation.generateVectorCopyConstructor
+import dev.peytob.math.generation.kpoet.generation.vector.operation.generateVectorCopyConstructorFlat
 import dev.peytob.math.generation.kpoet.model.*
+import dev.peytob.math.generation.kpoet.model.Function
 
 fun main() {
     val generationContext = GenerationContext(
@@ -95,25 +96,89 @@ fun main() {
     }
     println()
 
+    val typedVectorBases = vectorBases.flatMap { vectorBase ->
+        generationContext.getPrimitives().map { primitive ->
+            TypedVectorBase(
+                base = vectorBase,
+                primitive = primitive
+            )
+        }
+    }
+
+    val typedVectorAccessors = generationContext.getVectorAccessors().flatMap { vectorAccessor ->
+        generationContext.getPrimitives().map { primitive ->
+            TypedVectorAccessor(
+                accessor = vectorAccessor,
+                primitive = primitive
+            )
+        }
+    }
+
     println("Generating typed struct vector realisations")
-    vectorBases
-        .flatMap { base ->
-            generationContext.getPrimitives().map { primitive ->
-                println("-> Generation vector ${base.className.simpleName} struct realisation for primitive ${primitive.cls.simpleName}")
+    typedVectorBases
+        .map {
+            val (base, primitive) = it
+            println("-> Generation vector ${base.className.simpleName} struct realisation for primitive ${primitive.cls.simpleName}")
 
-                val typeSpec = if (base.isMutable)
-                    generateVectorStructMutableRealisation(base, primitive)
-                else
-                    generateVectorStructImmutableRealisation(base, primitive)
+            val typeSpec = if (base.isMutable)
+                generateVectorStructMutableRealisation(base, primitive)
+            else
+                generateVectorStructImmutableRealisation(base, primitive)
 
-                Vector(
-                    base = base,
-                    primitive = primitive,
-                    typeSpec = typeSpec
-                )
-            }
+            Vector(
+                base = base,
+                primitive = primitive,
+                typeSpec = typeSpec
+            )
         }
         .forEach(generationContext::registerVector)
+    println()
+
+    println("Generating struct vectors factory methods")
+    generationContext.getVectors()
+        .filter { leftVector -> leftVector.className.simpleName.contains("Struct") }
+        .flatMap { vector ->
+            val funSpec = generateStructVectorEmptyConstructor(vector)
+            val filePostfix = "Factory"
+
+            listOf(
+                Function(
+                    file = vector.alias.name + filePostfix,
+                    packageName = vector.className.packageName,
+                    operandsAliases = emptyList(),
+                    funSpec = funSpec
+                )
+            )
+        }
+        .forEach(generationContext::registerFunction)
+
+    generationContext.getVectors()
+        .flatMap { leftVector ->
+            typedVectorAccessors
+                .filter { rightAccessor -> rightAccessor.accessor.size == leftVector.base.size }
+                .flatMap { rightAccessor ->
+                    val factoryVectorized = generateVectorCopyConstructor(leftVector, rightAccessor)
+                    val factoryFlat = generateVectorCopyConstructorFlat(leftVector, rightAccessor)
+                    val filePostfix = "Factory"
+
+                    listOf(
+                        Function(
+                            file = leftVector.alias.name + filePostfix,
+                            packageName = leftVector.base.className.packageName,
+                            operandsAliases = listOf(leftVector.alias.name, rightAccessor.alias),
+                            funSpec = factoryVectorized
+                        ),
+
+                        Function(
+                            file = leftVector.alias.name + filePostfix,
+                            packageName = leftVector.base.className.packageName,
+                            operandsAliases = rightAccessor.components.toList(),
+                            funSpec = factoryFlat,
+                        ),
+                    )
+                }
+        }
+        .forEach { generationContext.registerFunction(it) }
 
     // Saving
 
@@ -139,11 +204,23 @@ fun main() {
             .writeTo(BASE_DESTINATION_FOLDER)
     }
 
-    println("Saving vectors realisations")
+    println("Saving ${generationContext.getVectors().size} vectors realisations")
     generationContext.getVectors().forEach { vector ->
         FileSpec.builder(vector.className)
             .addType(vector.typeSpec)
             .build()
             .writeTo(BASE_DESTINATION_FOLDER)
     }
+
+    println("Saving ${generationContext.getFunctions().size} functions")
+    generationContext.getFunctions()
+        .groupBy { Pair(it.file, it.packageName) }
+        .mapValues { it.value.map(Function::funSpec) }
+        .forEach { (file, functions) ->
+            println("-> Saving ${functions.size} functions to file ${file.first}")
+            FileSpec.builder(file.second, file.first)
+                .addFunctions(functions)
+                .build()
+                .writeTo(BASE_DESTINATION_FOLDER)
+        }
 }

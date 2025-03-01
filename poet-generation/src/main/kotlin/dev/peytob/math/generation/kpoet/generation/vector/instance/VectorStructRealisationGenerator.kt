@@ -1,4 +1,4 @@
-package dev.peytob.math.generation.kpoet.generation.vector
+package dev.peytob.math.generation.kpoet.generation.vector.instance
 
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier

@@ -24,4 +24,20 @@ class GenerationContext(
     fun getVectorAccessors(): Collection<VectorAccessor> = vectorAccessors
 
     fun getVectors(): Collection<Vector> = vectors
+    
+    fun registerFunction(function: Function) {
+        val isExists = functions.any { it.name == function.name && it.packageName == function.packageName && it.funSpec.parameters == function.funSpec.parameters }
+
+        if (isExists) {
+            throw RuntimeException("Function ${function.name}(${function.operandsAliases.joinToString(", ")}) already exists")
+        }
+
+        functions.add(function)
+    }
+
+    fun getFunctions(): Collection<Function> = functions
+    
+    fun forEachVectorPair(action: (Vector, Vector) -> Collection<Function>): Collection<Function> {
+        return vectors.flatMap { leftVector -> vectors.flatMap { rightVector -> action(leftVector, rightVector) } }
+    }
 }
