@@ -3,8 +3,6 @@ package dev.peytob.math.generation.kpoet.generation.vector.operation
 import com.squareup.kotlinpoet.*
 import dev.peytob.math.generation.kpoet.generated
 import dev.peytob.math.generation.kpoet.jvmName
-import dev.peytob.math.generation.kpoet.model.Function
-import dev.peytob.math.generation.kpoet.model.TypedVectorAccessor
 import dev.peytob.math.generation.kpoet.model.TypedVectorBase
 
 fun generateUnaryPlusVectorOperation(leftVector: TypedVectorBase): FunSpec {

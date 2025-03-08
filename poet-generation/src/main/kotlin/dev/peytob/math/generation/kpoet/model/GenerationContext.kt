@@ -11,6 +11,10 @@ class GenerationContext(
 
     private val functions: MutableCollection<Function> = mutableListOf()
 
+    private val typedVectorBases: MutableCollection<TypedVectorBase> = mutableListOf()
+
+    private val typedVectorAccessors: MutableCollection<TypedVectorAccessor> = mutableListOf()
+
     fun registerVector(vector: Vector) {
         val isExists = vectors.any { it.base == vector.base && it.size == vector.size && it.isMutable == vector.isMutable && it.primitive == vector.primitive }
 
@@ -36,7 +40,7 @@ class GenerationContext(
         }
 
         if (isExists) {
-            throw RuntimeException("Function ${function.name}(${function.operandsAliases.joinToString(", ")}) already exists")
+            throw IllegalStateException("Function ${function.name}(${function.operandsAliases.joinToString(", ")}) already exists")
         }
 
         functions.add(function)
@@ -55,5 +59,35 @@ class GenerationContext(
     fun getConstructor(leftVector: TypedVectorBase): Function? {
         val constructor = generateConstructorName(leftVector.alias, leftVector.isMutable)
         return getFunction(constructor)
+    }
+
+    fun registerTypedVectorBase(typedVectorBase: TypedVectorBase) {
+        if (typedVectorBases.contains(typedVectorBase)) {
+            throw IllegalStateException("Typed vector base ${typedVectorBase.alias} already registered in context")
+        }
+
+        typedVectorBases.add(typedVectorBase)
+    }
+
+    fun registerTypedVectorAccessor(typedVectorAccessor: TypedVectorAccessor) {
+        if (typedVectorAccessors.contains(typedVectorAccessor)) {
+            throw IllegalStateException("Typed vector base ${typedVectorAccessor.alias} already registered in context")
+        }
+
+        typedVectorAccessors.add(typedVectorAccessor)
+    }
+
+    fun getTypedVectorBases(): Collection<TypedVectorBase> {
+        return typedVectorBases
+    }
+
+    fun getTypedVectorAccessors(): Collection<TypedVectorAccessor> {
+        return typedVectorAccessors
+    }
+
+    fun getVectorBases(): Collection<VectorBase> {
+        return typedVectorBases.map {
+            it.base
+        }.toSet()
     }
 }

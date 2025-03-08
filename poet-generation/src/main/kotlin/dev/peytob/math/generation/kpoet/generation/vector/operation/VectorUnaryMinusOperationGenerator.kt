@@ -1,7 +1,6 @@
 package dev.peytob.math.generation.kpoet.generation.vector.operation
 
 import com.squareup.kotlinpoet.*
-import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import dev.peytob.math.generation.kpoet.generated
 import dev.peytob.math.generation.kpoet.jvmName
 import dev.peytob.math.generation.kpoet.model.Function

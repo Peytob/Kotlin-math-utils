@@ -1,12 +1,90 @@
 package dev.peytob.math.generation.kpoet
 
 import com.squareup.kotlinpoet.*
+import dev.peytob.math.generation.kpoet.generation.vector.instance.generateVectorRealisations
 import dev.peytob.math.generation.kpoet.generation.vector.instance.*
 import dev.peytob.math.generation.kpoet.generation.vector.operation.*
 import dev.peytob.math.generation.kpoet.model.*
 import dev.peytob.math.generation.kpoet.model.Function
+import org.slf4j.LoggerFactory
+import java.time.Duration
+import java.time.Instant
+
+private val log = LoggerFactory.getLogger("main")
 
 fun main() {
+    val generationStartedAt = Instant.now()
+
+    log.info("Starting vectors and matrix types generation")
+
+    val generationContext = initializeGenerationContext()
+
+    log.info("Generation context data:")
+    log.info("Destination folder: {}", BASE_DESTINATION_FOLDER)
+    log.info("Target generation primitives: ${generationContext.getPrimitives().joinToString(", ") { it.cls.simpleName }}")
+    generationContext.getVectorAccessors()
+        .joinToString(", ") { it.components.joinToString(",", prefix = "[", postfix = "]") }
+        .let { log.info("Target vector accessors: {}", it) }
+
+    generateVectorRealisations(generationContext)
+    generateVectorFactoryMethods(generationContext)
+    generateVectorArithmeticOperations(generationContext)
+
+    saveGenerationResults(generationContext)
+
+    val generationTime = Duration.between(generationStartedAt, Instant.now())
+    log.info("Generation time: {}.{}s", generationTime.toSeconds(), generationTime.toMillis())
+}
+
+fun saveGenerationResults(generationContext: GenerationContext) {
+    log.info("Saving generation results")
+
+    log.info("Saving vector accessors")
+    generationContext.getVectorAccessors().forEach { accessor ->
+        FileSpec.builder(accessor.className)
+            .addType(accessor.typeSpec)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
+    }
+
+    log.info("Saving vector bases")
+    generationContext.getVectorBases().forEach { base ->
+        FileSpec.builder(base.className)
+            .addType(base.typeSpec)
+            .apply {
+                generationContext.getVectors()
+                    .filter { vector -> vector.base == base }
+                    .map(Vector::alias)
+                    .forEach(this::addTypeAlias)
+            }
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
+    }
+
+    log.info("Saving vector realisations")
+    generationContext.getVectors().forEach { vector ->
+        FileSpec.builder(vector.className)
+            .addType(vector.typeSpec)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
+    }
+
+    log.info("Saving functions")
+    generationContext.getFunctions().groupBy {
+        ClassName(it.packageName, it.file)
+    }.mapValues {
+        it.value.map(Function::funSpec)
+    }.forEach { (className, functions) ->
+        FileSpec.builder(className)
+            .addFunctions(functions)
+            .build()
+            .writeTo(BASE_DESTINATION_FOLDER)
+    }
+}
+
+private fun initializeGenerationContext(): GenerationContext {
+    log.info("Initializing generation context")
+
     val generationContext = GenerationContext(
         primitives = listOf(
             Primitive(
@@ -55,289 +133,12 @@ fun main() {
         )
     )
 
-    println("Starting vectors and matrix types generation")
-    println("Configuration:")
-    println("-> Destination folder: $BASE_DESTINATION_FOLDER")
-    println("-> Target generation primitives: ${generationContext.getPrimitives().joinToString(", ") { it.cls.simpleName }}")
-    generationContext.getVectorAccessors()
-        .joinToString(", ") { it.components.joinToString(",", prefix = "[", postfix = "]") }
-        .let { println("-> Target vector accessors: $it") }
-    println()
-
-    // Vectors
-
-    println("Generation type specs for vector accessors")
+    log.info("Generating type specs for vector accessors")
     generationContext.getVectorAccessors().forEach {
-        println("-> Generation vector accessor class for ${it.size}-vector")
+        log.debug("Generating vector accessor class for {}-vector", it.size)
         it.typeSpec = generateVectorAccessor(it)
         it.className = ClassName(it.destinationPackage, it.typeSpec.name!!)
     }
-    println()
 
-    println("Generation vectors bases for vector accessors")
-    val vectorBases = generationContext.getVectorAccessors().flatMap { accessor ->
-        println("-> Generation vector bases for accessor ${accessor.className.simpleName}")
-
-        listOf(
-            VectorBase(
-                accessor = accessor,
-                isMutable = false,
-                typeSpec = generateVectorImmutableBase(accessor)
-            ),
-
-            VectorBase(
-                accessor = accessor,
-                isMutable = true,
-                typeSpec = generateVectorMutableBase(accessor)
-            )
-        )
-    }
-    println()
-
-    val typedVectorBases = vectorBases.flatMap { vectorBase ->
-        generationContext.getPrimitives().map { primitive ->
-            TypedVectorBase(
-                base = vectorBase,
-                primitive = primitive
-            )
-        }
-    }
-
-    val typedVectorAccessors = generationContext.getVectorAccessors().flatMap { vectorAccessor ->
-        generationContext.getPrimitives().map { primitive ->
-            TypedVectorAccessor(
-                accessor = vectorAccessor,
-                primitive = primitive
-            )
-        }
-    }
-
-    println("Generating typed struct vector realisations")
-    typedVectorBases
-        .map {
-            val (base, primitive) = it
-            println("-> Generation vector ${base.className.simpleName} struct realisation for primitive ${primitive.cls.simpleName}")
-
-            Vector(
-                base = base,
-                primitive = primitive,
-                typeSpec = generateVectorStructRealisation(base, primitive)
-            )
-        }
-        .forEach(generationContext::registerVector)
-    println()
-
-    println("Generating struct vectors factory methods")
-    generationContext.getVectors()
-        .filter { leftVector -> leftVector.className.simpleName.contains("Struct") }
-        .flatMap { vector ->
-            println("-> Generation vector ${vector.className.simpleName} empty factory methods")
-            val filePostfix = "Factory"
-
-            listOf(
-                Function(
-                    file = vector.alias.name + filePostfix,
-                    packageName = vector.className.packageName,
-                    operandsAliases = emptyList(),
-                    funSpec = generateStructVectorEmptyConstructor(vector)
-                )
-            )
-        }
-        .forEach(generationContext::registerFunction)
-
-    generationContext.getVectors()
-        .flatMap { leftVector ->
-            typedVectorAccessors
-                .filter { rightAccessor -> rightAccessor.accessor.size == leftVector.base.size }
-                .flatMap { rightAccessor ->
-                    println("-> Generation vector ${leftVector.className.simpleName} copy constructors")
-                    val filePostfix = "Factory"
-
-                    listOf(
-                        Function(
-                            file = leftVector.alias.name + filePostfix,
-                            packageName = leftVector.base.className.packageName,
-                            operandsAliases = listOf(leftVector.alias.name, rightAccessor.alias),
-                            funSpec = generateVectorCopyConstructor(leftVector, rightAccessor)
-                        ),
-
-                        Function(
-                            file = leftVector.alias.name + filePostfix,
-                            packageName = leftVector.base.className.packageName,
-                            operandsAliases = rightAccessor.components.toList(),
-                            funSpec = generateVectorCopyConstructorFlat(leftVector, rightAccessor),
-                        ),
-                    )
-                }
-        }
-        .forEach(generationContext::registerFunction)
-
-    println("Generating vectors operations")
-    typedVectorBases
-        .flatMap { leftVector ->
-            val arithmeticOperationsPostfix = "ArithmeticOperations"
-            val constructor = generationContext.getConstructor(leftVector)
-                ?: throw IllegalStateException("Constructor for class ${leftVector.alias} not found")
-
-            val binaryOperations = typedVectorAccessors
-                .filter { rightAccessor -> rightAccessor.accessor.size == leftVector.size }
-                .flatMap { rightAccessor ->
-                    println("-> Generation binary arithmetic operations for vectors ${leftVector.alias} - ${rightAccessor.alias}")
-
-                    val binaryOperationComponents = listOf(leftVector.alias, rightAccessor.alias)
-                    val flatOperationComponents =
-                        listOf(leftVector.alias) + List(rightAccessor.size) { rightAccessor.primitive.cls.simpleName }
-
-                    listOf(
-                        Function(
-                            file = leftVector.alias + arithmeticOperationsPostfix,
-                            packageName = leftVector.base.className.packageName,
-                            operandsAliases = binaryOperationComponents,
-                            funSpec = generatePlusVectorOperation(leftVector, rightAccessor, constructor)
-                        ),
-
-                        Function(
-                            file = leftVector.alias + arithmeticOperationsPostfix,
-                            packageName = leftVector.base.className.packageName,
-                            operandsAliases = flatOperationComponents,
-                            funSpec = generatePlusVectorOperationFlat(leftVector, rightAccessor, constructor)
-                        ),
-
-                        Function(
-                            file = leftVector.alias + arithmeticOperationsPostfix,
-                            packageName = leftVector.base.className.packageName,
-                            operandsAliases = binaryOperationComponents,
-                            funSpec = generateTimesVectorOperation(leftVector, rightAccessor, constructor)
-                        ),
-
-                        Function(
-                            file = leftVector.alias + arithmeticOperationsPostfix,
-                            packageName = leftVector.base.className.packageName,
-                            operandsAliases = flatOperationComponents,
-                            funSpec = generateTimesVectorOperationFlat(leftVector, rightAccessor, constructor)
-                        ),
-
-                        Function(
-                            file = leftVector.alias + arithmeticOperationsPostfix,
-                            packageName = leftVector.base.className.packageName,
-                            operandsAliases = binaryOperationComponents,
-                            funSpec = generateDotVectorOperation(leftVector, rightAccessor)
-                        ),
-
-                        Function(
-                            file = leftVector.alias + arithmeticOperationsPostfix,
-                            packageName = leftVector.base.className.packageName,
-                            operandsAliases = flatOperationComponents,
-                            funSpec = generateDotVectorOperationFlat(leftVector, rightAccessor)
-                        ),
-
-                        Function(
-                            file = leftVector.alias + arithmeticOperationsPostfix,
-                            packageName = leftVector.base.className.packageName,
-                            operandsAliases = binaryOperationComponents,
-                            funSpec = generateMinusVectorOperation(leftVector, rightAccessor, constructor)
-                        ),
-
-                        Function(
-                            file = leftVector.alias + arithmeticOperationsPostfix,
-                            packageName = leftVector.base.className.packageName,
-                            operandsAliases = flatOperationComponents,
-                            funSpec = generateMinusVectorOperationFlat(leftVector, rightAccessor, constructor)
-                        ),
-                    )
-                }
-
-            println("-> Generation unary operations for vector ${leftVector.alias}")
-
-            val unaryOperations = listOf(
-                Function(
-                    file = leftVector.alias + arithmeticOperationsPostfix,
-                    packageName = leftVector.base.className.packageName,
-                    operandsAliases = emptyList(),
-                    funSpec = generateUnaryPlusVectorOperation(leftVector)
-                ),
-
-                Function(
-                    file = leftVector.alias + arithmeticOperationsPostfix,
-                    packageName = leftVector.base.className.packageName,
-                    operandsAliases = emptyList(),
-                    funSpec = generateUnaryMinusVectorOperation(leftVector, constructor)
-                )
-            )
-
-            binaryOperations + unaryOperations
-        }
-        .forEach(generationContext::registerFunction)
-    println()
-
-    println("Generating vector buffer operations")
-    typedVectorAccessors.flatMap { vectorAccessor ->
-        println("-> Generation buffer operations for accessor ${vectorAccessor.alias}")
-
-        val primitiveBufferOperations = generationContext.getPrimitives().flatMap { primitive ->
-            emptyList<Function>()
-        }
-
-        val byteBufferOperations = listOf(
-            Function(
-                file = "Vec${vectorAccessor.components.size}BufferOperations",
-                packageName = vectorAccessor.accessor.destinationPackage,
-                operandsAliases = listOf("byteBuffer"),
-                funSpec = generateByteBufferOperation(vectorAccessor)
-            ),
-
-            Function(
-                file = "Vec${vectorAccessor.components.size}BufferOperations",
-                packageName = vectorAccessor.accessor.destinationPackage,
-                operandsAliases = listOf("${vectorAccessor.primitive.cls.simpleName}Buffer"),
-                funSpec = generateTypedBufferOperation(vectorAccessor)
-            ),
-        )
-
-        byteBufferOperations + primitiveBufferOperations
-    }.forEach(generationContext::registerFunction)
-
-    // Saving
-
-    println("Saving ${generationContext.getVectorAccessors().size} vector accessors")
-    generationContext.getVectorAccessors().forEach { accessor ->
-        FileSpec.builder(accessor.className)
-            .addType(accessor.typeSpec)
-            .build()
-            .writeTo(BASE_DESTINATION_FOLDER)
-    }
-
-    println("Saving ${vectorBases.size} vector bases with vectors aliases")
-    vectorBases.forEach { base ->
-        FileSpec.builder(base.className)
-            .addType(base.typeSpec)
-            .apply {
-                generationContext.getVectors()
-                    .filter { vector -> vector.base == base }
-                    .map(Vector::alias)
-                    .forEach(this::addTypeAlias)
-            }
-            .build()
-            .writeTo(BASE_DESTINATION_FOLDER)
-    }
-
-    println("Saving ${generationContext.getVectors().size} vectors realisations")
-    generationContext.getVectors().forEach { vector ->
-        FileSpec.builder(vector.className)
-            .addType(vector.typeSpec)
-            .build()
-            .writeTo(BASE_DESTINATION_FOLDER)
-    }
-
-    println("Saving ${generationContext.getFunctions().size} functions")
-    generationContext.getFunctions()
-        .groupBy { Pair(it.file, it.packageName) }
-        .mapValues { it.value.map(Function::funSpec) }
-        .forEach { (file, functions) ->
-            println("-> Saving ${functions.size} functions to file ${file.first}")
-            FileSpec.builder(file.second, file.first)
-                .addFunctions(functions)
-                .build()
-                .writeTo(BASE_DESTINATION_FOLDER)
-        }
+    return generationContext
 }
