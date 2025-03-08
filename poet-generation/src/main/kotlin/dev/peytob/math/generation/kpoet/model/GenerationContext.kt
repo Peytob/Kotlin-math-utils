@@ -1,5 +1,7 @@
 package dev.peytob.math.generation.kpoet.model
 
+import dev.peytob.math.generation.kpoet.generation.vector.operation.generateConstructorName
+
 class GenerationContext(
     private val primitives: Collection<Primitive>,
     private val vectorAccessors: Collection<VectorAccessor>
@@ -26,7 +28,12 @@ class GenerationContext(
     fun getVectors(): Collection<Vector> = vectors
     
     fun registerFunction(function: Function) {
-        val isExists = functions.any { it.name == function.name && it.packageName == function.packageName && it.funSpec.parameters == function.funSpec.parameters }
+        val isExists = functions.any {
+            it.name == function.name &&
+            it.packageName == function.packageName &&
+            it.funSpec.parameters == function.funSpec.parameters &&
+            it.funSpec.receiverType == function.funSpec.receiverType
+        }
 
         if (isExists) {
             throw RuntimeException("Function ${function.name}(${function.operandsAliases.joinToString(", ")}) already exists")
@@ -39,5 +46,14 @@ class GenerationContext(
     
     fun forEachVectorPair(action: (Vector, Vector) -> Collection<Function>): Collection<Function> {
         return vectors.flatMap { leftVector -> vectors.flatMap { rightVector -> action(leftVector, rightVector) } }
+    }
+
+    private fun getFunction(name: String): Function? {
+        return getFunctions().firstOrNull { it.name == name }
+    }
+
+    fun getConstructor(leftVector: TypedVectorBase): Function? {
+        val constructor = generateConstructorName(leftVector.alias, leftVector.isMutable)
+        return getFunction(constructor)
     }
 }

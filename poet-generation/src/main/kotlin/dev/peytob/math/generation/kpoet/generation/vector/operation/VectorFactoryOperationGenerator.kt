@@ -17,10 +17,10 @@ fun generateStructVectorEmptyConstructor(targetVector: Vector): FunSpec {
 
     body.addStatement("return %T(%L)", targetVector.className, constructorArgs)
 
-    val prefix = if (targetVector.isMutable) "mutable" else "immutable"
+    val name = generateConstructorName(targetVector.alias.name, targetVector.isMutable)
 
     return FunSpec
-        .builder(prefix + targetVector.alias.name)
+        .builder(name)
         .generated()
         .returns(targetVector.base.className.parameterizedBy(targetVector.primitive.cls))
         .addCode(body.build())
@@ -41,12 +41,12 @@ fun generateVectorCopyConstructor(leftVector: Vector, rightAccessor: TypedVector
     val scalarFormArguments = leftVector.components.joinToString(", ") { "$it = $it" }
     body.addStatement("return %T(%L)", leftVector.className, scalarFormArguments)
 
-    val prefix = if (leftVector.isMutable) "mutable" else "immutable"
+    val name = generateConstructorName(leftVector.alias.name, leftVector.isMutable)
 
     return FunSpec
-        .builder(prefix + leftVector.alias.name)
+        .builder(name)
         .generated()
-        .jvmName(prefix + leftVector.alias.name + rightAccessor.primitive.postfix)
+        .jvmName(name + rightAccessor.primitive.postfix)
         .returns(leftVector.base.className.parameterizedBy(leftVector.primitive.cls))
         .addParameter("right", rightAccessor.className)
         .addCode(body.build())
@@ -60,27 +60,32 @@ fun generateVectorCopyConstructorFlat(leftVector: Vector, rightAccessor: TypedVe
 
     val parameters = leftVector.components.map { component ->
         ParameterSpec
-            .builder("r$component", rightAccessor.primitive.cls)
+            .builder(component, rightAccessor.primitive.cls)
             .build()
     }
 
     val body = CodeBlock.builder()
 
     leftVector.components.forEach { component ->
-        body.addStatement("val %1L = r%1L.%2N()", component, leftVector.primitive.numberCastMethodName)
+        body.addStatement("val r%1L = %1L.%2N()", component, leftVector.primitive.numberCastMethodName)
     }
 
-    val scalarFormArguments = leftVector.components.joinToString(", ") { "$it = $it" }
+    val scalarFormArguments = leftVector.components.joinToString(", ") { "$it = r$it" }
     body.addStatement("return %T(%L)", leftVector.className, scalarFormArguments)
 
-    val prefix = if (leftVector.isMutable) "mutable" else "immutable"
+    val name = generateConstructorName(leftVector.alias.name, leftVector.isMutable)
 
     return FunSpec
-        .builder(prefix + leftVector.alias.name)
+        .builder(name)
         .generated()
-        .jvmName(prefix + leftVector.alias.name + rightAccessor.primitive.postfix)
+        .jvmName(name + rightAccessor.primitive.postfix)
         .returns(leftVector.base.className.parameterizedBy(leftVector.primitive.cls))
         .addParameters(parameters)
         .addCode(body.build())
         .build()
+}
+
+fun generateConstructorName(alias: String, mutable: Boolean): String {
+    val prefix = if (mutable) "mutable" else "immutable"
+    return prefix + alias.removePrefix("Mut")
 }

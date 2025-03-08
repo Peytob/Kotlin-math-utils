@@ -88,7 +88,14 @@ fun generateVectorStructMutableRealisation(base: VectorBase, primitive: Primitiv
         .build()
 }
 
-fun generateToString(vectorName: String, base: VectorBase): FunSpec {
+fun generateVectorStructRealisation(base: VectorBase, primitive: Primitive): TypeSpec {
+    return if (base.isMutable)
+        generateVectorStructMutableRealisation(base, primitive)
+    else
+        generateVectorStructImmutableRealisation(base, primitive)
+}
+
+private fun generateToString(vectorName: String, base: VectorBase): FunSpec {
     val vectorStringPattern = base.components
         .joinToString(prefix = "$vectorName[", postfix = "]", separator = ", ") { "$it=\$$it" }
 

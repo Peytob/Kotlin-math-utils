@@ -1,5 +1,6 @@
 package dev.peytob.math.generation.kpoet.model
 
+import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FunSpec
 
 data class Function(
@@ -9,4 +10,5 @@ data class Function(
     val funSpec: FunSpec
 ) {
     val name: String = funSpec.name
+    val className = ClassName(packageName, name)
 }
