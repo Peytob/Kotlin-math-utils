@@ -1,4 +1,4 @@
-package dev.peytob.math.generation.kpoet.generation.vector.operation
+package dev.peytob.math.generation.kpoet.generation.vector.operation.arithmetic
 
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
@@ -29,7 +29,7 @@ fun generateVectorCopyFactoryMethods(generationContext: GenerationContext) {
         generationContext.getTypedVectorAccessors().filter { rightAccessor ->
             rightAccessor.accessor.size == leftVector.base.size
         }.flatMap { rightAccessor ->
-            log.debug("Generating vector ${leftVector.className.simpleName} copy constructor from accessor ${rightAccessor.alias}")
+            log.debug("Generating vector ${leftVector.className.simpleName} copy factories from accessor ${rightAccessor.alias}")
 
             listOf(
                 Function(
@@ -50,7 +50,7 @@ fun generateVectorCopyFactoryMethods(generationContext: GenerationContext) {
     }.onEach {
         generationContext.registerFunction(it)
     }.let {
-        log.info("Generated {} empty copy methods for struct vectors", it.size)
+        log.info("Generated {} copy factories for struct vectors", it.size)
     }
 }
 

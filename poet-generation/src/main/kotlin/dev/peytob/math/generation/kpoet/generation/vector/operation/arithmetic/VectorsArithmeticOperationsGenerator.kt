@@ -1,5 +1,7 @@
-package dev.peytob.math.generation.kpoet.generation.vector.operation
+package dev.peytob.math.generation.kpoet.generation.vector.operation.arithmetic
 
+import dev.peytob.math.generation.kpoet.generation.vector.operation.buffer.generateByteBufferOperation
+import dev.peytob.math.generation.kpoet.generation.vector.operation.buffer.generateTypedBufferOperation
 import dev.peytob.math.generation.kpoet.model.Function
 import dev.peytob.math.generation.kpoet.model.GenerationContext
 import org.slf4j.LoggerFactory
@@ -21,11 +23,7 @@ fun generateBufferVectorOperations(generationContext: GenerationContext) {
     generationContext.getTypedVectorAccessors().flatMap { vectorAccessor ->
         log.debug("Generating unary vector {} buffer operations", vectorAccessor.alias)
 
-        val primitiveBufferOperations = generationContext.getPrimitives().flatMap { primitive ->
-            emptyList<Function>()
-        }
-
-        val byteBufferOperations = listOf(
+        listOf(
             Function(
                 file = "Vec${vectorAccessor.components.size}BufferOperations",
                 packageName = vectorAccessor.accessor.destinationPackage,
@@ -40,8 +38,6 @@ fun generateBufferVectorOperations(generationContext: GenerationContext) {
                 funSpec = generateTypedBufferOperation(vectorAccessor)
             ),
         )
-
-        byteBufferOperations + primitiveBufferOperations
     }.onEach {
         generationContext.registerFunction(it)
     }.let {
@@ -76,7 +72,7 @@ fun generateUnaryVectorOperations(generationContext: GenerationContext) {
     }.onEach {
         generationContext.registerFunction(it)
     }.let {
-        log.info("Generated {} unary vector functions", it.size)
+        log.info("Generated {} unary vector arithmetic functions", it.size)
     }
 }
 

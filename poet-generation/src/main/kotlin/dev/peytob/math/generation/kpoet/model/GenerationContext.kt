@@ -1,6 +1,6 @@
 package dev.peytob.math.generation.kpoet.model
 
-import dev.peytob.math.generation.kpoet.generation.vector.operation.generateConstructorName
+import dev.peytob.math.generation.kpoet.generation.vector.operation.arithmetic.generateConstructorName
 
 class GenerationContext(
     private val primitives: Collection<Primitive>,

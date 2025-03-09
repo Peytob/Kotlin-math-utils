@@ -1,4 +1,4 @@
-package dev.peytob.math.generation.kpoet.generation.vector.operation
+package dev.peytob.math.generation.kpoet.generation.vector.operation.arithmetic
 
 import com.squareup.kotlinpoet.*
 import dev.peytob.math.generation.kpoet.generated

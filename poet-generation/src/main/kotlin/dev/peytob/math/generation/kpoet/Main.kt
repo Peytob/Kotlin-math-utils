@@ -3,7 +3,9 @@ package dev.peytob.math.generation.kpoet
 import com.squareup.kotlinpoet.*
 import dev.peytob.math.generation.kpoet.generation.vector.instance.generateVectorRealisations
 import dev.peytob.math.generation.kpoet.generation.vector.instance.*
-import dev.peytob.math.generation.kpoet.generation.vector.operation.*
+import dev.peytob.math.generation.kpoet.generation.vector.operation.algebra.generateVectorAlgebraicOperations
+import dev.peytob.math.generation.kpoet.generation.vector.operation.arithmetic.generateVectorArithmeticOperations
+import dev.peytob.math.generation.kpoet.generation.vector.operation.arithmetic.generateVectorFactoryMethods
 import dev.peytob.math.generation.kpoet.model.*
 import dev.peytob.math.generation.kpoet.model.Function
 import org.slf4j.LoggerFactory
@@ -29,6 +31,7 @@ fun main() {
     generateVectorRealisations(generationContext)
     generateVectorFactoryMethods(generationContext)
     generateVectorArithmeticOperations(generationContext)
+    generateVectorAlgebraicOperations(generationContext)
 
     saveGenerationResults(generationContext)
 

@@ -1,4 +1,4 @@
-package dev.peytob.math.generation.kpoet.generation.vector.operation
+package dev.peytob.math.generation.kpoet.generation.vector.operation.arithmetic
 
 import com.squareup.kotlinpoet.*
 import dev.peytob.math.generation.kpoet.generated
@@ -7,28 +7,28 @@ import dev.peytob.math.generation.kpoet.model.Function
 import dev.peytob.math.generation.kpoet.model.TypedVectorAccessor
 import dev.peytob.math.generation.kpoet.model.TypedVectorBase
 
-fun generateTimesImmutableVectorOperation(
+fun generatePlusImmutableVectorOperation(
     leftVector: TypedVectorBase,
     rightVector: TypedVectorAccessor,
     constructor: Function
 ): FunSpec {
     if (leftVector.size != rightVector.size) {
-        throw IllegalArgumentException("Times operation requires same size of operands. Left vector size ${leftVector.size}, right ${rightVector.size}")
+        throw IllegalArgumentException("Plus operation requires same size of operands. Left vector size ${leftVector.size}, right ${rightVector.size}")
     }
 
     val body = CodeBlock.builder()
 
     leftVector.components.forEach { component ->
-        body.addStatement("val r$component = (this.$component * right.$component).%N()", leftVector.primitive.numberCastMethodName)
+        body.addStatement("val r$component = (this.$component + right.$component).%N()", leftVector.primitive.numberCastMethodName)
     }
     val scalarFormArguments = leftVector.components.joinToString(", ") { component -> "$component = r$component"}
 
     body.addStatement("return %T(%L)", constructor.className, scalarFormArguments)
 
     return FunSpec
-        .builder("times")
+        .builder("plus")
         .generated()
-        .jvmName("timesVecVec${leftVector.size}${leftVector.primitive.postfix}${rightVector.primitive.postfix}")
+        .jvmName("plusVecVec${leftVector.size}${leftVector.primitive.postfix}${rightVector.primitive.postfix}")
         .addModifiers(KModifier.OPERATOR)
         .receiver(leftVector.className)
         .returns(leftVector.className)
@@ -37,19 +37,19 @@ fun generateTimesImmutableVectorOperation(
         .build()
 }
 
-fun generateTimesImmutableVectorOperationFlat(
+fun generatePlusImmutableVectorOperationFlat(
     leftVector: TypedVectorBase,
     rightVector: TypedVectorAccessor,
     constructor: Function
 ): FunSpec {
     if (leftVector.size != rightVector.size) {
-        throw IllegalArgumentException("Times operation requires same size of operands. Left vector size ${leftVector.size}, right ${rightVector.size}")
+        throw IllegalArgumentException("Plus operation requires same size of operands. Left vector size ${leftVector.size}, right ${rightVector.size}")
     }
 
     val body = CodeBlock.builder()
 
     leftVector.components.forEach { component ->
-        body.addStatement("val $component = (this.$component * r$component).%N()", leftVector.primitive.numberCastMethodName)
+        body.addStatement("val $component = (this.$component + r$component).%N()", leftVector.primitive.numberCastMethodName)
     }
 
     val scalarFormArguments = leftVector.components.joinToString(", ") { component -> "$component = r$component" }
@@ -61,7 +61,7 @@ fun generateTimesImmutableVectorOperationFlat(
     body.addStatement("return %T(%L)", constructor.className, scalarFormArguments)
 
     return FunSpec
-        .builder("times")
+        .builder("plus")
         .generated()
         .receiver(leftVector.className)
         .returns(leftVector.className)
@@ -70,23 +70,23 @@ fun generateTimesImmutableVectorOperationFlat(
         .build()
 }
 
-fun generateTimesMutableVectorOperation(leftVector: TypedVectorBase, rightVector: TypedVectorAccessor): FunSpec {
+fun generatePlusMutableVectorOperation(leftVector: TypedVectorBase, rightVector: TypedVectorAccessor): FunSpec {
     if (leftVector.size != rightVector.size) {
-        throw IllegalArgumentException("Times operation requires same size of operands. Left vector size ${leftVector.size}, right ${rightVector.size}")
+        throw IllegalArgumentException("Plus operation requires same size of operands. Left vector size ${leftVector.size}, right ${rightVector.size}")
     }
 
     val body = CodeBlock.builder()
 
     leftVector.components.forEach { component ->
-        body.addStatement("this.$component = (this.$component * right.$component).%N()", leftVector.primitive.numberCastMethodName)
+        body.addStatement("this.$component = (this.$component + right.$component).%N()", leftVector.primitive.numberCastMethodName)
     }
 
     body.addStatement("return this")
 
     return FunSpec
-        .builder("times")
+        .builder("plus")
         .generated()
-        .jvmName("timesVecVec${leftVector.size}${leftVector.primitive.postfix}${rightVector.primitive.postfix}")
+        .jvmName("plusVecVec${leftVector.size}${leftVector.primitive.postfix}${rightVector.primitive.postfix}")
         .addModifiers(KModifier.OPERATOR)
         .receiver(leftVector.className)
         .returns(leftVector.className)
@@ -95,15 +95,15 @@ fun generateTimesMutableVectorOperation(leftVector: TypedVectorBase, rightVector
         .build()
 }
 
-fun generateTimesMutableVectorOperationFlat(leftVector: TypedVectorBase, rightVector: TypedVectorAccessor): FunSpec {
+fun generatePlusMutableVectorOperationFlat(leftVector: TypedVectorBase, rightVector: TypedVectorAccessor): FunSpec {
     if (leftVector.size != rightVector.size) {
-        throw IllegalArgumentException("Times operation requires same size of operands. Left vector size ${leftVector.size}, right ${rightVector.size}")
+        throw IllegalArgumentException("Plus operation requires same size of operands. Left vector size ${leftVector.size}, right ${rightVector.size}")
     }
 
     val body = CodeBlock.builder()
 
     leftVector.components.forEach { component ->
-        body.addStatement("this.$component = (this.$component * r$component).%N()", leftVector.primitive.numberCastMethodName)
+        body.addStatement("this.$component = (this.$component + r$component).%N()", leftVector.primitive.numberCastMethodName)
     }
 
     val parameters = leftVector.components.map {
@@ -114,7 +114,7 @@ fun generateTimesMutableVectorOperationFlat(leftVector: TypedVectorBase, rightVe
     body.addStatement("return this")
 
     return FunSpec
-        .builder("times")
+        .builder("plus")
         .generated()
         .receiver(leftVector.className)
         .returns(leftVector.className)
@@ -123,20 +123,20 @@ fun generateTimesMutableVectorOperationFlat(leftVector: TypedVectorBase, rightVe
         .build()
 }
 
-fun generateTimesVectorOperation(leftVector: TypedVectorBase, rightVector: TypedVectorAccessor, constructor: Function): FunSpec {
+fun generatePlusVectorOperation(leftVector: TypedVectorBase, rightVector: TypedVectorAccessor, constructor: Function): FunSpec {
     return if (leftVector.isMutable)
-        generateTimesMutableVectorOperation(leftVector, rightVector)
+        generatePlusMutableVectorOperation(leftVector, rightVector)
     else
-        generateTimesImmutableVectorOperation(leftVector, rightVector, constructor)
+        generatePlusImmutableVectorOperation(leftVector, rightVector, constructor)
 }
 
-fun generateTimesVectorOperationFlat(
+fun generatePlusVectorOperationFlat(
     leftVector: TypedVectorBase,
     rightVector: TypedVectorAccessor,
     constructor: Function
 ): FunSpec {
     return if (leftVector.isMutable)
-        generateTimesMutableVectorOperationFlat(leftVector, rightVector)
+        generatePlusMutableVectorOperationFlat(leftVector, rightVector)
     else
-        generateTimesImmutableVectorOperationFlat(leftVector, rightVector, constructor)
+        generatePlusImmutableVectorOperationFlat(leftVector, rightVector, constructor)
 }

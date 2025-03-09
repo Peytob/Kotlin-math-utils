@@ -32,19 +32,19 @@ fun generateVectorAccessor(vectorAccessor: VectorAccessor): TypeSpec {
             .build())
     }
 
-    val getCodeBlockBuilder = CodeBlock.builder()
+    val getbody = CodeBlock.builder()
 
-    getCodeBlockBuilder.beginControlFlow("when (index)")
+    getbody.beginControlFlow("when (index)")
     vectorAccessor.components.forEachIndexed { index, component ->
-        getCodeBlockBuilder.addStatement("$index -> $component")
+        getbody.addStatement("$index -> $component")
     }
-    getCodeBlockBuilder.addStatement("else -> throw IndexOutOfBoundsException()")
+    getbody.addStatement("else -> throw IndexOutOfBoundsException()")
 
-    getCodeBlockBuilder.endControlFlow()
+    getbody.endControlFlow()
 
     typeSpecBuilder.addFunction(FunSpec.builder("get")
         .addModifiers(KModifier.OPERATOR)
-        .addCode(getCodeBlockBuilder.build())
+        .addCode(getbody.build())
         .addParameter("index", Int::class)
         .build())
 
