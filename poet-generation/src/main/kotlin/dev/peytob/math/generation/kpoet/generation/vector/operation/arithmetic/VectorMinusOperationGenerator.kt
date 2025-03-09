@@ -4,6 +4,7 @@ import com.squareup.kotlinpoet.*
 import dev.peytob.math.generation.kpoet.generated
 import dev.peytob.math.generation.kpoet.jvmName
 import dev.peytob.math.generation.kpoet.model.Function
+import dev.peytob.math.generation.kpoet.model.Primitive
 import dev.peytob.math.generation.kpoet.model.TypedVectorAccessor
 import dev.peytob.math.generation.kpoet.model.TypedVectorBase
 
@@ -120,6 +121,23 @@ fun generateMinusMutableVectorOperationFlat(leftVector: TypedVectorBase, rightVe
         .returns(leftVector.className)
         .addCode(body.build())
         .addParameters(parameters)
+        .build()
+}
+
+fun generateMinusVectorOperationScalar(leftVector: TypedVectorBase, primitive: Primitive): FunSpec {
+    val body = CodeBlock.builder()
+
+    val scalarFormArguments = leftVector.components.joinToString(", ") { component -> "r$component = scalar" }
+    body.addStatement("return this.minus(%L)", scalarFormArguments)
+
+    return FunSpec
+        .builder("minus")
+        .generated()
+        .addModifiers(KModifier.OPERATOR)
+        .receiver(leftVector.className)
+        .returns(leftVector.className)
+        .addCode(body.build())
+        .addParameter("scalar", primitive.cls)
         .build()
 }
 

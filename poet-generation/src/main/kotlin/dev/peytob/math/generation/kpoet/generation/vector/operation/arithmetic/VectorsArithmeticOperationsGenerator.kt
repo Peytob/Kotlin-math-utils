@@ -154,4 +154,37 @@ fun generateBinaryVectorOperations(generationContext: GenerationContext) {
     }.let {
         log.info("Generated {} binary vector - vector functions", it.size)
     }
+
+    generationContext.getTypedVectorBases().flatMap { leftVector ->
+        generationContext.getPrimitives().flatMap { primitive ->
+            log.debug("Generating arithmetic operations for vector {} and scalar {}", leftVector.alias, primitive.cls.simpleName)
+
+            listOf(
+                Function(
+                    file = leftVector.alias + ARITHMETIC_OPERATIONS_FILES_POSTFIX,
+                    packageName = leftVector.base.className.packageName,
+                    operandsAliases = listOf(primitive.cls.simpleName),
+                    funSpec = generatePlusVectorOperationScalar(leftVector, primitive)
+                ),
+
+                Function(
+                    file = leftVector.alias + ARITHMETIC_OPERATIONS_FILES_POSTFIX,
+                    packageName = leftVector.base.className.packageName,
+                    operandsAliases = listOf(primitive.cls.simpleName),
+                    funSpec = generateTimesVectorOperationScalar(leftVector, primitive)
+                ),
+
+                Function(
+                    file = leftVector.alias + ARITHMETIC_OPERATIONS_FILES_POSTFIX,
+                    packageName = leftVector.base.className.packageName,
+                    operandsAliases = listOf(primitive.cls.simpleName),
+                    funSpec = generateMinusVectorOperationScalar(leftVector, primitive)
+                )
+            )
+        }
+    }.onEach {
+        generationContext.registerFunction(it)
+    }.let {
+        log.info("Generated {} scalar vector functions", it.size)
+    }
 }
