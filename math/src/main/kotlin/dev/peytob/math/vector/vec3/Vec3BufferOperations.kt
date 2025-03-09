@@ -14,10 +14,10 @@ import kotlin.jvm.JvmName
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "toByteBuffer3d")
-infix fun Vec3Accessor<Double>.to(buffer: ByteBuffer) {
+@JvmName(name = "toByteBufferVec3Accessor<Double>d")
+public infix fun Vec3Accessor<Double>.to(buffer: ByteBuffer) {
   buffer.putDouble(x)
   buffer.putDouble(y)
   buffer.putDouble(z)
@@ -25,21 +25,10 @@ infix fun Vec3Accessor<Double>.to(buffer: ByteBuffer) {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "toByteBuffer3i")
-infix fun Vec3Accessor<Int>.to(buffer: ByteBuffer) {
-  buffer.putInt(x)
-  buffer.putInt(y)
-  buffer.putInt(z)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "toBuffer3i")
-infix fun Vec3Accessor<Int>.to(buffer: IntBuffer) {
+@JvmName(name = "toBufferVec3Accessor<Double>d")
+public infix fun Vec3Accessor<Double>.to(buffer: DoubleBuffer) {
   buffer.put(x)
   buffer.put(y)
   buffer.put(z)
@@ -47,43 +36,10 @@ infix fun Vec3Accessor<Int>.to(buffer: IntBuffer) {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "toByteBuffer3l")
-infix fun Vec3Accessor<Long>.to(buffer: ByteBuffer) {
-  buffer.putLong(x)
-  buffer.putLong(y)
-  buffer.putLong(z)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "toBuffer3l")
-infix fun Vec3Accessor<Long>.to(buffer: LongBuffer) {
-  buffer.put(x)
-  buffer.put(y)
-  buffer.put(z)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "toBuffer3f")
-infix fun Vec3Accessor<Float>.to(buffer: FloatBuffer) {
-  buffer.put(x)
-  buffer.put(y)
-  buffer.put(z)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "toByteBuffer3f")
-infix fun Vec3Accessor<Float>.to(buffer: ByteBuffer) {
+@JvmName(name = "toByteBufferVec3Accessor<Float>f")
+public infix fun Vec3Accessor<Float>.to(buffer: ByteBuffer) {
   buffer.putFloat(x)
   buffer.putFloat(y)
   buffer.putFloat(z)
@@ -91,10 +47,54 @@ infix fun Vec3Accessor<Float>.to(buffer: ByteBuffer) {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "toBuffer3d")
-infix fun Vec3Accessor<Double>.to(buffer: DoubleBuffer) {
+@JvmName(name = "toBufferVec3Accessor<Float>f")
+public infix fun Vec3Accessor<Float>.to(buffer: FloatBuffer) {
+  buffer.put(x)
+  buffer.put(y)
+  buffer.put(z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "toByteBufferVec3Accessor<Int>i")
+public infix fun Vec3Accessor<Int>.to(buffer: ByteBuffer) {
+  buffer.putInt(x)
+  buffer.putInt(y)
+  buffer.putInt(z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "toBufferVec3Accessor<Int>i")
+public infix fun Vec3Accessor<Int>.to(buffer: IntBuffer) {
+  buffer.put(x)
+  buffer.put(y)
+  buffer.put(z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "toByteBufferVec3Accessor<Long>l")
+public infix fun Vec3Accessor<Long>.to(buffer: ByteBuffer) {
+  buffer.putLong(x)
+  buffer.putLong(y)
+  buffer.putLong(z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "toBufferVec3Accessor<Long>l")
+public infix fun Vec3Accessor<Long>.to(buffer: LongBuffer) {
   buffer.put(x)
   buffer.put(y)
   buffer.put(z)

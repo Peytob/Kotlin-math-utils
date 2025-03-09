@@ -9,14 +9,14 @@ import kotlin.Number
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-interface Vec3<T : Number> : Vec3Accessor<T>
+public interface Vec3<T : Number> : Vec3Accessor<T>
 
-typealias Vec3i = Vec3<Int>
+public typealias Vec3d = Vec3<Double>
 
-typealias Vec3d = Vec3<Double>
+public typealias Vec3f = Vec3<Float>
 
-typealias Vec3l = Vec3<Long>
+public typealias Vec3i = Vec3<Int>
 
-typealias Vec3f = Vec3<Float>
+public typealias Vec3l = Vec3<Long>

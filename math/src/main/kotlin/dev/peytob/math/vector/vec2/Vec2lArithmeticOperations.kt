@@ -9,378 +9,425 @@ import kotlin.jvm.JvmName
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun Vec2<Long>.times(rx: Int, ry: Int): Vec2<Long> {
-  val x = (this.x * rx).toLong()
-  val y = (this.y * ry).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "times2ll")
-operator fun Vec2<Long>.times(scalar: Long): Vec2<Long> {
-  val x = (this.x * scalar).toLong()
-  val y = (this.y * scalar).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun Vec2<Long>.dot(rx: Int, ry: Int): Float {
-  val sum = x * rx + y * ry
-  return sum.toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "plusVecVec2lf")
-operator fun Vec2<Long>.plus(right: Vec2Accessor<Float>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.plus(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "timesVecVec2ll")
-operator fun Vec2<Long>.times(right: Vec2Accessor<Long>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.times(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "dotVec2ll")
-fun Vec2<Long>.dot(right: Vec2Accessor<Long>): Float = this.dot(rx = right.x, ry = right.y)
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "unaryPlusVec2l")
-operator fun Vec2<Long>.unaryPlus(): Vec2<Long> = this
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "times2ld")
-operator fun Vec2<Long>.times(scalar: Double): Vec2<Long> {
-  val x = (this.x * scalar).toLong()
-  val y = (this.y * scalar).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun Vec2<Long>.plus(rx: Double, ry: Double): Vec2<Long> {
-  val x = (this.x + rx).toLong()
-  val y = (this.y + ry).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "timesVecVec2li")
-operator fun Vec2<Long>.times(right: Vec2Accessor<Int>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.times(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "timesVecVec2ld")
-operator fun Vec2<Long>.times(right: Vec2Accessor<Double>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.times(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun Vec2<Long>.minus(rx: Float, ry: Float): Vec2<Long> {
-  val x = (this.x - rx).toLong()
-  val y = (this.y - ry).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun Vec2<Long>.dot(rx: Float, ry: Float): Float {
-  val sum = x * rx + y * ry
-  return sum.toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "plusVecVec2ll")
-operator fun Vec2<Long>.plus(right: Vec2Accessor<Long>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.plus(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "minusVecVec2lf")
-operator fun Vec2<Long>.minus(right: Vec2Accessor<Float>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.minus(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "minusVecVec2ll")
-operator fun Vec2<Long>.minus(right: Vec2Accessor<Long>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.minus(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun Vec2<Long>.minus(rx: Int, ry: Int): Vec2<Long> {
-  val x = (this.x - rx).toLong()
-  val y = (this.y - ry).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "dotVec2li")
-fun Vec2<Long>.dot(right: Vec2Accessor<Int>): Float = this.dot(rx = right.x, ry = right.y)
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "unaryMinusVec2l")
-operator fun Vec2<Long>.unaryMinus(): Vec2<Long> {
-  val x = -this.x
-  val y = -this.y
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "dotVec2lf")
-fun Vec2<Long>.dot(right: Vec2Accessor<Float>): Float = this.dot(rx = right.x, ry = right.y)
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun Vec2<Long>.times(rx: Float, ry: Float): Vec2<Long> {
-  val x = (this.x * rx).toLong()
-  val y = (this.y * ry).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "minusVecVec2ld")
-operator fun Vec2<Long>.minus(right: Vec2Accessor<Double>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.minus(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
 @JvmName(name = "plusVecVec2ld")
-operator fun Vec2<Long>.plus(right: Vec2Accessor<Double>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.plus(rx = rx, ry = ry)
+public operator fun Vec2<Long>.plus(right: Vec2Accessor<Double>): Vec2<Long> {
+  val rx = (this.x + right.x).toLong()
+  val ry = (this.y + right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun Vec2<Long>.plus(rx: Int, ry: Int): Vec2<Long> {
+public fun Vec2<Long>.plus(rx: Double, ry: Double): Vec2<Long> {
   val x = (this.x + rx).toLong()
   val y = (this.y + ry).toLong()
-  return StructVec2l(x = x, y = y)
+  return immutableVec2l(x = rx, y = ry)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "plusVecVec2li")
-operator fun Vec2<Long>.plus(right: Vec2Accessor<Int>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.plus(rx = rx, ry = ry)
+@JvmName(name = "timesVecVec2ld")
+public operator fun Vec2<Long>.times(right: Vec2Accessor<Double>): Vec2<Long> {
+  val rx = (this.x * right.x).toLong()
+  val ry = (this.y * right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
+)
+public fun Vec2<Long>.times(rx: Double, ry: Double): Vec2<Long> {
+  val x = (this.x * rx).toLong()
+  val y = (this.y * ry).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "dotVecVec2ld")
+public fun Vec2<Long>.dot(right: Vec2Accessor<Double>): Float {
+  val sum = this.x * right.x + this.y * right.y
+  return sum.toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun Vec2<Long>.dot(rx: Double, ry: Double): Float {
+  val sum = this.x * rx + this.y * ry
+  return sum.toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "minusVecVec2ld")
+public operator fun Vec2<Long>.minus(right: Vec2Accessor<Double>): Vec2<Long> {
+  val rx = (this.x - right.x).toLong()
+  val ry = (this.y - right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun Vec2<Long>.minus(rx: Double, ry: Double): Vec2<Long> {
+  val x = (this.x - rx).toLong()
+  val y = (this.y - ry).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "plusVecVec2lf")
+public operator fun Vec2<Long>.plus(right: Vec2Accessor<Float>): Vec2<Long> {
+  val rx = (this.x + right.x).toLong()
+  val ry = (this.y + right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun Vec2<Long>.plus(rx: Float, ry: Float): Vec2<Long> {
+  val x = (this.x + rx).toLong()
+  val y = (this.y + ry).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
 )
 @JvmName(name = "timesVecVec2lf")
-operator fun Vec2<Long>.times(right: Vec2Accessor<Float>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.times(rx = rx, ry = ry)
+public operator fun Vec2<Long>.times(right: Vec2Accessor<Float>): Vec2<Long> {
+  val rx = (this.x * right.x).toLong()
+  val ry = (this.y * right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun Vec2<Long>.minus(rx: Long, ry: Long): Vec2<Long> {
-  val x = (this.x - rx).toLong()
-  val y = (this.y - ry).toLong()
-  return StructVec2l(x = x, y = y)
+public fun Vec2<Long>.times(rx: Float, ry: Float): Vec2<Long> {
+  val x = (this.x * rx).toLong()
+  val y = (this.y * ry).toLong()
+  return immutableVec2l(x = rx, y = ry)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun Vec2<Long>.plus(rx: Float, ry: Float): Vec2<Long> {
-  val x = (this.x + rx).toLong()
-  val y = (this.y + ry).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun Vec2<Long>.plus(rx: Long, ry: Long): Vec2<Long> {
-  val x = (this.x + rx).toLong()
-  val y = (this.y + ry).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "times2lf")
-operator fun Vec2<Long>.times(scalar: Float): Vec2<Long> {
-  val x = (this.x * scalar).toLong()
-  val y = (this.y * scalar).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun Vec2<Long>.minus(rx: Double, ry: Double): Vec2<Long> {
-  val x = (this.x - rx).toLong()
-  val y = (this.y - ry).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "times2li")
-operator fun Vec2<Long>.times(scalar: Int): Vec2<Long> {
-  val x = (this.x * scalar).toLong()
-  val y = (this.y * scalar).toLong()
-  return StructVec2l(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun Vec2<Long>.dot(rx: Double, ry: Double): Float {
-  val sum = x * rx + y * ry
+@JvmName(name = "dotVecVec2lf")
+public fun Vec2<Long>.dot(right: Vec2Accessor<Float>): Float {
+  val sum = this.x * right.x + this.y * right.y
   return sum.toFloat()
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "dotVec2ld")
-fun Vec2<Long>.dot(right: Vec2Accessor<Double>): Float = this.dot(rx = right.x, ry = right.y)
+public fun Vec2<Long>.dot(rx: Float, ry: Float): Float {
+  val sum = this.x * rx + this.y * ry
+  return sum.toFloat()
+}
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
+)
+@JvmName(name = "minusVecVec2lf")
+public operator fun Vec2<Long>.minus(right: Vec2Accessor<Float>): Vec2<Long> {
+  val rx = (this.x - right.x).toLong()
+  val ry = (this.y - right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun Vec2<Long>.minus(rx: Float, ry: Float): Vec2<Long> {
+  val x = (this.x - rx).toLong()
+  val y = (this.y - ry).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "plusVecVec2li")
+public operator fun Vec2<Long>.plus(right: Vec2Accessor<Int>): Vec2<Long> {
+  val rx = (this.x + right.x).toLong()
+  val ry = (this.y + right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun Vec2<Long>.plus(rx: Int, ry: Int): Vec2<Long> {
+  val x = (this.x + rx).toLong()
+  val y = (this.y + ry).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "timesVecVec2li")
+public operator fun Vec2<Long>.times(right: Vec2Accessor<Int>): Vec2<Long> {
+  val rx = (this.x * right.x).toLong()
+  val ry = (this.y * right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun Vec2<Long>.times(rx: Int, ry: Int): Vec2<Long> {
+  val x = (this.x * rx).toLong()
+  val y = (this.y * ry).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "dotVecVec2li")
+public fun Vec2<Long>.dot(right: Vec2Accessor<Int>): Float {
+  val sum = this.x * right.x + this.y * right.y
+  return sum.toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun Vec2<Long>.dot(rx: Int, ry: Int): Float {
+  val sum = this.x * rx + this.y * ry
+  return sum.toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
 )
 @JvmName(name = "minusVecVec2li")
-operator fun Vec2<Long>.minus(right: Vec2Accessor<Int>): Vec2<Long> {
-  val rx = right.x
-  val ry = right.y
-  return this.minus(rx = rx, ry = ry)
+public operator fun Vec2<Long>.minus(right: Vec2Accessor<Int>): Vec2<Long> {
+  val rx = (this.x - right.x).toLong()
+  val ry = (this.y - right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun Vec2<Long>.dot(rx: Long, ry: Long): Float {
-  val sum = x * rx + y * ry
+public fun Vec2<Long>.minus(rx: Int, ry: Int): Vec2<Long> {
+  val x = (this.x - rx).toLong()
+  val y = (this.y - ry).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "plusVecVec2ll")
+public operator fun Vec2<Long>.plus(right: Vec2Accessor<Long>): Vec2<Long> {
+  val rx = (this.x + right.x).toLong()
+  val ry = (this.y + right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun Vec2<Long>.plus(rx: Long, ry: Long): Vec2<Long> {
+  val x = (this.x + rx).toLong()
+  val y = (this.y + ry).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "timesVecVec2ll")
+public operator fun Vec2<Long>.times(right: Vec2Accessor<Long>): Vec2<Long> {
+  val rx = (this.x * right.x).toLong()
+  val ry = (this.y * right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun Vec2<Long>.times(rx: Long, ry: Long): Vec2<Long> {
+  val x = (this.x * rx).toLong()
+  val y = (this.y * ry).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "dotVecVec2ll")
+public fun Vec2<Long>.dot(right: Vec2Accessor<Long>): Float {
+  val sum = this.x * right.x + this.y * right.y
   return sum.toFloat()
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun Vec2<Long>.times(rx: Double, ry: Double): Vec2<Long> {
-  val x = (this.x * rx).toLong()
-  val y = (this.y * ry).toLong()
-  return StructVec2l(x = x, y = y)
+public fun Vec2<Long>.dot(rx: Long, ry: Long): Float {
+  val sum = this.x * rx + this.y * ry
+  return sum.toFloat()
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun Vec2<Long>.times(rx: Long, ry: Long): Vec2<Long> {
-  val x = (this.x * rx).toLong()
-  val y = (this.y * ry).toLong()
-  return StructVec2l(x = x, y = y)
+@JvmName(name = "minusVecVec2ll")
+public operator fun Vec2<Long>.minus(right: Vec2Accessor<Long>): Vec2<Long> {
+  val rx = (this.x - right.x).toLong()
+  val ry = (this.y - right.y).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun Vec2<Long>.minus(rx: Long, ry: Long): Vec2<Long> {
+  val x = (this.x - rx).toLong()
+  val y = (this.y - ry).toLong()
+  return immutableVec2l(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.plus(scalar: Double): Vec2<Long> = this.plus(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.times(scalar: Double): Vec2<Long> = this.times(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.minus(scalar: Double): Vec2<Long> = this.minus(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.plus(scalar: Float): Vec2<Long> = this.plus(rx = scalar, ry = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.times(scalar: Float): Vec2<Long> = this.times(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.minus(scalar: Float): Vec2<Long> = this.minus(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.plus(scalar: Int): Vec2<Long> = this.plus(rx = scalar, ry = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.times(scalar: Int): Vec2<Long> = this.times(rx = scalar, ry = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.minus(scalar: Int): Vec2<Long> = this.minus(rx = scalar, ry = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.plus(scalar: Long): Vec2<Long> = this.plus(rx = scalar, ry = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.times(scalar: Long): Vec2<Long> = this.times(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun Vec2<Long>.minus(scalar: Long): Vec2<Long> = this.minus(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "unaryPlusVec2l")
+public operator fun Vec2<Long>.unaryPlus(): Vec2<Long> = this
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "unaryMinusVec2l")
+public operator fun Vec2<Long>.unaryMinus(): Vec2<Long> {
+  val x = -this.x
+  val y = -this.y
+  return immutableVec2l(x = x, y = y)
 }

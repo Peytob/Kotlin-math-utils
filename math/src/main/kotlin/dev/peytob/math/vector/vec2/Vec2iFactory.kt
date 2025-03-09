@@ -9,90 +9,94 @@ import kotlin.jvm.JvmName
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "immutableVec2il")
-fun immutableVec2i(right: Vec2Accessor<Long>): Vec2<Int> {
-  val rx = right.x
-  val ry = right.y
-  return immutableVec2i(rx = rx, ry = ry)
-}
+public fun immutableVec2i(): Vec2<Int> = StructVec2i(0, 0)
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun immutableVec2i(): Vec2<Int> = StructVec2i(0, 0)
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun immutableVec2i(rx: Float, ry: Float): Vec2<Int> {
-  val x = rx.toInt()
-  val y = ry.toInt()
-  return StructVec2i(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
 @JvmName(name = "immutableVec2id")
-fun immutableVec2i(right: Vec2Accessor<Double>): Vec2<Int> {
-  val rx = right.x
-  val ry = right.y
-  return immutableVec2i(rx = rx, ry = ry)
+public fun immutableVec2i(right: Vec2Accessor<Double>): Vec2<Int> {
+  val x = right.x.toInt()
+  val y = right.y.toInt()
+  return StructVec2i(x = x, y = y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "immutableVec2ii")
-fun immutableVec2i(right: Vec2Accessor<Int>): Vec2<Int> {
-  val rx = right.x
-  val ry = right.y
-  return immutableVec2i(rx = rx, ry = ry)
+@JvmName(name = "immutableVec2id")
+public fun immutableVec2i(x: Double, y: Double): Vec2<Int> {
+  val rx = x.toInt()
+  val ry = y.toInt()
+  return StructVec2i(x = rx, y = ry)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
 @JvmName(name = "immutableVec2if")
-fun immutableVec2i(right: Vec2Accessor<Float>): Vec2<Int> {
-  val rx = right.x
-  val ry = right.y
-  return immutableVec2i(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun immutableVec2i(rx: Double, ry: Double): Vec2<Int> {
-  val x = rx.toInt()
-  val y = ry.toInt()
+public fun immutableVec2i(right: Vec2Accessor<Float>): Vec2<Int> {
+  val x = right.x.toInt()
+  val y = right.y.toInt()
   return StructVec2i(x = x, y = y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun immutableVec2i(rx: Int, ry: Int): Vec2<Int> {
-  val x = rx.toInt()
-  val y = ry.toInt()
+@JvmName(name = "immutableVec2if")
+public fun immutableVec2i(x: Float, y: Float): Vec2<Int> {
+  val rx = x.toInt()
+  val ry = y.toInt()
+  return StructVec2i(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "immutableVec2ii")
+public fun immutableVec2i(right: Vec2Accessor<Int>): Vec2<Int> {
+  val x = right.x.toInt()
+  val y = right.y.toInt()
   return StructVec2i(x = x, y = y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun immutableVec2i(rx: Long, ry: Long): Vec2<Int> {
-  val x = rx.toInt()
-  val y = ry.toInt()
+@JvmName(name = "immutableVec2ii")
+public fun immutableVec2i(x: Int, y: Int): Vec2<Int> {
+  val rx = x.toInt()
+  val ry = y.toInt()
+  return StructVec2i(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "immutableVec2il")
+public fun immutableVec2i(right: Vec2Accessor<Long>): Vec2<Int> {
+  val x = right.x.toInt()
+  val y = right.y.toInt()
   return StructVec2i(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "immutableVec2il")
+public fun immutableVec2i(x: Long, y: Long): Vec2<Int> {
+  val rx = x.toInt()
+  val ry = y.toInt()
+  return StructVec2i(x = rx, y = ry)
 }

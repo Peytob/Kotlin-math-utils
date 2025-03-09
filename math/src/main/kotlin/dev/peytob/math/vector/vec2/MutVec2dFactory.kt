@@ -9,90 +9,94 @@ import kotlin.jvm.JvmName
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun mutableVec2d(rx: Double, ry: Double): MutVec2<Double> {
-  val x = rx.toDouble()
-  val y = ry.toDouble()
-  return StructMutVec2d(x = x, y = y)
-}
+public fun mutableVec2d(): MutVec2<Double> = StructMutVec2d(0.0, 0.0)
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun mutableVec2d(rx: Float, ry: Float): MutVec2<Double> {
-  val x = rx.toDouble()
-  val y = ry.toDouble()
-  return StructMutVec2d(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun mutableVec2d(): MutVec2<Double> = StructMutVec2d(0.0, 0.0)
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "mutableVec2df")
-fun mutableVec2d(right: Vec2Accessor<Float>): MutVec2<Double> {
-  val rx = right.x
-  val ry = right.y
-  return mutableVec2d(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun mutableVec2d(rx: Int, ry: Int): MutVec2<Double> {
-  val x = rx.toDouble()
-  val y = ry.toDouble()
-  return StructMutVec2d(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
 @JvmName(name = "mutableVec2dd")
-fun mutableVec2d(right: Vec2Accessor<Double>): MutVec2<Double> {
-  val rx = right.x
-  val ry = right.y
-  return mutableVec2d(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun mutableVec2d(rx: Long, ry: Long): MutVec2<Double> {
-  val x = rx.toDouble()
-  val y = ry.toDouble()
+public fun mutableVec2d(right: Vec2Accessor<Double>): MutVec2<Double> {
+  val x = right.x.toDouble()
+  val y = right.y.toDouble()
   return StructMutVec2d(x = x, y = y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "mutableVec2di")
-fun mutableVec2d(right: Vec2Accessor<Int>): MutVec2<Double> {
-  val rx = right.x
-  val ry = right.y
-  return mutableVec2d(rx = rx, ry = ry)
+@JvmName(name = "mutableVec2dd")
+public fun mutableVec2d(x: Double, y: Double): MutVec2<Double> {
+  val rx = x.toDouble()
+  val ry = y.toDouble()
+  return StructMutVec2d(x = rx, y = ry)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec2df")
+public fun mutableVec2d(right: Vec2Accessor<Float>): MutVec2<Double> {
+  val x = right.x.toDouble()
+  val y = right.y.toDouble()
+  return StructMutVec2d(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec2df")
+public fun mutableVec2d(x: Float, y: Float): MutVec2<Double> {
+  val rx = x.toDouble()
+  val ry = y.toDouble()
+  return StructMutVec2d(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec2di")
+public fun mutableVec2d(right: Vec2Accessor<Int>): MutVec2<Double> {
+  val x = right.x.toDouble()
+  val y = right.y.toDouble()
+  return StructMutVec2d(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec2di")
+public fun mutableVec2d(x: Int, y: Int): MutVec2<Double> {
+  val rx = x.toDouble()
+  val ry = y.toDouble()
+  return StructMutVec2d(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
 )
 @JvmName(name = "mutableVec2dl")
-fun mutableVec2d(right: Vec2Accessor<Long>): MutVec2<Double> {
-  val rx = right.x
-  val ry = right.y
-  return mutableVec2d(rx = rx, ry = ry)
+public fun mutableVec2d(right: Vec2Accessor<Long>): MutVec2<Double> {
+  val x = right.x.toDouble()
+  val y = right.y.toDouble()
+  return StructMutVec2d(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec2dl")
+public fun mutableVec2d(x: Long, y: Long): MutVec2<Double> {
+  val rx = x.toDouble()
+  val ry = y.toDouble()
+  return StructMutVec2d(x = rx, y = ry)
 }

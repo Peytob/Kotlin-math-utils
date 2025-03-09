@@ -14,80 +14,80 @@ import kotlin.jvm.JvmName
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "toByteBuffer2d")
-infix fun Vec2Accessor<Double>.to(buffer: ByteBuffer) {
+@JvmName(name = "toByteBufferVec2Accessor<Double>d")
+public infix fun Vec2Accessor<Double>.to(buffer: ByteBuffer) {
   buffer.putDouble(x)
   buffer.putDouble(y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "toByteBuffer2f")
-infix fun Vec2Accessor<Float>.to(buffer: ByteBuffer) {
+@JvmName(name = "toBufferVec2Accessor<Double>d")
+public infix fun Vec2Accessor<Double>.to(buffer: DoubleBuffer) {
+  buffer.put(x)
+  buffer.put(y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "toByteBufferVec2Accessor<Float>f")
+public infix fun Vec2Accessor<Float>.to(buffer: ByteBuffer) {
   buffer.putFloat(x)
   buffer.putFloat(y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "toByteBuffer2l")
-infix fun Vec2Accessor<Long>.to(buffer: ByteBuffer) {
-  buffer.putLong(x)
-  buffer.putLong(y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "toBuffer2d")
-infix fun Vec2Accessor<Double>.to(buffer: DoubleBuffer) {
+@JvmName(name = "toBufferVec2Accessor<Float>f")
+public infix fun Vec2Accessor<Float>.to(buffer: FloatBuffer) {
   buffer.put(x)
   buffer.put(y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "toByteBuffer2i")
-infix fun Vec2Accessor<Int>.to(buffer: ByteBuffer) {
+@JvmName(name = "toByteBufferVec2Accessor<Int>i")
+public infix fun Vec2Accessor<Int>.to(buffer: ByteBuffer) {
   buffer.putInt(x)
   buffer.putInt(y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "toBuffer2i")
-infix fun Vec2Accessor<Int>.to(buffer: IntBuffer) {
+@JvmName(name = "toBufferVec2Accessor<Int>i")
+public infix fun Vec2Accessor<Int>.to(buffer: IntBuffer) {
   buffer.put(x)
   buffer.put(y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "toBuffer2f")
-infix fun Vec2Accessor<Float>.to(buffer: FloatBuffer) {
-  buffer.put(x)
-  buffer.put(y)
+@JvmName(name = "toByteBufferVec2Accessor<Long>l")
+public infix fun Vec2Accessor<Long>.to(buffer: ByteBuffer) {
+  buffer.putLong(x)
+  buffer.putLong(y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "toBuffer2l")
-infix fun Vec2Accessor<Long>.to(buffer: LongBuffer) {
+@JvmName(name = "toBufferVec2Accessor<Long>l")
+public infix fun Vec2Accessor<Long>.to(buffer: LongBuffer) {
   buffer.put(x)
   buffer.put(y)
 }

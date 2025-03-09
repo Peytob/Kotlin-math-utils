@@ -9,18 +9,18 @@ import kotlin.Number
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-interface MutVec2<T : Number> : Vec2Accessor<T> {
+public interface MutVec2<T : Number> : Vec2Accessor<T> {
   override var x: T
 
   override var y: T
 }
 
-typealias MutVec2f = MutVec2<Float>
+public typealias MutVec2d = MutVec2<Double>
 
-typealias MutVec2i = MutVec2<Int>
+public typealias MutVec2f = MutVec2<Float>
 
-typealias MutVec2d = MutVec2<Double>
+public typealias MutVec2i = MutVec2<Int>
 
-typealias MutVec2l = MutVec2<Long>
+public typealias MutVec2l = MutVec2<Long>

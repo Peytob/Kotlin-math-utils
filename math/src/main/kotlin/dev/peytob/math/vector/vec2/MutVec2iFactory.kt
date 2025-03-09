@@ -9,90 +9,94 @@ import kotlin.jvm.JvmName
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun mutableVec2i(rx: Double, ry: Double): MutVec2<Int> {
-  val x = rx.toInt()
-  val y = ry.toInt()
-  return StructMutVec2i(x = x, y = y)
-}
+public fun mutableVec2i(): MutVec2<Int> = StructMutVec2i(0, 0)
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun mutableVec2i(rx: Int, ry: Int): MutVec2<Int> {
-  val x = rx.toInt()
-  val y = ry.toInt()
-  return StructMutVec2i(x = x, y = y)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
 @JvmName(name = "mutableVec2id")
-fun mutableVec2i(right: Vec2Accessor<Double>): MutVec2<Int> {
-  val rx = right.x
-  val ry = right.y
-  return mutableVec2i(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "mutableVec2il")
-fun mutableVec2i(right: Vec2Accessor<Long>): MutVec2<Int> {
-  val rx = right.x
-  val ry = right.y
-  return mutableVec2i(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun mutableVec2i(rx: Long, ry: Long): MutVec2<Int> {
-  val x = rx.toInt()
-  val y = ry.toInt()
+public fun mutableVec2i(right: Vec2Accessor<Double>): MutVec2<Int> {
+  val x = right.x.toInt()
+  val y = right.y.toInt()
   return StructMutVec2i(x = x, y = y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun mutableVec2i(): MutVec2<Int> = StructMutVec2i(0, 0)
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun mutableVec2i(rx: Float, ry: Float): MutVec2<Int> {
-  val x = rx.toInt()
-  val y = ry.toInt()
-  return StructMutVec2i(x = x, y = y)
+@JvmName(name = "mutableVec2id")
+public fun mutableVec2i(x: Double, y: Double): MutVec2<Int> {
+  val rx = x.toInt()
+  val ry = y.toInt()
+  return StructMutVec2i(x = rx, y = ry)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
 @JvmName(name = "mutableVec2if")
-fun mutableVec2i(right: Vec2Accessor<Float>): MutVec2<Int> {
-  val rx = right.x
-  val ry = right.y
-  return mutableVec2i(rx = rx, ry = ry)
+public fun mutableVec2i(right: Vec2Accessor<Float>): MutVec2<Int> {
+  val x = right.x.toInt()
+  val y = right.y.toInt()
+  return StructMutVec2i(x = x, y = y)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec2if")
+public fun mutableVec2i(x: Float, y: Float): MutVec2<Int> {
+  val rx = x.toInt()
+  val ry = y.toInt()
+  return StructMutVec2i(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
 )
 @JvmName(name = "mutableVec2ii")
-fun mutableVec2i(right: Vec2Accessor<Int>): MutVec2<Int> {
-  val rx = right.x
-  val ry = right.y
-  return mutableVec2i(rx = rx, ry = ry)
+public fun mutableVec2i(right: Vec2Accessor<Int>): MutVec2<Int> {
+  val x = right.x.toInt()
+  val y = right.y.toInt()
+  return StructMutVec2i(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec2ii")
+public fun mutableVec2i(x: Int, y: Int): MutVec2<Int> {
+  val rx = x.toInt()
+  val ry = y.toInt()
+  return StructMutVec2i(x = rx, y = ry)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec2il")
+public fun mutableVec2i(right: Vec2Accessor<Long>): MutVec2<Int> {
+  val x = right.x.toInt()
+  val y = right.y.toInt()
+  return StructMutVec2i(x = x, y = y)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec2il")
+public fun mutableVec2i(x: Long, y: Long): MutVec2<Int> {
+  val rx = x.toInt()
+  val ry = y.toInt()
+  return StructMutVec2i(x = rx, y = ry)
 }

@@ -6,29 +6,29 @@ import kotlin.Number
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-interface Vec3Accessor<T : Number> {
-  val elementSizeBytes: Int
+public interface Vec3Accessor<T : Number> {
+  public val elementSizeBytes: Int
 
-  val vectorSizeBytes: Int
+  public val vectorSizeBytes: Int
 
-  val elementsCount: Int
+  public val elementsCount: Int
     get() = 3
 
-  val x: T
+  public val x: T
 
-  val y: T
+  public val y: T
 
-  val z: T
+  public val z: T
 
-  operator fun component0(): T = x
+  public operator fun component0(): T = x
 
-  operator fun component1(): T = y
+  public operator fun component1(): T = y
 
-  operator fun component2(): T = z
+  public operator fun component2(): T = z
 
-  operator fun `get`(index: Int) {
+  public operator fun `get`(index: Int) {
     when (index) {
       0 -> x
       1 -> y

@@ -9,114 +9,118 @@ import kotlin.jvm.JvmName
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
+)
+public fun immutableVec3l(): Vec3<Long> = StructVec3l(0L, 0L, 0L)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
 )
 @JvmName(name = "immutableVec3ld")
-fun immutableVec3l(right: Vec3Accessor<Double>): Vec3<Long> {
-  val rx = right.x
-  val ry = right.y
-  val rz = right.z
-  return immutableVec3l(rx = rx, ry = ry, rz = rz)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun immutableVec3l(): Vec3<Long> = StructVec3l(0L, 0L, 0L)
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun immutableVec3l(
-  rx: Float,
-  ry: Float,
-  rz: Float,
-): Vec3<Long> {
-  val x = rx.toLong()
-  val y = ry.toLong()
-  val z = rz.toLong()
+public fun immutableVec3l(right: Vec3Accessor<Double>): Vec3<Long> {
+  val x = right.x.toLong()
+  val y = right.y.toLong()
+  val z = right.z.toLong()
   return StructVec3l(x = x, y = y, z = z)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun immutableVec3l(
-  rx: Int,
-  ry: Int,
-  rz: Int,
+@JvmName(name = "immutableVec3ld")
+public fun immutableVec3l(
+  x: Double,
+  y: Double,
+  z: Double,
 ): Vec3<Long> {
-  val x = rx.toLong()
-  val y = ry.toLong()
-  val z = rz.toLong()
-  return StructVec3l(x = x, y = y, z = z)
+  val rx = x.toLong()
+  val ry = y.toLong()
+  val rz = z.toLong()
+  return StructVec3l(x = rx, y = ry, z = rz)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
 @JvmName(name = "immutableVec3lf")
-fun immutableVec3l(right: Vec3Accessor<Float>): Vec3<Long> {
-  val rx = right.x
-  val ry = right.y
-  val rz = right.z
-  return immutableVec3l(rx = rx, ry = ry, rz = rz)
+public fun immutableVec3l(right: Vec3Accessor<Float>): Vec3<Long> {
+  val x = right.x.toLong()
+  val y = right.y.toLong()
+  val z = right.z.toLong()
+  return StructVec3l(x = x, y = y, z = z)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
+)
+@JvmName(name = "immutableVec3lf")
+public fun immutableVec3l(
+  x: Float,
+  y: Float,
+  z: Float,
+): Vec3<Long> {
+  val rx = x.toLong()
+  val ry = y.toLong()
+  val rz = z.toLong()
+  return StructVec3l(x = rx, y = ry, z = rz)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
 )
 @JvmName(name = "immutableVec3li")
-fun immutableVec3l(right: Vec3Accessor<Int>): Vec3<Long> {
-  val rx = right.x
-  val ry = right.y
-  val rz = right.z
-  return immutableVec3l(rx = rx, ry = ry, rz = rz)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun immutableVec3l(
-  rx: Double,
-  ry: Double,
-  rz: Double,
-): Vec3<Long> {
-  val x = rx.toLong()
-  val y = ry.toLong()
-  val z = rz.toLong()
+public fun immutableVec3l(right: Vec3Accessor<Int>): Vec3<Long> {
+  val x = right.x.toLong()
+  val y = right.y.toLong()
+  val z = right.z.toLong()
   return StructVec3l(x = x, y = y, z = z)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
+)
+@JvmName(name = "immutableVec3li")
+public fun immutableVec3l(
+  x: Int,
+  y: Int,
+  z: Int,
+): Vec3<Long> {
+  val rx = x.toLong()
+  val ry = y.toLong()
+  val rz = z.toLong()
+  return StructVec3l(x = rx, y = ry, z = rz)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
 )
 @JvmName(name = "immutableVec3ll")
-fun immutableVec3l(right: Vec3Accessor<Long>): Vec3<Long> {
-  val rx = right.x
-  val ry = right.y
-  val rz = right.z
-  return immutableVec3l(rx = rx, ry = ry, rz = rz)
+public fun immutableVec3l(right: Vec3Accessor<Long>): Vec3<Long> {
+  val x = right.x.toLong()
+  val y = right.y.toLong()
+  val z = right.z.toLong()
+  return StructVec3l(x = x, y = y, z = z)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun immutableVec3l(
-  rx: Long,
-  ry: Long,
-  rz: Long,
+@JvmName(name = "immutableVec3ll")
+public fun immutableVec3l(
+  x: Long,
+  y: Long,
+  z: Long,
 ): Vec3<Long> {
-  val x = rx.toLong()
-  val y = ry.toLong()
-  val z = rz.toLong()
-  return StructVec3l(x = x, y = y, z = z)
+  val rx = x.toLong()
+  val ry = y.toLong()
+  val rz = z.toLong()
+  return StructVec3l(x = rx, y = ry, z = rz)
 }

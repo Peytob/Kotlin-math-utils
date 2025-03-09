@@ -10,10 +10,10 @@ import kotlin.math.sqrt
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "distance2id")
-fun distance(left: Vec2Accessor<Int>, right: Vec2Accessor<Double>): Float {
+@JvmName(name = "distanceVec2dVec2d")
+public fun distance(left: Vec2Accessor<Double>, right: Vec2Accessor<Double>): Float {
   var s = 0.0
   s += (left.x - right.x) * (left.x - right.x)
   s += (left.y - right.y) * (left.y - right.y)
@@ -22,150 +22,10 @@ fun distance(left: Vec2Accessor<Int>, right: Vec2Accessor<Double>): Float {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "distance2di")
-fun distance(
-  lx: Double,
-  ly: Double,
-  rx: Int,
-  ry: Int,
-): Float {
-  var s = 0.0
-  s += (lx - rx) * (lx - rx)
-  s += (ly - ry) * (ly - ry)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2ii")
-fun distance(
-  lx: Int,
-  ly: Int,
-  rx: Int,
-  ry: Int,
-): Float {
-  var s = 0.0
-  s += (lx - rx) * (lx - rx)
-  s += (ly - ry) * (ly - ry)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2fl")
-fun distance(
-  lx: Float,
-  ly: Float,
-  rx: Long,
-  ry: Long,
-): Float {
-  var s = 0.0
-  s += (lx - rx) * (lx - rx)
-  s += (ly - ry) * (ly - ry)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2if")
-fun distance(left: Vec2Accessor<Int>, right: Vec2Accessor<Float>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2df")
-fun distance(
-  lx: Double,
-  ly: Double,
-  rx: Float,
-  ry: Float,
-): Float {
-  var s = 0.0
-  s += (lx - rx) * (lx - rx)
-  s += (ly - ry) * (ly - ry)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2ld")
-fun distance(left: Vec2Accessor<Long>, right: Vec2Accessor<Double>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2fl")
-fun distance(left: Vec2Accessor<Float>, right: Vec2Accessor<Long>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2di")
-fun distance(left: Vec2Accessor<Double>, right: Vec2Accessor<Int>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2ff")
-fun distance(left: Vec2Accessor<Float>, right: Vec2Accessor<Float>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2ii")
-fun distance(left: Vec2Accessor<Int>, right: Vec2Accessor<Int>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2dd")
-fun distance(
+@JvmName(name = "distanceVec2dVec2d")
+public fun distance(
   lx: Double,
   ly: Double,
   rx: Double,
@@ -179,27 +39,10 @@ fun distance(
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "distance2il")
-fun distance(
-  lx: Int,
-  ly: Int,
-  rx: Long,
-  ry: Long,
-): Float {
-  var s = 0.0
-  s += (lx - rx) * (lx - rx)
-  s += (ly - ry) * (ly - ry)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2li")
-fun distance(left: Vec2Accessor<Long>, right: Vec2Accessor<Int>): Float {
+@JvmName(name = "distanceVec2dVec2f")
+public fun distance(left: Vec2Accessor<Double>, right: Vec2Accessor<Float>): Float {
   var s = 0.0
   s += (left.x - right.x) * (left.x - right.x)
   s += (left.y - right.y) * (left.y - right.y)
@@ -208,152 +51,12 @@ fun distance(left: Vec2Accessor<Long>, right: Vec2Accessor<Int>): Float {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "distance2il")
-fun distance(left: Vec2Accessor<Int>, right: Vec2Accessor<Long>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2ll")
-fun distance(
-  lx: Long,
-  ly: Long,
-  rx: Long,
-  ry: Long,
-): Float {
-  var s = 0.0
-  s += (lx - rx) * (lx - rx)
-  s += (ly - ry) * (ly - ry)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2fd")
-fun distance(left: Vec2Accessor<Float>, right: Vec2Accessor<Double>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2id")
-fun distance(
-  lx: Int,
-  ly: Int,
-  rx: Double,
-  ry: Double,
-): Float {
-  var s = 0.0
-  s += (lx - rx) * (lx - rx)
-  s += (ly - ry) * (ly - ry)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2fi")
-fun distance(left: Vec2Accessor<Float>, right: Vec2Accessor<Int>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2ld")
-fun distance(
-  lx: Long,
-  ly: Long,
-  rx: Double,
-  ry: Double,
-): Float {
-  var s = 0.0
-  s += (lx - rx) * (lx - rx)
-  s += (ly - ry) * (ly - ry)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2fi")
-fun distance(
-  lx: Float,
-  ly: Float,
-  rx: Int,
-  ry: Int,
-): Float {
-  var s = 0.0
-  s += (lx - rx) * (lx - rx)
-  s += (ly - ry) * (ly - ry)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2ll")
-fun distance(left: Vec2Accessor<Long>, right: Vec2Accessor<Long>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2dl")
-fun distance(left: Vec2Accessor<Double>, right: Vec2Accessor<Long>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2lf")
-fun distance(left: Vec2Accessor<Long>, right: Vec2Accessor<Float>): Float {
-  var s = 0.0
-  s += (left.x - right.x) * (left.x - right.x)
-  s += (left.y - right.y) * (left.y - right.y)
-  return sqrt(s).toFloat()
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "distance2lf")
-fun distance(
-  lx: Long,
-  ly: Long,
+@JvmName(name = "distanceVec2dVec2f")
+public fun distance(
+  lx: Double,
+  ly: Double,
   rx: Float,
   ry: Float,
 ): Float {
@@ -365,10 +68,10 @@ fun distance(
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "distance2dd")
-fun distance(left: Vec2Accessor<Double>, right: Vec2Accessor<Double>): Float {
+@JvmName(name = "distanceVec2dVec2i")
+public fun distance(left: Vec2Accessor<Double>, right: Vec2Accessor<Int>): Float {
   var s = 0.0
   s += (left.x - right.x) * (left.x - right.x)
   s += (left.y - right.y) * (left.y - right.y)
@@ -377,14 +80,14 @@ fun distance(left: Vec2Accessor<Double>, right: Vec2Accessor<Double>): Float {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "distance2fd")
-fun distance(
-  lx: Float,
-  ly: Float,
-  rx: Double,
-  ry: Double,
+@JvmName(name = "distanceVec2dVec2i")
+public fun distance(
+  lx: Double,
+  ly: Double,
+  rx: Int,
+  ry: Int,
 ): Float {
   var s = 0.0
   s += (lx - rx) * (lx - rx)
@@ -394,10 +97,22 @@ fun distance(
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "distance2dl")
-fun distance(
+@JvmName(name = "distanceVec2dVec2l")
+public fun distance(left: Vec2Accessor<Double>, right: Vec2Accessor<Long>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2dVec2l")
+public fun distance(
   lx: Double,
   ly: Double,
   rx: Long,
@@ -411,10 +126,51 @@ fun distance(
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "distance2ff")
-fun distance(
+@JvmName(name = "distanceVec2fVec2d")
+public fun distance(left: Vec2Accessor<Float>, right: Vec2Accessor<Double>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2fVec2d")
+public fun distance(
+  lx: Float,
+  ly: Float,
+  rx: Double,
+  ry: Double,
+): Float {
+  var s = 0.0
+  s += (lx - rx) * (lx - rx)
+  s += (ly - ry) * (ly - ry)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2fVec2f")
+public fun distance(left: Vec2Accessor<Float>, right: Vec2Accessor<Float>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2fVec2f")
+public fun distance(
   lx: Float,
   ly: Float,
   rx: Float,
@@ -428,10 +184,10 @@ fun distance(
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "distance2df")
-fun distance(left: Vec2Accessor<Double>, right: Vec2Accessor<Float>): Float {
+@JvmName(name = "distanceVec2fVec2i")
+public fun distance(left: Vec2Accessor<Float>, right: Vec2Accessor<Int>): Float {
   var s = 0.0
   s += (left.x - right.x) * (left.x - right.x)
   s += (left.y - right.y) * (left.y - right.y)
@@ -440,10 +196,97 @@ fun distance(left: Vec2Accessor<Double>, right: Vec2Accessor<Float>): Float {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "distance2if")
-fun distance(
+@JvmName(name = "distanceVec2fVec2i")
+public fun distance(
+  lx: Float,
+  ly: Float,
+  rx: Int,
+  ry: Int,
+): Float {
+  var s = 0.0
+  s += (lx - rx) * (lx - rx)
+  s += (ly - ry) * (ly - ry)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2fVec2l")
+public fun distance(left: Vec2Accessor<Float>, right: Vec2Accessor<Long>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2fVec2l")
+public fun distance(
+  lx: Float,
+  ly: Float,
+  rx: Long,
+  ry: Long,
+): Float {
+  var s = 0.0
+  s += (lx - rx) * (lx - rx)
+  s += (ly - ry) * (ly - ry)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2iVec2d")
+public fun distance(left: Vec2Accessor<Int>, right: Vec2Accessor<Double>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2iVec2d")
+public fun distance(
+  lx: Int,
+  ly: Int,
+  rx: Double,
+  ry: Double,
+): Float {
+  var s = 0.0
+  s += (lx - rx) * (lx - rx)
+  s += (ly - ry) * (ly - ry)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2iVec2f")
+public fun distance(left: Vec2Accessor<Int>, right: Vec2Accessor<Float>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2iVec2f")
+public fun distance(
   lx: Int,
   ly: Int,
   rx: Float,
@@ -457,14 +300,171 @@ fun distance(
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "distance2li")
-fun distance(
+@JvmName(name = "distanceVec2iVec2i")
+public fun distance(left: Vec2Accessor<Int>, right: Vec2Accessor<Int>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2iVec2i")
+public fun distance(
+  lx: Int,
+  ly: Int,
+  rx: Int,
+  ry: Int,
+): Float {
+  var s = 0.0
+  s += (lx - rx) * (lx - rx)
+  s += (ly - ry) * (ly - ry)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2iVec2l")
+public fun distance(left: Vec2Accessor<Int>, right: Vec2Accessor<Long>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2iVec2l")
+public fun distance(
+  lx: Int,
+  ly: Int,
+  rx: Long,
+  ry: Long,
+): Float {
+  var s = 0.0
+  s += (lx - rx) * (lx - rx)
+  s += (ly - ry) * (ly - ry)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2lVec2d")
+public fun distance(left: Vec2Accessor<Long>, right: Vec2Accessor<Double>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2lVec2d")
+public fun distance(
+  lx: Long,
+  ly: Long,
+  rx: Double,
+  ry: Double,
+): Float {
+  var s = 0.0
+  s += (lx - rx) * (lx - rx)
+  s += (ly - ry) * (ly - ry)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2lVec2f")
+public fun distance(left: Vec2Accessor<Long>, right: Vec2Accessor<Float>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2lVec2f")
+public fun distance(
+  lx: Long,
+  ly: Long,
+  rx: Float,
+  ry: Float,
+): Float {
+  var s = 0.0
+  s += (lx - rx) * (lx - rx)
+  s += (ly - ry) * (ly - ry)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2lVec2i")
+public fun distance(left: Vec2Accessor<Long>, right: Vec2Accessor<Int>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2lVec2i")
+public fun distance(
   lx: Long,
   ly: Long,
   rx: Int,
   ry: Int,
+): Float {
+  var s = 0.0
+  s += (lx - rx) * (lx - rx)
+  s += (ly - ry) * (ly - ry)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2lVec2l")
+public fun distance(left: Vec2Accessor<Long>, right: Vec2Accessor<Long>): Float {
+  var s = 0.0
+  s += (left.x - right.x) * (left.x - right.x)
+  s += (left.y - right.y) * (left.y - right.y)
+  return sqrt(s).toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "distanceVec2lVec2l")
+public fun distance(
+  lx: Long,
+  ly: Long,
+  rx: Long,
+  ry: Long,
 ): Float {
   var s = 0.0
   s += (lx - rx) * (lx - rx)

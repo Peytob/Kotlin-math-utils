@@ -7,7 +7,7 @@ import kotlin.String
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
 internal data class StructVec2f(
   override val x: Float,

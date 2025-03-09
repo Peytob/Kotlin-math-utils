@@ -6,7 +6,7 @@ import kotlin.String
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
 internal data class StructMutVec3i(
   override var x: Int,

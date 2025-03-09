@@ -9,30 +9,20 @@ import kotlin.jvm.JvmName
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun MutVec2<Float>.times(rx: Int, ry: Int): MutVec2<Float> {
-  this.x = (this.x * rx).toFloat()
-  this.y = (this.y * ry).toFloat()
+@JvmName(name = "plusVecVec2fd")
+public operator fun MutVec2<Float>.plus(right: Vec2Accessor<Double>): MutVec2<Float> {
+  this.x = (this.x + right.x).toFloat()
+  this.y = (this.y + right.y).toFloat()
   return this
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "timesMut2fi")
-operator fun MutVec2<Float>.times(scalar: Int): MutVec2<Float> {
-  this.x = (this.x * scalar).toFloat()
-  this.y = (this.y * scalar).toFloat()
-  return this
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun MutVec2<Float>.plus(rx: Int, ry: Int): MutVec2<Float> {
+public fun MutVec2<Float>.plus(rx: Double, ry: Double): MutVec2<Float> {
   this.x = (this.x + rx).toFloat()
   this.y = (this.y + ry).toFloat()
   return this
@@ -40,20 +30,20 @@ fun MutVec2<Float>.plus(rx: Int, ry: Int): MutVec2<Float> {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "unaryMinusMutVec2f")
-operator fun MutVec2<Float>.unaryMinus(): MutVec2<Float> {
-  this.x = -this.x
-  this.y = -this.y
+@JvmName(name = "timesVecVec2fd")
+public operator fun MutVec2<Float>.times(right: Vec2Accessor<Double>): MutVec2<Float> {
+  this.x = (this.x * right.x).toFloat()
+  this.y = (this.y * right.y).toFloat()
   return this
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun MutVec2<Float>.times(rx: Float, ry: Float): MutVec2<Float> {
+public fun MutVec2<Float>.times(rx: Double, ry: Double): MutVec2<Float> {
   this.x = (this.x * rx).toFloat()
   this.y = (this.y * ry).toFloat()
   return this
@@ -61,42 +51,60 @@ fun MutVec2<Float>.times(rx: Float, ry: Float): MutVec2<Float> {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "timesVecMutVec2fd")
-operator fun MutVec2<Float>.times(right: Vec2Accessor<Double>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.times(rx = rx, ry = ry)
+@JvmName(name = "dotVecVec2fd")
+public fun MutVec2<Float>.dot(right: Vec2Accessor<Double>): Float {
+  val sum = this.x * right.x + this.y * right.y
+  return sum.toFloat()
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "plusVecMutVec2ff")
-operator fun MutVec2<Float>.plus(right: Vec2Accessor<Float>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.plus(rx = rx, ry = ry)
+public fun MutVec2<Float>.dot(rx: Double, ry: Double): Float {
+  val sum = this.x * rx + this.y * ry
+  return sum.toFloat()
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "plusVecMutVec2fi")
-operator fun MutVec2<Float>.plus(right: Vec2Accessor<Int>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.plus(rx = rx, ry = ry)
+@JvmName(name = "minusVecVec2fd")
+public operator fun MutVec2<Float>.minus(right: Vec2Accessor<Double>): MutVec2<Float> {
+  this.x = (this.x - right.x).toFloat()
+  this.y = (this.y - right.y).toFloat()
+  return this
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun MutVec2<Float>.plus(rx: Float, ry: Float): MutVec2<Float> {
+public fun MutVec2<Float>.minus(rx: Double, ry: Double): MutVec2<Float> {
+  this.x = (this.x - rx).toFloat()
+  this.y = (this.y - ry).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "plusVecVec2ff")
+public operator fun MutVec2<Float>.plus(right: Vec2Accessor<Float>): MutVec2<Float> {
+  this.x = (this.x + right.x).toFloat()
+  this.y = (this.y + right.y).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun MutVec2<Float>.plus(rx: Float, ry: Float): MutVec2<Float> {
   this.x = (this.x + rx).toFloat()
   this.y = (this.y + ry).toFloat()
   return this
@@ -104,74 +112,20 @@ fun MutVec2<Float>.plus(rx: Float, ry: Float): MutVec2<Float> {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "minusVecMutVec2fl")
-operator fun MutVec2<Float>.minus(right: Vec2Accessor<Long>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.minus(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "plusVecMutVec2fd")
-operator fun MutVec2<Float>.plus(right: Vec2Accessor<Double>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.plus(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "timesMut2fl")
-operator fun MutVec2<Float>.times(scalar: Long): MutVec2<Float> {
-  this.x = (this.x * scalar).toFloat()
-  this.y = (this.y * scalar).toFloat()
+@JvmName(name = "timesVecVec2ff")
+public operator fun MutVec2<Float>.times(right: Vec2Accessor<Float>): MutVec2<Float> {
+  this.x = (this.x * right.x).toFloat()
+  this.y = (this.y * right.y).toFloat()
   return this
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "timesMut2fd")
-operator fun MutVec2<Float>.times(scalar: Double): MutVec2<Float> {
-  this.x = (this.x * scalar).toFloat()
-  this.y = (this.y * scalar).toFloat()
-  return this
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun MutVec2<Float>.minus(rx: Long, ry: Long): MutVec2<Float> {
-  this.x = (this.x - rx).toFloat()
-  this.y = (this.y - ry).toFloat()
-  return this
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "minusVecMutVec2fi")
-operator fun MutVec2<Float>.minus(right: Vec2Accessor<Int>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.minus(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun MutVec2<Float>.times(rx: Double, ry: Double): MutVec2<Float> {
+public fun MutVec2<Float>.times(rx: Float, ry: Float): MutVec2<Float> {
   this.x = (this.x * rx).toFloat()
   this.y = (this.y * ry).toFloat()
   return this
@@ -179,20 +133,39 @@ fun MutVec2<Float>.times(rx: Double, ry: Double): MutVec2<Float> {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "minusVecMutVec2ff")
-operator fun MutVec2<Float>.minus(right: Vec2Accessor<Float>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.minus(rx = rx, ry = ry)
+@JvmName(name = "dotVecVec2ff")
+public fun MutVec2<Float>.dot(right: Vec2Accessor<Float>): Float {
+  val sum = this.x * right.x + this.y * right.y
+  return sum.toFloat()
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun MutVec2<Float>.minus(rx: Double, ry: Double): MutVec2<Float> {
+public fun MutVec2<Float>.dot(rx: Float, ry: Float): Float {
+  val sum = this.x * rx + this.y * ry
+  return sum.toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "minusVecVec2ff")
+public operator fun MutVec2<Float>.minus(right: Vec2Accessor<Float>): MutVec2<Float> {
+  this.x = (this.x - right.x).toFloat()
+  this.y = (this.y - right.y).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun MutVec2<Float>.minus(rx: Float, ry: Float): MutVec2<Float> {
   this.x = (this.x - rx).toFloat()
   this.y = (this.y - ry).toFloat()
   return this
@@ -200,74 +173,20 @@ fun MutVec2<Float>.minus(rx: Double, ry: Double): MutVec2<Float> {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "timesMut2ff")
-operator fun MutVec2<Float>.times(scalar: Float): MutVec2<Float> {
-  this.x = (this.x * scalar).toFloat()
-  this.y = (this.y * scalar).toFloat()
+@JvmName(name = "plusVecVec2fi")
+public operator fun MutVec2<Float>.plus(right: Vec2Accessor<Int>): MutVec2<Float> {
+  this.x = (this.x + right.x).toFloat()
+  this.y = (this.y + right.y).toFloat()
   return this
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "timesVecMutVec2fl")
-operator fun MutVec2<Float>.times(right: Vec2Accessor<Long>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.times(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "timesVecMutVec2ff")
-operator fun MutVec2<Float>.times(right: Vec2Accessor<Float>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.times(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "plusVecMutVec2fl")
-operator fun MutVec2<Float>.plus(right: Vec2Accessor<Long>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.plus(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-@JvmName(name = "timesVecMutVec2fi")
-operator fun MutVec2<Float>.times(right: Vec2Accessor<Int>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.times(rx = rx, ry = ry)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun MutVec2<Float>.minus(rx: Float, ry: Float): MutVec2<Float> {
-  this.x = (this.x - rx).toFloat()
-  this.y = (this.y - ry).toFloat()
-  return this
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun MutVec2<Float>.plus(rx: Long, ry: Long): MutVec2<Float> {
+public fun MutVec2<Float>.plus(rx: Int, ry: Int): MutVec2<Float> {
   this.x = (this.x + rx).toFloat()
   this.y = (this.y + ry).toFloat()
   return this
@@ -275,20 +194,20 @@ fun MutVec2<Float>.plus(rx: Long, ry: Long): MutVec2<Float> {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "minusVecMutVec2fd")
-operator fun MutVec2<Float>.minus(right: Vec2Accessor<Double>): MutVec2<Float> {
-  val rx = right.x
-  val ry = right.y
-  return this.minus(rx = rx, ry = ry)
+@JvmName(name = "timesVecVec2fi")
+public operator fun MutVec2<Float>.times(right: Vec2Accessor<Int>): MutVec2<Float> {
+  this.x = (this.x * right.x).toFloat()
+  this.y = (this.y * right.y).toFloat()
+  return this
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun MutVec2<Float>.times(rx: Long, ry: Long): MutVec2<Float> {
+public fun MutVec2<Float>.times(rx: Int, ry: Int): MutVec2<Float> {
   this.x = (this.x * rx).toFloat()
   this.y = (this.y * ry).toFloat()
   return this
@@ -296,27 +215,224 @@ fun MutVec2<Float>.times(rx: Long, ry: Long): MutVec2<Float> {
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
+)
+@JvmName(name = "dotVecVec2fi")
+public fun MutVec2<Float>.dot(right: Vec2Accessor<Int>): Float {
+  val sum = this.x * right.x + this.y * right.y
+  return sum.toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun MutVec2<Float>.dot(rx: Int, ry: Int): Float {
+  val sum = this.x * rx + this.y * ry
+  return sum.toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "minusVecVec2fi")
+public operator fun MutVec2<Float>.minus(right: Vec2Accessor<Int>): MutVec2<Float> {
+  this.x = (this.x - right.x).toFloat()
+  this.y = (this.y - right.y).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun MutVec2<Float>.minus(rx: Int, ry: Int): MutVec2<Float> {
+  this.x = (this.x - rx).toFloat()
+  this.y = (this.y - ry).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "plusVecVec2fl")
+public operator fun MutVec2<Float>.plus(right: Vec2Accessor<Long>): MutVec2<Float> {
+  this.x = (this.x + right.x).toFloat()
+  this.y = (this.y + right.y).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun MutVec2<Float>.plus(rx: Long, ry: Long): MutVec2<Float> {
+  this.x = (this.x + rx).toFloat()
+  this.y = (this.y + ry).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "timesVecVec2fl")
+public operator fun MutVec2<Float>.times(right: Vec2Accessor<Long>): MutVec2<Float> {
+  this.x = (this.x * right.x).toFloat()
+  this.y = (this.y * right.y).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun MutVec2<Float>.times(rx: Long, ry: Long): MutVec2<Float> {
+  this.x = (this.x * rx).toFloat()
+  this.y = (this.y * ry).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "dotVecVec2fl")
+public fun MutVec2<Float>.dot(right: Vec2Accessor<Long>): Float {
+  val sum = this.x * right.x + this.y * right.y
+  return sum.toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun MutVec2<Float>.dot(rx: Long, ry: Long): Float {
+  val sum = this.x * rx + this.y * ry
+  return sum.toFloat()
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "minusVecVec2fl")
+public operator fun MutVec2<Float>.minus(right: Vec2Accessor<Long>): MutVec2<Float> {
+  this.x = (this.x - right.x).toFloat()
+  this.y = (this.y - right.y).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public fun MutVec2<Float>.minus(rx: Long, ry: Long): MutVec2<Float> {
+  this.x = (this.x - rx).toFloat()
+  this.y = (this.y - ry).toFloat()
+  return this
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.plus(scalar: Double): MutVec2<Float> = this.plus(rx = scalar, ry
+    = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.times(scalar: Double): MutVec2<Float> = this.times(rx = scalar,
+    ry = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.minus(scalar: Double): MutVec2<Float> = this.minus(rx = scalar,
+    ry = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.plus(scalar: Float): MutVec2<Float> = this.plus(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.times(scalar: Float): MutVec2<Float> = this.times(rx = scalar, ry
+    = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.minus(scalar: Float): MutVec2<Float> = this.minus(rx = scalar, ry
+    = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.plus(scalar: Int): MutVec2<Float> = this.plus(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.times(scalar: Int): MutVec2<Float> = this.times(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.minus(scalar: Int): MutVec2<Float> = this.minus(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.plus(scalar: Long): MutVec2<Float> = this.plus(rx = scalar, ry =
+    scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.times(scalar: Long): MutVec2<Float> = this.times(rx = scalar, ry
+    = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+public operator fun MutVec2<Float>.minus(scalar: Long): MutVec2<Float> = this.minus(rx = scalar, ry
+    = scalar)
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
 )
 @JvmName(name = "unaryPlusMutVec2f")
-operator fun MutVec2<Float>.unaryPlus(): MutVec2<Float> = this
+public operator fun MutVec2<Float>.unaryPlus(): MutVec2<Float> = this
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun MutVec2<Float>.plus(rx: Double, ry: Double): MutVec2<Float> {
-  this.x = (this.x + rx).toFloat()
-  this.y = (this.y + ry).toFloat()
-  return this
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun MutVec2<Float>.minus(rx: Int, ry: Int): MutVec2<Float> {
-  this.x = (this.x - rx).toFloat()
-  this.y = (this.y - ry).toFloat()
+@JvmName(name = "unaryMinusMutVec2f")
+public operator fun MutVec2<Float>.unaryMinus(): MutVec2<Float> {
+  this.x = -this.x
+  this.y = -this.y
   return this
 }

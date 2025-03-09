@@ -9,114 +9,118 @@ import kotlin.jvm.JvmName
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "mutableVec3ff")
-fun mutableVec3f(right: Vec3Accessor<Float>): MutVec3<Float> {
-  val rx = right.x
-  val ry = right.y
-  val rz = right.z
-  return mutableVec3f(rx = rx, ry = ry, rz = rz)
-}
+public fun mutableVec3f(): MutVec3<Float> = StructMutVec3f(0f, 0f, 0f)
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
 @JvmName(name = "mutableVec3fd")
-fun mutableVec3f(right: Vec3Accessor<Double>): MutVec3<Float> {
-  val rx = right.x
-  val ry = right.y
-  val rz = right.z
-  return mutableVec3f(rx = rx, ry = ry, rz = rz)
+public fun mutableVec3f(right: Vec3Accessor<Double>): MutVec3<Float> {
+  val x = right.x.toFloat()
+  val y = right.y.toFloat()
+  val z = right.z.toFloat()
+  return StructMutVec3f(x = x, y = y, z = z)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-@JvmName(name = "mutableVec3fl")
-fun mutableVec3f(right: Vec3Accessor<Long>): MutVec3<Float> {
-  val rx = right.x
-  val ry = right.y
-  val rz = right.z
-  return mutableVec3f(rx = rx, ry = ry, rz = rz)
+@JvmName(name = "mutableVec3fd")
+public fun mutableVec3f(
+  x: Double,
+  y: Double,
+  z: Double,
+): MutVec3<Float> {
+  val rx = x.toFloat()
+  val ry = y.toFloat()
+  val rz = z.toFloat()
+  return StructMutVec3f(x = rx, y = ry, z = rz)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec3ff")
+public fun mutableVec3f(right: Vec3Accessor<Float>): MutVec3<Float> {
+  val x = right.x.toFloat()
+  val y = right.y.toFloat()
+  val z = right.z.toFloat()
+  return StructMutVec3f(x = x, y = y, z = z)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec3ff")
+public fun mutableVec3f(
+  x: Float,
+  y: Float,
+  z: Float,
+): MutVec3<Float> {
+  val rx = x.toFloat()
+  val ry = y.toFloat()
+  val rz = z.toFloat()
+  return StructMutVec3f(x = rx, y = ry, z = rz)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
 )
 @JvmName(name = "mutableVec3fi")
-fun mutableVec3f(right: Vec3Accessor<Int>): MutVec3<Float> {
-  val rx = right.x
-  val ry = right.y
-  val rz = right.z
-  return mutableVec3f(rx = rx, ry = ry, rz = rz)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun mutableVec3f(
-  rx: Double,
-  ry: Double,
-  rz: Double,
-): MutVec3<Float> {
-  val x = rx.toFloat()
-  val y = ry.toFloat()
-  val z = rz.toFloat()
+public fun mutableVec3f(right: Vec3Accessor<Int>): MutVec3<Float> {
+  val x = right.x.toFloat()
+  val y = right.y.toFloat()
+  val z = right.z.toFloat()
   return StructMutVec3f(x = x, y = y, z = z)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun mutableVec3f(
-  rx: Long,
-  ry: Long,
-  rz: Long,
+@JvmName(name = "mutableVec3fi")
+public fun mutableVec3f(
+  x: Int,
+  y: Int,
+  z: Int,
 ): MutVec3<Float> {
-  val x = rx.toFloat()
-  val y = ry.toFloat()
-  val z = rz.toFloat()
+  val rx = x.toFloat()
+  val ry = y.toFloat()
+  val rz = z.toFloat()
+  return StructMutVec3f(x = rx, y = ry, z = rz)
+}
+
+@Generated(
+  value = ["poet", "kmu"],
+  date = "2025-03-09",
+)
+@JvmName(name = "mutableVec3fl")
+public fun mutableVec3f(right: Vec3Accessor<Long>): MutVec3<Float> {
+  val x = right.x.toFloat()
+  val y = right.y.toFloat()
+  val z = right.z.toFloat()
   return StructMutVec3f(x = x, y = y, z = z)
 }
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-fun mutableVec3f(): MutVec3<Float> = StructMutVec3f(0f, 0f, 0f)
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun mutableVec3f(
-  rx: Int,
-  ry: Int,
-  rz: Int,
+@JvmName(name = "mutableVec3fl")
+public fun mutableVec3f(
+  x: Long,
+  y: Long,
+  z: Long,
 ): MutVec3<Float> {
-  val x = rx.toFloat()
-  val y = ry.toFloat()
-  val z = rz.toFloat()
-  return StructMutVec3f(x = x, y = y, z = z)
-}
-
-@Generated(
-  value = ["poet", "kmu"],
-  date = "2025-02-17",
-)
-fun mutableVec3f(
-  rx: Float,
-  ry: Float,
-  rz: Float,
-): MutVec3<Float> {
-  val x = rx.toFloat()
-  val y = ry.toFloat()
-  val z = rz.toFloat()
-  return StructMutVec3f(x = x, y = y, z = z)
+  val rx = x.toFloat()
+  val ry = y.toFloat()
+  val rz = z.toFloat()
+  return StructMutVec3f(x = rx, y = ry, z = rz)
 }

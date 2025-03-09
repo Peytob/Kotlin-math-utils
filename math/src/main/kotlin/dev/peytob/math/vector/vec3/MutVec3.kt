@@ -9,9 +9,9 @@ import kotlin.Number
 
 @Generated(
   value = ["poet", "kmu"],
-  date = "2025-02-17",
+  date = "2025-03-09",
 )
-interface MutVec3<T : Number> : Vec3Accessor<T> {
+public interface MutVec3<T : Number> : Vec3Accessor<T> {
   override var x: T
 
   override var y: T
@@ -19,10 +19,10 @@ interface MutVec3<T : Number> : Vec3Accessor<T> {
   override var z: T
 }
 
-typealias MutVec3l = MutVec3<Long>
+public typealias MutVec3d = MutVec3<Double>
 
-typealias MutVec3i = MutVec3<Int>
+public typealias MutVec3f = MutVec3<Float>
 
-typealias MutVec3d = MutVec3<Double>
+public typealias MutVec3i = MutVec3<Int>
 
-typealias MutVec3f = MutVec3<Float>
+public typealias MutVec3l = MutVec3<Long>
