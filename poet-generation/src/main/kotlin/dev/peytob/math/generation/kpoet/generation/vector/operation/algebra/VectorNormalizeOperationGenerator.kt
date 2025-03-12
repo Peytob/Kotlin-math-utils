@@ -12,7 +12,7 @@ fun generateMutableVectorNormalizeOperation(leftVector: TypedVectorBase): FunSpe
     body.addStatement("var l = this.length()")
 
     leftVector.components.forEach { property ->
-        body.addStatement("this.%1L /= l", property)
+        body.addStatement("val %1L = (this.%1L / l).%2N()", property, leftVector.primitive.numberCastMethodName)
     }
 
     body.addStatement("return this")
@@ -32,7 +32,7 @@ fun generateImmutableVectorNormalizeOperation(leftVector: TypedVectorBase, const
     body.addStatement("var l = this.length()")
 
     leftVector.components.forEach { property ->
-        body.addStatement("val %1L = this.%1L / l", property)
+        body.addStatement("val %1L = (this.%1L / l).%2N()", property, leftVector.primitive.numberCastMethodName)
     }
 
     val scalarFormArguments = leftVector.components.joinToString(", ") { "$it = $it" }

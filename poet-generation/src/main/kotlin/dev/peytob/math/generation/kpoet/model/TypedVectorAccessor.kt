@@ -7,7 +7,7 @@ data class TypedVectorAccessor(
     val primitive: Primitive
 ) {
     val className = accessor.className.parameterizedBy(primitive.cls)
-    val alias = "${accessor.className.simpleName}<${primitive.cls.simpleName}>"
+    val alias = "${accessor.className.simpleName}${primitive.postfix}"
     val size = accessor.size
     val components = accessor.components
 }

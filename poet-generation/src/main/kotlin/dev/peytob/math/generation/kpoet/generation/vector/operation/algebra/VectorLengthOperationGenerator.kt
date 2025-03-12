@@ -4,11 +4,10 @@ import com.squareup.kotlinpoet.*
 import dev.peytob.math.generation.kpoet.generated
 import dev.peytob.math.generation.kpoet.jvmName
 import dev.peytob.math.generation.kpoet.model.TypedVectorAccessor
-import dev.peytob.math.generation.kpoet.model.TypedVectorBase
 
 private val SQRT = MemberName("kotlin.math", "sqrt")
 
-fun generateVectorLengthOperation(leftVector: TypedVectorBase): FunSpec {
+fun generateVectorLengthOperation(leftVector: TypedVectorAccessor): FunSpec {
     val body = CodeBlock.builder()
 
     body.addStatement("var s = 0.0")
@@ -21,14 +20,14 @@ fun generateVectorLengthOperation(leftVector: TypedVectorBase): FunSpec {
 
     return FunSpec.builder("length")
         .generated()
-        .jvmName("length${leftVector.alias}")
+        .jvmName("lengthVec${leftVector.size}${leftVector.primitive.postfix}")
         .receiver(leftVector.className)
         .returns(Float::class)
         .addCode(body.build())
         .build()
 }
 
-fun generateVectorLengthOperationFlat(leftVector: TypedVectorBase): FunSpec {
+fun generateVectorLengthOperationFlat(leftVector: TypedVectorAccessor): FunSpec {
     val body = CodeBlock.builder()
 
     body.addStatement("var s = 0.0")
@@ -43,7 +42,7 @@ fun generateVectorLengthOperationFlat(leftVector: TypedVectorBase): FunSpec {
 
     return FunSpec.builder("length")
         .generated()
-        .jvmName("length${leftVector.alias}")
+        .jvmName("lengthVec${leftVector.size}${leftVector.primitive.postfix}")
         .addParameters(parameters)
         .returns(Float::class)
         .addCode(body.build())

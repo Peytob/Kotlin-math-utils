@@ -52,9 +52,7 @@ fun generateBinaryVectorAlgebraicOperations(generationContext: GenerationContext
 fun generateUnaryVectorAlgebraicOperations(generationContext: GenerationContext) {
     log.info("Generating unary vector algebraic operations")
 
-    generationContext.getTypedVectorBases().filterNot { leftVector ->
-        leftVector.isMutable
-    }.flatMap { leftVector ->
+    generationContext.getTypedVectorBases().flatMap { leftVector ->
         log.debug("Generating {} vector unary operations", leftVector.alias)
 
         val constructor = generationContext.getConstructor(leftVector)
@@ -62,25 +60,35 @@ fun generateUnaryVectorAlgebraicOperations(generationContext: GenerationContext)
 
         listOf(
             Function(
-                file = leftVector.alias + "Length",
-                packageName = leftVector.base.className.packageName,
-                operandsAliases = emptyList(),
-                funSpec = generateVectorLengthOperation(leftVector)
-            ),
-
-            Function(
-                file = leftVector.alias + "Length",
-                packageName = leftVector.base.className.packageName,
-                operandsAliases = emptyList(),
-                funSpec = generateVectorLengthOperationFlat(leftVector)
-            ),
-
-            Function(
                 file = leftVector.alias + "Normalize",
                 packageName = leftVector.base.className.packageName,
                 operandsAliases = emptyList(),
                 funSpec = generateVectorNormalizeOperation(leftVector, constructor)
             )
+        )
+    }.onEach {
+        generationContext.registerFunction(it)
+    }.let {
+        log.info("Generated {} unary vector algebraic functions", it.size)
+    }
+
+    generationContext.getTypedVectorAccessors().flatMap { vectorAccessor ->
+        log.debug("Generating {} vector unary operations", vectorAccessor.alias)
+
+        listOf(
+            Function(
+                file = "Vec${vectorAccessor.size}Length",
+                packageName = vectorAccessor.className.rawType.packageName,
+                operandsAliases = emptyList(),
+                funSpec = generateVectorLengthOperation(vectorAccessor)
+            ),
+
+            Function(
+                file = "Vec${vectorAccessor.size}Length",
+                packageName = vectorAccessor.accessor.className.packageName,
+                operandsAliases = emptyList(),
+                funSpec = generateVectorLengthOperationFlat(vectorAccessor)
+            ),
         )
     }.onEach {
         generationContext.registerFunction(it)
