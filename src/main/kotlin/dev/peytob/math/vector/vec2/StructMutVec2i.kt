@@ -1,6 +1,6 @@
 package dev.peytob.math.vector.vec2
 
-data class StructMutVec2i(
+internal data class StructMutVec2i(
     override var x: Int,
     override var y: Int
 ) : MutVec2i {

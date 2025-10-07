@@ -1,6 +1,6 @@
 package dev.peytob.math.vector.vec2
 
-data class StructVec2l(
+internal data class StructVec2l(
     override val x: Long,
     override val y: Long
 ) : Vec2l {
