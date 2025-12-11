@@ -1,8 +1,7 @@
 package dev.peytob.math.noise
 
-import dev.peytob.math.vector.vec2.Vec2f
-import dev.peytob.math.vector.vec2.dot
-import dev.peytob.math.vector.vec2.immutableVec2f
+import dev.peytob.math.vec.Vec2f
+import dev.peytob.math.vec.vec2f
 import kotlin.math.floor
 import kotlin.random.Random
 
@@ -12,10 +11,10 @@ class PerlinNoise2D(
 
     private companion object {
         val GRADIENT_VECTORS = arrayOf(
-            immutableVec2f(1.0f, 1.0f),
-            immutableVec2f(-1.0f, 1.0f),
-            immutableVec2f(-1.0f, -1.0f),
-            immutableVec2f(1.0f, -1.0f)
+            vec2f(1.0f, 1.0f),
+            vec2f(-1.0f, 1.0f),
+            vec2f(-1.0f, -1.0f),
+            vec2f(1.0f, -1.0f)
         )
 
         fun generatePermutationTable(seed: Int): List<Int> =
@@ -38,10 +37,10 @@ class PerlinNoise2D(
 
         // TODO Garbage collector, forgive me
 
-        val topRight = immutableVec2f(fractionalX - 1.0f, fractionalY - 1.0f)
-        val topLeft = immutableVec2f(fractionalX, fractionalY - 1.0f)
-        val bottomRight = immutableVec2f(fractionalX - 1.0f, fractionalY)
-        val bottomLeft = immutableVec2f(fractionalX, fractionalY)
+        val topRight = vec2f(fractionalX - 1.0f, fractionalY - 1.0f)
+        val topLeft = vec2f(fractionalX, fractionalY - 1.0f)
+        val bottomRight = vec2f(fractionalX - 1.0f, fractionalY)
+        val bottomLeft = vec2f(fractionalX, fractionalY)
 
         val dotTopRight = topRight.dot(getGradientVector(integerX + 1, integerY + 1))
         val dotTopLeft = topLeft.dot(getGradientVector(integerX, integerY + 1))

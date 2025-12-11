@@ -1,8 +1,8 @@
 package dev.peytob.math.field
 
 import dev.peytob.math.noise.Noise2D
-import dev.peytob.math.vector.vec2.Vec2f
-import dev.peytob.math.vector.vec2.immutableVec2f
+import dev.peytob.math.vec.Vec2f
+import dev.peytob.math.vec.vec2f
 
 class CurlNoise22D(
     private val baseNoise: Noise2D
@@ -24,6 +24,6 @@ class CurlNoise22D(
 
         val yAverage = (dyp - dyn) * divider
 
-        return immutableVec2f(yAverage, xAverage)
+        return vec2f(yAverage, xAverage)
     }
 }

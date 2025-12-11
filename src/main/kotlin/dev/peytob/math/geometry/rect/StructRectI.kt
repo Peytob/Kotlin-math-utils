@@ -1,8 +1,8 @@
 package dev.peytob.math.geometry.rect
 
-import dev.peytob.math.vector.vec2.Vec2
+import dev.peytob.math.vec.Vec2i
 
 data class StructRectI(
-    override val position: Vec2<Int>,
-    override val size: Vec2<Int>
-) : dev.peytob.math.geometry.rect.RectI
+    override val position: Vec2i,
+    override val size: Vec2i
+) : RectI

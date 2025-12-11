@@ -1,10 +1,9 @@
 package dev.peytob.math.noise
 
 import dev.peytob.math.PHI
-import dev.peytob.math.vector.vec2.Vec2f
-import dev.peytob.math.vector.vec2.distance
-import dev.peytob.math.vector.vec2.immutableVec2f
-import dev.peytob.math.vector.vec2.times
+import dev.peytob.math.vec.Vec2f
+import dev.peytob.math.vec.distance
+import dev.peytob.math.vec.vec2f
 import kotlin.math.floor
 import kotlin.math.tan
 
@@ -17,7 +16,7 @@ class GoldNoise2D(
     }
 
     override fun getPoint(x: Float, y: Float): Float {
-        return getPoint(immutableVec2f(x, y))
+        return getPoint(vec2f(x, y))
     }
 
     private fun fract(x: Float): Float {

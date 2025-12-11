@@ -1,6 +1,9 @@
 package dev.peytob.math.noise
 
-import dev.peytob.math.vector.vec2.*
+import dev.peytob.math.vec.Vec2f
+import dev.peytob.math.vec.length
+import dev.peytob.math.vec.vec2f
+import dev.peytob.math.vec.vec2i
 import kotlin.math.floor
 import kotlin.math.min
 
@@ -17,20 +20,20 @@ class WorleyNoise2D(
     private val goldNoise2DY = GoldNoise2D(seed.inv())
 
     override fun getPoint(point: Vec2f): Float {
-        val integerPoint = immutableVec2i(
+        val integerPoint = vec2i(
             floor(point.x).toInt(),
             floor(point.y).toInt())
 
-        val fractionalPoint = immutableVec2f(point.x - integerPoint.x, point.y - integerPoint.y)
+        val fractionalPoint = vec2f(point.x - integerPoint.x, point.y - integerPoint.y)
 
         var minimalDistance = Float.MAX_VALUE
         for (y in -1..1) {
             for (x in -1..1) {
-                val neighbour = immutableVec2f(x.toFloat(), y.toFloat())
-                val xy = immutableVec2f(neighbour.x + integerPoint.x, neighbour.y + integerPoint.y)
-                val neighbourPoint = immutableVec2f(goldNoise2DX.getPoint(xy), goldNoise2DY.getPoint(xy))
+                val neighbour = vec2f(x.toFloat(), y.toFloat())
+                val xy = vec2f(neighbour.x + integerPoint.x, neighbour.y + integerPoint.y)
+                val neighbourPoint = vec2f(goldNoise2DX.getPoint(xy), goldNoise2DY.getPoint(xy))
                 val diff = neighbour + neighbourPoint - fractionalPoint
-                val dist = diff.length()
+                val dist = length(diff)
                 minimalDistance = min(minimalDistance, dist)
             }
         }
@@ -38,5 +41,5 @@ class WorleyNoise2D(
         return min(minimalDistance, 1.0f)
     }
 
-    override fun getPoint(x: Float, y: Float) = getPoint(immutableVec2f(x, y))
+    override fun getPoint(x: Float, y: Float) = getPoint(vec2f(x, y))
 }

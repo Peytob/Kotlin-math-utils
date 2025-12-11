@@ -1,6 +1,6 @@
 package dev.peytob.math.field
 
-import dev.peytob.math.vector.vec2.Vec2f
+import dev.peytob.math.vec.Vec2f
 
 /**
  * Returns noise vector value for given 2d vector. Value should be same for same points (x, y).

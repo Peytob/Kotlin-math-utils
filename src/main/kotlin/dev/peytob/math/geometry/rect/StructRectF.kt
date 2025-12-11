@@ -1,8 +1,8 @@
 package dev.peytob.math.geometry.rect
 
-import dev.peytob.math.vector.vec2.Vec2
+import dev.peytob.math.vec.Vec2f
 
 data class StructRectF(
-    override val position: Vec2<Float>,
-    override val size: Vec2<Float>
-) : dev.peytob.math.geometry.rect.RectF
+    override val position: Vec2f,
+    override val size: Vec2f
+) : RectF

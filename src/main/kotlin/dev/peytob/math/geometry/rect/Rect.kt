@@ -1,6 +1,8 @@
 package dev.peytob.math.geometry.rect
 
-import dev.peytob.math.vector.vec2.Vec2
+import dev.peytob.math.vec.Vec2
+import dev.peytob.math.vec.Vec2f
+import dev.peytob.math.vec.Vec2i
 
 interface Rect<T : Number> {
     val position: Vec2<T>
@@ -11,5 +13,14 @@ interface Rect<T : Number> {
         get() = false
 }
 
-typealias RectF = dev.peytob.math.geometry.rect.Rect<Float>
-typealias RectI = dev.peytob.math.geometry.rect.Rect<Int>
+interface RectF : Rect<Float> {
+    override val position: Vec2f
+
+    override val size: Vec2f
+}
+
+interface RectI : Rect<Int> {
+    override val position: Vec2i
+
+    override val size: Vec2i
+}

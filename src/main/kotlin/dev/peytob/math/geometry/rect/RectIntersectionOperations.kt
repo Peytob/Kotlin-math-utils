@@ -1,19 +1,19 @@
 package dev.peytob.math.geometry.rect
 
-import dev.peytob.math.vector.vec2.Vec2f
-import dev.peytob.math.vector.vec2.Vec2i
-import dev.peytob.math.vector.vec2.immutableVec2f
-import dev.peytob.math.vector.vec2.immutableVec2i
+import dev.peytob.math.vec.Vec2f
+import dev.peytob.math.vec.Vec2i
+import dev.peytob.math.vec.vec2f
+import dev.peytob.math.vec.vec2i
 import kotlin.math.max
 import kotlin.math.min
 
 @JvmName(name = "containsRectF")
-operator fun dev.peytob.math.geometry.rect.RectF.contains(point: Vec2f): Boolean {
+operator fun RectF.contains(point: Vec2f): Boolean {
     return contains(point.x, point.y)
 }
 
 @JvmName(name = "containsRectF")
-fun dev.peytob.math.geometry.rect.RectF.contains(px: Float, py: Float): Boolean {
+fun RectF.contains(px: Float, py: Float): Boolean {
     val minX = min(position.x, position.x + size.x)
     val maxX = max(position.x, position.x + size.x)
     val minY = min(position.y, position.y + size.y)
@@ -23,7 +23,7 @@ fun dev.peytob.math.geometry.rect.RectF.contains(px: Float, py: Float): Boolean 
 }
 
 @JvmName(name = "findIntersectionRectFRectF")
-fun findIntersection(left: dev.peytob.math.geometry.rect.RectF, right: dev.peytob.math.geometry.rect.RectF): dev.peytob.math.geometry.rect.RectF? {
+fun findIntersection(left: RectF, right: RectF): RectF? {
     val r1MinX = min(left.position.x, left.position.x + left.size.x)
     val r1MaxX = max(left.position.x, left.position.x + left.size.x)
     val r1MinY = min(left.position.y, left.position.y + left.size.y)
@@ -42,8 +42,8 @@ fun findIntersection(left: dev.peytob.math.geometry.rect.RectF, right: dev.peyto
     // Intersection should be non-zero
     if ((interLeft < interRight) && (interTop < interBottom)) {
         return StructRectF(
-            position = immutableVec2f(interLeft, interTop),
-            size = immutableVec2f(interRight - interLeft, interBottom - interTop)
+            position = vec2f(interLeft, interTop),
+            size = vec2f(interRight - interLeft, interBottom - interTop)
         )
     }
 
@@ -51,12 +51,12 @@ fun findIntersection(left: dev.peytob.math.geometry.rect.RectF, right: dev.peyto
 }
 
 @JvmName(name = "containsRectI")
-operator fun dev.peytob.math.geometry.rect.RectI.contains(point: Vec2i): Boolean {
+operator fun RectI.contains(point: Vec2i): Boolean {
     return contains(point.x, point.y)
 }
 
 @JvmName(name = "containsRectI")
-fun dev.peytob.math.geometry.rect.RectI.contains(px: Int, py: Int): Boolean {
+fun RectI.contains(px: Int, py: Int): Boolean {
     val minX = min(position.x, position.x + size.x)
     val maxX = max(position.x, position.x + size.x)
     val minY = min(position.y, position.y + size.y)
@@ -66,7 +66,7 @@ fun dev.peytob.math.geometry.rect.RectI.contains(px: Int, py: Int): Boolean {
 }
 
 @JvmName(name = "findIntersectionRectIRectI")
-fun findIntersection(left: dev.peytob.math.geometry.rect.RectI, right: dev.peytob.math.geometry.rect.RectI): dev.peytob.math.geometry.rect.RectI? {
+fun findIntersection(left: RectI, right: RectI): RectI? {
     val r1MinX = min(left.position.x, left.position.x + left.size.x)
     val r1MaxX = max(left.position.x, left.position.x + left.size.x)
     val r1MinY = min(left.position.y, left.position.y + left.size.y)
@@ -85,8 +85,8 @@ fun findIntersection(left: dev.peytob.math.geometry.rect.RectI, right: dev.peyto
     // Intersection should be non-zero
     if ((interLeft < interRight) && (interTop < interBottom)) {
         return StructRectI(
-            position = immutableVec2i(interLeft, interTop),
-            size = immutableVec2i(interRight - interLeft, interBottom - interTop)
+            position = vec2i(interLeft, interTop),
+            size = vec2i(interRight - interLeft, interBottom - interTop)
         )
     }
 

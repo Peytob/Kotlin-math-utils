@@ -105,8 +105,8 @@ fun Number.plus(other: Number): Number {
 Рассмотрим приведение примитивов векторов при сложении. Аналогично для любых других операций.
 
 ```kotlin
-val a: Vec2f = immutableVec2f(1.1f, 4.2f)
-val b: Vec2i = immutableVec2i(2, 5)
+val a: Vec2f = vec2f(1.1f, 4.2f)
+val b: Vec2i = vec2i(2, 5)
 
 val apb: Vec2f = a + b // (3.1f, 9.2f)
 val bpa: Vec2i = b + a // (3, 9)
@@ -115,8 +115,8 @@ val bpa: Vec2i = b + a // (3, 9)
 В случае, если операция определена для двух векторов, может быть реализована flat-версия операции, принимающая раскрытый вектор. Результаты операций должны быть одинаковы и flat-операции используются для более гибкого API, которое может иногда позволить сэкономить на создании объектов векторов:
 
 ```kotlin
-val a: Vec2f = immutableVec2f(1.5f, 2.0f)
-val b: Vec2f = immutableVec2f(5.0, 2.0)
+val a: Vec2f = vec2f(1.5f, 2.0f)
+val b: Vec2f = vec2f(5.0, 2.0)
 
 val sumVectorized: Vec2f = a + b // also can be used as function: a.plus(b)
 val sumFlat: Vec2f = a.plus(rx = b.x, ry = b.y)

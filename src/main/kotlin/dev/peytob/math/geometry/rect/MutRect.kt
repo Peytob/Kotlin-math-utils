@@ -1,15 +1,15 @@
 package dev.peytob.math.geometry.rect
 
-import dev.peytob.math.vector.vec2.MutVec2
+import dev.peytob.math.vec.Vec2
 
-interface MutRect<T : Number> : dev.peytob.math.geometry.rect.Rect<T> {
-    override val position: MutVec2<T>
+interface MutRect<T : Number> : Rect<T> {
+    override val position: Vec2<T>
 
-    override val size: MutVec2<T>
+    override val size: Vec2<T>
 
     override val mutable: Boolean
         get() = true
 }
 
-typealias MutRectF = dev.peytob.math.geometry.rect.MutRect<Float>
-typealias MutRectI = dev.peytob.math.geometry.rect.MutRect<Int>
+typealias MutRectF = MutRect<Float>
+typealias MutRectI = MutRect<Int>

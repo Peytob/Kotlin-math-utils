@@ -7,46 +7,45 @@ import dev.peytob.math.geometry.rect.rectI
 import dev.peytob.math.noise.*
 import dev.peytob.math.noise.decorator.ScaledNoiseDecorator
 import dev.peytob.math.random.JdkRandom1DWrapper
-
-import dev.peytob.math.vector.vec2.immutableVec2f
-import dev.peytob.math.vector.vec2.immutableVec2i
+import dev.peytob.math.vec.vec2f
+import dev.peytob.math.vec.vec2i
 
 fun main() {
-    val defaultImageSize = immutableVec2i(512, 512)
+    val defaultImageSize = vec2i(512, 512)
     val random1 = JdkRandom1DWrapper(System.currentTimeMillis().toInt())
 
     buildNoiseImage(
-        ScaledNoiseDecorator(PerlinNoise2D(random1.nextInt()), 1f / 64f, immutableVec2f()),
-        rectI(immutableVec2i(), defaultImageSize),
+        ScaledNoiseDecorator(PerlinNoise2D(random1.nextInt()), 1f / 64f, vec2f()),
+        rectI(vec2i(), defaultImageSize),
         "perlin_1_div_64_scale"
     )
 
     buildNoiseImage(
-        ScaledNoiseDecorator(PerlinNoise2D(random1.nextInt()), 0.1f, immutableVec2f(100f, 100f)),
-        rectI(immutableVec2i(), defaultImageSize),
+        ScaledNoiseDecorator(PerlinNoise2D(random1.nextInt()), 0.1f, vec2f(100f, 100f)),
+        rectI(vec2i(), defaultImageSize),
         "perlin_0_1_scale"
     )
 
     buildNoiseImage(
-        FbmNoise2D(ScaledNoiseDecorator(PerlinNoise2D(random1.nextInt()), 1f / 64f, immutableVec2f()), 3),
-        rectI(immutableVec2i(), defaultImageSize),
+        FbmNoise2D(ScaledNoiseDecorator(PerlinNoise2D(random1.nextInt()), 1f / 64f, vec2f()), 3),
+        rectI(vec2i(), defaultImageSize),
         "fbm_perlin"
     )
 
     buildNoiseImage(
-        ScaledNoiseDecorator(WorleyNoise2D(random1.nextInt()), 1f / 128f, immutableVec2f(10f, 10f)),
-        rectI(immutableVec2i(), defaultImageSize),
+        ScaledNoiseDecorator(WorleyNoise2D(random1.nextInt()), 1f / 128f, vec2f(10f, 10f)),
+        rectI(vec2i(), defaultImageSize),
         "worley_noise"
     )
 
     buildNoiseImage(
         GoldNoise2D(random1.nextInt()),
-        rectI(immutableVec2i(), defaultImageSize),
+        rectI(vec2i(), defaultImageSize),
         "gold_noise"
     )
     buildFieldImage(
-        CurlNoise22D(ScaledNoiseDecorator(PerlinNoise2D(random1.nextInt()), 0.05f, immutableVec2f())),
-        rectI(immutableVec2i(), defaultImageSize),
+        CurlNoise22D(ScaledNoiseDecorator(PerlinNoise2D(random1.nextInt()), 0.05f, vec2f())),
+        rectI(vec2i(), defaultImageSize),
         "curl_noise"
     )
 }
